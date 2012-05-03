@@ -1,1 +1,2 @@
-Theres some sort of addon thing for Visual Studio that lets git integrate directly into it, I haven't fiddled with it yet though. http://gitscc.codeplex.com/
+Theres some sort of addon thing for Visual Studio that lets git integrate directly into it,
+I haven't fiddled with it yet though. http://gitscc.codeplex.com/
