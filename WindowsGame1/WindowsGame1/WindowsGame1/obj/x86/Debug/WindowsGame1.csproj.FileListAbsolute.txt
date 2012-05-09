@@ -6,3 +6,4 @@ C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\obj\x86\Debug\Micros
 C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\obj\x86\Debug\WindowsGame1.exe
 C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\obj\x86\Debug\WindowsGame1.pdb
 C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Back01.xnb
+C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Pcrane.xnb

@@ -14,24 +14,47 @@ namespace WindowsGame1
     {
         public Vector2 Position = new Vector2(0, 0);//The current position of the Sprite
         private Texture2D mSpriteTexture;//The texture object used when drawing the sprite
-        //The size of the Sprite
-        public Rectangle Size;
-        //Used to size the Sprite up or down from the original image
-        public float Scale = 1.0f;
+        public Rectangle Size;//The size of the Sprite
+        public float scale = 1.0f;//Used to size the Sprite up or down from the original image
+        public string AssetName;
 
-        //Load the texture for the sprite using the Content Pipeline
-        public void LoadContent(ContentManager theContentManager, string theAssetName)
+        public void LoadContent(ContentManager theContentManager, string theAssetName)//Load the texture for the sprite using the Content Pipeline
         {
             mSpriteTexture = theContentManager.Load<Texture2D>(theAssetName);
-            Size = new Rectangle(0, 0, (int)(mSpriteTexture.Width * Scale), (int)(mSpriteTexture.Height * Scale));
+            AssetName = theAssetName;
+            Size = new Rectangle(0, 0, (int)(mSpriteTexture.Width * scale), (int)(mSpriteTexture.Height * scale));
         }
 
-        //Draw the sprite to the screen
-        public void Draw(SpriteBatch theSpriteBatch)
+        public void Draw(SpriteBatch theSpriteBatch)//Draw the sprite to the screen
         {
             theSpriteBatch.Draw(mSpriteTexture, Position, new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
         }
 
+        public float Scale
+        {
+            get { return scale; }
+            set
+            {
+                scale = value;
+                //Recalculate the Size of the Sprite with the new scale
+                try
+                {
+                    Rectangle temp = new Rectangle(0, 0, (int)(mSpriteTexture.Width * Scale), (int)(mSpriteTexture.Height * Scale));
+                    Size = temp;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("Something went wrong with your resize :("+e);
+                }
+            }
+        }
+
+
+        public void Update(GameTime theGameTime, Vector2 theSpeed, Vector2 theDirection)//Update the Sprite and change it's position based on the passed in speed, direction and elapsed time.
+        {
+            Position += theDirection * theSpeed * (float)theGameTime.ElapsedGameTime.TotalSeconds;
+        }
+        
 
     }
 }

@@ -25,6 +25,7 @@ namespace WindowsGame1
         sprite mSprite;
         sprite mSprite2;
         sprite Back1;
+        Pcrane enemy1;
 
         public Game1()
         {
@@ -42,9 +43,12 @@ namespace WindowsGame1
         {
             // TODO: Add your initialization logic here
             mSprite = new sprite();
+            mSprite.Scale = 0.5f;
             mSprite2 = new sprite();
+            mSprite2.Scale = 0.5f;
             Back1 = new sprite();
             Back1.Scale = 2.0f;
+            enemy1 = new Pcrane();
 
             base.Initialize();
         }
@@ -61,12 +65,12 @@ namespace WindowsGame1
             mSprite.LoadContent(this.Content, "tower1");
             mSprite2.LoadContent(this.Content, "tower1");
             Back1.LoadContent(this.Content, "Back01");
+            enemy1.LoadContent(this.Content);
 
             mSprite.Position = new Vector2(125, 245);
             mSprite2.Position.X = 0; //these work too
             mSprite2.Position.Y = 0;
-
-
+            
         }
 
         /// <summary>
@@ -90,6 +94,7 @@ namespace WindowsGame1
                 this.Exit();
 
             // TODO: Add your update logic here
+            enemy1.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -107,6 +112,7 @@ namespace WindowsGame1
 
             Back1.Draw(this.spriteBatch);
 
+            enemy1.Draw(this.spriteBatch);
             mSprite.Draw(this.spriteBatch);
             mSprite2.Draw(this.spriteBatch);
 
