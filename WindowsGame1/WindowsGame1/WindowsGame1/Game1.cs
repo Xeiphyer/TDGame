@@ -1,3 +1,5 @@
+/*All based on this tutorial http://www.xnadevelopment.com/tutorials.shtml */
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,7 @@ namespace WindowsGame1
         Texture2D mSpriteTexture;
         sprite mSprite;
         sprite mSprite2;
+        sprite Back1;
 
         public Game1()
         {
@@ -40,6 +43,8 @@ namespace WindowsGame1
             // TODO: Add your initialization logic here
             mSprite = new sprite();
             mSprite2 = new sprite();
+            Back1 = new sprite();
+            Back1.Scale = 2.0f;
 
             base.Initialize();
         }
@@ -55,9 +60,11 @@ namespace WindowsGame1
 
             mSprite.LoadContent(this.Content, "tower1");
             mSprite2.LoadContent(this.Content, "tower1");
+            Back1.LoadContent(this.Content, "Back01");
+
             mSprite.Position = new Vector2(125, 245);
-           // mSprite.Position.X = 200; these work too
-           // mSprite.Position.Y = 300;
+            mSprite2.Position.X = 0; //these work too
+            mSprite2.Position.Y = 0;
 
 
         }
@@ -97,8 +104,12 @@ namespace WindowsGame1
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+
+            Back1.Draw(this.spriteBatch);
+
             mSprite.Draw(this.spriteBatch);
             mSprite2.Draw(this.spriteBatch);
+
             spriteBatch.End();
 
             base.Draw(gameTime);

@@ -5,3 +5,4 @@ C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\obj\x86\Debug\Resolv
 C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\obj\x86\Debug\WindowsGame1.exe
 C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\obj\x86\Debug\WindowsGame1.pdb
+C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Back01.xnb
