@@ -16,8 +16,8 @@ namespace WindowsGame1
     {
         const string WIZARD_ASSETNAME = "Pcrane";
         const int START_POSITION_X = 0;
-        const int START_POSITION_Y = 20;
-        const int WIZARD_SPEED = 160;
+        const int START_POSITION_Y = 90;
+        const int WIZARD_SPEED = 200;
         const int MOVE_UP = -1;
         const int MOVE_DOWN = 1;
         const int MOVE_LEFT = -1;

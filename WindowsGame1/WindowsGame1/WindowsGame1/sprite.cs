@@ -25,7 +25,7 @@ namespace WindowsGame1
             Size = new Rectangle(0, 0, (int)(mSpriteTexture.Width * scale), (int)(mSpriteTexture.Height * scale));
         }
 
-        public void Draw(SpriteBatch theSpriteBatch)//Draw the sprite to the screen
+        public virtual void Draw(SpriteBatch theSpriteBatch)//Draw the sprite to the screen
         {
             theSpriteBatch.Draw(mSpriteTexture, Position, new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
         }

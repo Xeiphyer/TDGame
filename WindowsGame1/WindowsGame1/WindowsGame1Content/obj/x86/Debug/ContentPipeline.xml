@@ -28,6 +28,24 @@
       <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Pcrane.xnb</Output>
       <Time>2012-05-09T15:20:19.0253907-06:00</Time>
     </Item>
+    <Item>
+      <Source>Back01path.png</Source>
+      <Name>Back01path</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Back01path.xnb</Output>
+      <Time>2012-05-09T23:29:12.6972657-06:00</Time>
+    </Item>
+    <Item>
+      <Source>Fireball.png</Source>
+      <Name>Fireball</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Fireball.xnb</Output>
+      <Time>2012-05-10T12:05:17.0283203-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

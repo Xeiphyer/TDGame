@@ -22,8 +22,8 @@ namespace WindowsGame1
         SpriteBatch spriteBatch;
         Vector2 mPosition = new Vector2(100, 200);
         Texture2D mSpriteTexture;
-        sprite mSprite;
-        sprite mSprite2;
+        Tower mSprite;
+        Tower mSprite2;
         sprite Back1;
         Pcrane enemy1;
 
@@ -41,14 +41,22 @@ namespace WindowsGame1
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            mSprite = new sprite();
+            this.IsMouseVisible = true;
+
+            mSprite = new Tower();
             mSprite.Scale = 0.5f;
-            mSprite2 = new sprite();
+            
+            mSprite2 = new Tower();
             mSprite2.Scale = 0.5f;
+            
             Back1 = new sprite();
             Back1.Scale = 2.0f;
+            graphics.PreferredBackBufferWidth = 800;//size of window
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.ApplyChanges();
+
             enemy1 = new Pcrane();
+            enemy1.Scale = 0.5f;
 
             base.Initialize();
         }
@@ -62,15 +70,17 @@ namespace WindowsGame1
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            mSprite.LoadContent(this.Content, "tower1");
-            mSprite2.LoadContent(this.Content, "tower1");
-            Back1.LoadContent(this.Content, "Back01");
-            enemy1.LoadContent(this.Content);
-
+            mSprite.LoadContent(this.Content);
             mSprite.Position = new Vector2(125, 245);
+
+            mSprite2.LoadContent(this.Content);
             mSprite2.Position.X = 0; //these work too
             mSprite2.Position.Y = 0;
-            
+
+            Back1.LoadContent(this.Content, "Back01");
+
+            enemy1.LoadContent(this.Content);
+
         }
 
         /// <summary>
@@ -93,7 +103,6 @@ namespace WindowsGame1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
             enemy1.Update(gameTime);
 
             base.Update(gameTime);
@@ -106,12 +115,9 @@ namespace WindowsGame1
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
             spriteBatch.Begin();
 
             Back1.Draw(this.spriteBatch);
-
             enemy1.Draw(this.spriteBatch);
             mSprite.Draw(this.spriteBatch);
             mSprite2.Draw(this.spriteBatch);
