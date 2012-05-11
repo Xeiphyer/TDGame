@@ -15,9 +15,14 @@ namespace WindowsGame1
         const int START_POSITION_X = 100;
         const int START_POSITION_Y = 100;
         const string WIZARD_ASSETNAME = "tower1";
+        const int MOVE_UP = -1;
+        const int MOVE_DOWN = 1;
+        const int MOVE_LEFT = -1;
+        const int MOVE_RIGHT = 1;
         List<Fireball> mFireballs = new List<Fireball>();
         ContentManager mContentManager;
         Rectangle mSource;
+        int cooldown = 100;
 
         enum State
         {
@@ -28,6 +33,7 @@ namespace WindowsGame1
         Vector2 mDirection = Vector2.Zero;
         Vector2 mSpeed = Vector2.Zero;
         KeyboardState mPreviousKeyboardState;
+        Vector2 mStartingPosition = Vector2.Zero;
 
         public Tower()
         {
@@ -79,9 +85,12 @@ namespace WindowsGame1
                 aFireball.Update(theGameTime);
             }
 
-            if (aCurrentKeyboardState.IsKeyDown(Keys.RightControl) == true && mPreviousKeyboardState.IsKeyDown(Keys.RightControl) == false)
+            cooldown = --cooldown;
+
+            if (cooldown <= 0)
             {
                 ShootFireball();
+                cooldown = 100;
             }
         }
 
@@ -105,8 +114,7 @@ namespace WindowsGame1
                 {
                     Fireball aFireball = new Fireball();
                     aFireball.LoadContent(mContentManager);
-                    aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2),
-                    new Vector2(200, 200), new Vector2(1, 0));
+                    aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
                     mFireballs.Add(aFireball);
                 }
             }

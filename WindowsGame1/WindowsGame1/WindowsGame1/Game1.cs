@@ -104,6 +104,8 @@ namespace WindowsGame1
                 this.Exit();
 
             enemy1.Update(gameTime);
+            mSprite.Update(gameTime);
+            mSprite2.Update(gameTime);
 
             base.Update(gameTime);
         }

@@ -15,8 +15,8 @@ namespace WindowsGame1
     class Pcrane : sprite
     {
         const string WIZARD_ASSETNAME = "Pcrane";
-        const int START_POSITION_X = 0;
-        const int START_POSITION_Y = 90;
+        int X = 0;
+        int Y = 90;
         const int WIZARD_SPEED = 200;
         const int MOVE_UP = -1;
         const int MOVE_DOWN = 1;
@@ -37,7 +37,7 @@ namespace WindowsGame1
 
         public void LoadContent(ContentManager theContentManager)
         {
-            Position = new Vector2(START_POSITION_X, START_POSITION_Y);
+            Position = new Vector2(X, Y);
             base.LoadContent(theContentManager, WIZARD_ASSETNAME);
         }
 
@@ -61,24 +61,28 @@ namespace WindowsGame1
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_LEFT;
+                    X = X + MOVE_LEFT;
                 }
 
                 else if (aCurrentKeyboardState.IsKeyDown(Keys.Right) == true)
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_RIGHT;
+                    X = X + MOVE_RIGHT;
                 }
                 
                 if (aCurrentKeyboardState.IsKeyDown(Keys.Up) == true)
                 {
                     mSpeed.Y = WIZARD_SPEED;
                     mDirection.Y = MOVE_UP;
+                    Y = Y + MOVE_UP;
                 }
 
                 else if (aCurrentKeyboardState.IsKeyDown(Keys.Down) == true)
                 {
                     mSpeed.Y = WIZARD_SPEED;
                     mDirection.Y = MOVE_DOWN;
+                    Y = Y + MOVE_DOWN;
                 }
 
             }
