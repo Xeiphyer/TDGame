@@ -1,7 +1,3 @@
-Test readme file! Woo!
+Aha, I figured out how to download the files from the server using the GUI finally. 
 
-Now its a text file!
-
-Renamed main folder?!
-
-Look I can play too!
+Doood, nice work so far! Those fireballs look sick, did you make them or steal them?
