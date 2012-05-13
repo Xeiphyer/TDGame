@@ -50,6 +50,12 @@ namespace WindowsGame1
 
         }
 
+        public Vector2 getV()
+        {
+            Vector2 temp = new Vector2(X, Y);
+            return temp;
+        }
+
         private void UpdateMovement(KeyboardState aCurrentKeyboardState)
         {
             if (mCurrentState == State.Walking)
@@ -57,7 +63,44 @@ namespace WindowsGame1
                 mSpeed = Vector2.Zero;
                 mDirection = Vector2.Zero;
 
-                if (aCurrentKeyboardState.IsKeyDown(Keys.Left) == true)
+                if (X < 180 && Y < 100)
+                {
+                    mSpeed.X = WIZARD_SPEED;
+                    mDirection.X = MOVE_RIGHT;
+                    X = X + MOVE_RIGHT;
+                }
+                if (X == 180 && Y < 145)
+                {
+                    mSpeed.Y = WIZARD_SPEED;
+                    mDirection.Y = MOVE_DOWN;
+                    Y = Y + MOVE_DOWN;
+                }
+                if (X > 30 && Y == 145)
+                {
+                    mSpeed.X = WIZARD_SPEED;
+                    mDirection.X = MOVE_LEFT;
+                    X = X + MOVE_LEFT;
+                }
+                if (X == 30 && Y < 190)
+                {
+                    mSpeed.Y = WIZARD_SPEED;
+                    mDirection.Y = MOVE_DOWN;
+                    Y = Y + MOVE_DOWN;
+                }
+                if(Y == 190 && X < 230)
+                {
+                    mSpeed.X = WIZARD_SPEED;
+                    mDirection.X = MOVE_RIGHT;
+                    X = X + MOVE_RIGHT;
+                }
+                if (X == 230)
+                {
+                    X = 0;
+                    Y = 90;
+                    Position = new Vector2(X, Y);
+                }
+
+              /*  if (aCurrentKeyboardState.IsKeyDown(Keys.Left) == true)
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_LEFT;
@@ -83,15 +126,10 @@ namespace WindowsGame1
                     mSpeed.Y = WIZARD_SPEED;
                     mDirection.Y = MOVE_DOWN;
                     Y = Y + MOVE_DOWN;
-                }
+                }*/
 
             }
-
         }
-
-
-
-
 
     }
 }

@@ -29,7 +29,7 @@ namespace WindowsGame1
             Scale = 0.3f;
         }
 
-        public void Update(GameTime theGameTime)
+        public void Update(GameTime theGameTime, Vector2 XY)
         {
             if (Vector2.Distance(mStartPosition, Position) > MAX_DISTANCE)
             {

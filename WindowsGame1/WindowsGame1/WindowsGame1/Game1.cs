@@ -23,7 +23,7 @@ namespace WindowsGame1
         Vector2 mPosition = new Vector2(100, 200);
         Texture2D mSpriteTexture;
         Tower mSprite;
-        Tower mSprite2;
+      //  Tower mSprite2;
         sprite Back1;
         Pcrane enemy1;
 
@@ -46,8 +46,8 @@ namespace WindowsGame1
             mSprite = new Tower();
             mSprite.Scale = 0.5f;
             
-            mSprite2 = new Tower();
-            mSprite2.Scale = 0.5f;
+         //   mSprite2 = new Tower();
+         //   mSprite2.Scale = 0.5f;
             
             Back1 = new sprite();
             Back1.Scale = 2.0f;
@@ -71,11 +71,10 @@ namespace WindowsGame1
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             mSprite.LoadContent(this.Content);
-            mSprite.Position = new Vector2(125, 245);
 
-            mSprite2.LoadContent(this.Content);
-            mSprite2.Position.X = 0; //these work too
-            mSprite2.Position.Y = 0;
+           // mSprite2.LoadContent(this.Content);
+          // mSprite2.Position.X = 0; //these work too
+          //  mSprite2.Position.Y = 0;
 
             Back1.LoadContent(this.Content, "Back01");
 
@@ -104,8 +103,8 @@ namespace WindowsGame1
                 this.Exit();
 
             enemy1.Update(gameTime);
-            mSprite.Update(gameTime);
-            mSprite2.Update(gameTime);
+            mSprite.Update(gameTime, enemy1.getV());
+          //  mSprite2.Update(gameTime,enemy1.getV());
 
             base.Update(gameTime);
         }
@@ -122,7 +121,7 @@ namespace WindowsGame1
             Back1.Draw(this.spriteBatch);
             enemy1.Draw(this.spriteBatch);
             mSprite.Draw(this.spriteBatch);
-            mSprite2.Draw(this.spriteBatch);
+           // mSprite2.Draw(this.spriteBatch);
 
             spriteBatch.End();
 

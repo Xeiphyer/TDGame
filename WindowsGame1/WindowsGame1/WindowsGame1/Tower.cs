@@ -12,8 +12,8 @@ namespace WindowsGame1
 {
     class Tower : sprite
     {
-        const int START_POSITION_X = 100;
-        const int START_POSITION_Y = 100;
+        const int START_POSITION_X = 125;
+        const int START_POSITION_Y = 245;
         const string WIZARD_ASSETNAME = "tower1";
         const int MOVE_UP = -1;
         const int MOVE_DOWN = 1;
@@ -67,22 +67,22 @@ namespace WindowsGame1
             Source = new Rectangle(0, 0, 200, Source.Height);
         }
 
-        public void Update(GameTime theGameTime)
+        public void Update(GameTime theGameTime,Vector2 XY)
         {
             KeyboardState aCurrentKeyboardState = Keyboard.GetState();
             //UpdateMovement(aCurrentKeyboardState);
             //UpdateJump(aCurrentKeyboardState);
             //UpdateDuck(aCurrentKeyboardState);
-            UpdateFireball(theGameTime, aCurrentKeyboardState);
+            UpdateFireball(theGameTime, aCurrentKeyboardState, XY);
             mPreviousKeyboardState = aCurrentKeyboardState;
             base.Update(theGameTime, mSpeed, mDirection);
         }
 
-        private void UpdateFireball(GameTime theGameTime, KeyboardState aCurrentKeyboardState)
+        private void UpdateFireball(GameTime theGameTime, KeyboardState aCurrentKeyboardState, Vector2 XY)
         {
             foreach (Fireball aFireball in mFireballs)
             {
-                aFireball.Update(theGameTime);
+                aFireball.Update(theGameTime, XY);
             }
 
             cooldown = --cooldown;
@@ -99,22 +99,21 @@ namespace WindowsGame1
             if (mCurrentState == State.Walking)
             {
                 bool aCreateNew = true;
-                foreach (Fireball aFireball in mFireballs)
+            /*    foreach (Fireball aFireball in mFireballs)
                 {
                     if (aFireball.Visible == false)
                     {
                         aCreateNew = false;
-                        aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2),
-                        new Vector2(200, 0), new Vector2(1, 0));
+                        aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(-1, -1));
                         break;
                     }
-                }
+                }*/
 
                 if (aCreateNew == true)
                 {
                     Fireball aFireball = new Fireball();
                     aFireball.LoadContent(mContentManager);
-                    aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
+                    aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(-1, -1));
                     mFireballs.Add(aFireball);
                 }
             }
