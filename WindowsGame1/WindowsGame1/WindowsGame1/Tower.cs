@@ -113,7 +113,7 @@ namespace WindowsGame1
                 {
                     Fireball aFireball = new Fireball();
                     aFireball.LoadContent(mContentManager);
-                    aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(-1, -1));
+                    aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
                     mFireballs.Add(aFireball);
                 }
             }

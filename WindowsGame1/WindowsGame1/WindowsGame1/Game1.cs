@@ -26,6 +26,12 @@ namespace WindowsGame1
       //  Tower mSprite2;
         sprite Back1;
         Pcrane enemy1;
+        sprite sidebar;
+        sprite title;
+        sprite map;
+        bool titleScreen = true;
+        bool mapScreen = false;
+        bool gameScreen = false;
 
         public Game1()
         {
@@ -51,12 +57,17 @@ namespace WindowsGame1
             
             Back1 = new sprite();
             Back1.Scale = 2.0f;
-            graphics.PreferredBackBufferWidth = 800;//size of window
+            graphics.PreferredBackBufferWidth = 1000;//size of window
             graphics.PreferredBackBufferHeight = 600;
             graphics.ApplyChanges();
 
             enemy1 = new Pcrane();
             enemy1.Scale = 0.5f;
+
+            sidebar = new sprite();
+
+            title = new sprite();
+            map = new sprite();
 
             base.Initialize();
         }
@@ -80,6 +91,14 @@ namespace WindowsGame1
 
             enemy1.LoadContent(this.Content);
 
+            sidebar.LoadContent(this.Content, "side");
+            sidebar.Position.X = 800;
+
+            title.LoadContent(this.Content, "title");
+            map.LoadContent(this.Content, "Map");
+            titleScreen = true;
+            mapScreen = false;
+            gameScreen = false;
         }
 
         /// <summary>
@@ -102,26 +121,72 @@ namespace WindowsGame1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            enemy1.Update(gameTime);
-            mSprite.Update(gameTime, enemy1.getV());
-          //  mSprite2.Update(gameTime,enemy1.getV());
+            if (titleScreen)
+            {
+                updateTitle();
+            }
+            else if (mapScreen)
+            {
+                updateMap();
+            }
+            else if (gameScreen)
+            {
+                enemy1.Update(gameTime);
+                mSprite.Update(gameTime, enemy1.getV());
+                //  mSprite2.Update(gameTime,enemy1.getV());
+            }
 
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        private void updateTitle()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) == true)
+            {
+                titleScreen = false;
+                mapScreen = true;
+                return;
+
+            }
+        }
+
+        private void updateMap()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
+            {
+                mapScreen = false;
+                gameScreen = true;
+                return;
+
+            }
+        }
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
 
+            if (titleScreen)
+            {
+
+                title.Draw(this.spriteBatch);
+
+            }
+
+            else if (mapScreen)
+            {
+
+                map.Draw(this.spriteBatch);
+
+            }
+            else if(gameScreen)
+            {
             Back1.Draw(this.spriteBatch);
             enemy1.Draw(this.spriteBatch);
             mSprite.Draw(this.spriteBatch);
            // mSprite2.Draw(this.spriteBatch);
+            sidebar.Draw(this.spriteBatch);
+            }
 
             spriteBatch.End();
 

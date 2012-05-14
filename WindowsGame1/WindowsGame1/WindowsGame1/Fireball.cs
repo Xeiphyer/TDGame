@@ -46,28 +46,24 @@ namespace WindowsGame1
 
                   if (X > XY.X)
                   {
-                      mSpeed.X = 100;
                       mDirection.X = MOVE_LEFT;
                       X = X + MOVE_LEFT;
                   }
 
                   if (X < XY.X)
                   {
-                      mSpeed.X = 100;
                       mDirection.X = MOVE_RIGHT;
                       X = X + MOVE_RIGHT;
                   }
 
                   if (Y > XY.Y)
                   {
-                      mSpeed.X = 100;
                       mDirection.Y = MOVE_UP;
                       Y = Y + MOVE_UP;
                   }
 
                   if (Y < XY.Y)
                   {
-                      mSpeed.X = 100;
                       mDirection.Y = MOVE_DOWN;
                       Y = Y + MOVE_DOWN;
                   }

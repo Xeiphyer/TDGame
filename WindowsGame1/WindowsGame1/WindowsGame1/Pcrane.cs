@@ -81,7 +81,7 @@ namespace WindowsGame1
                     mDirection.X = MOVE_LEFT;
                     X = X + MOVE_LEFT;
                 }
-                if (X == 30 && Y < 190)
+                if (X == 30 && Y < 190 && Y > 90)
                 {
                     mSpeed.Y = WIZARD_SPEED;
                     mDirection.Y = MOVE_DOWN;

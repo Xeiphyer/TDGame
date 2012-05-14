@@ -3,3 +3,6 @@ Content\Back01.xnb
 Content\Pcrane.xnb
 Content\Back01path.xnb
 Content\Fireball.xnb
+Content\side.xnb
+Content\Map.xnb
+Content\title.xnb
