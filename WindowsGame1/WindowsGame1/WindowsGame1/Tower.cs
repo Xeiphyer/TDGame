@@ -12,8 +12,8 @@ namespace WindowsGame1
 {
     class Tower : sprite
     {
-        const int START_POSITION_X = 125;
-        const int START_POSITION_Y = 245;
+        int START_POSITION_X;
+        int START_POSITION_Y;
         const string WIZARD_ASSETNAME = "tower1";
         const int MOVE_UP = -1;
         const int MOVE_DOWN = 1;
@@ -26,17 +26,29 @@ namespace WindowsGame1
 
         enum State
         {
-            Walking
+            Tower,
+            Button,
+            Click
         }
 
-        State mCurrentState = State.Walking;
+        State mCurrentState;
         Vector2 mDirection = Vector2.Zero;
         Vector2 mSpeed = Vector2.Zero;
-        KeyboardState mPreviousKeyboardState;
         Vector2 mStartingPosition = Vector2.Zero;
+        MouseState mouseState;
 
-        public Tower()
+        public Tower(String str,int X, int Y)
         {
+            START_POSITION_X = X;
+            START_POSITION_Y = Y;
+            if(str == "Tower")
+            {
+                mCurrentState = State.Tower;
+            }
+            else if(str == "Button")
+            {
+                mCurrentState = State.Button;
+            }
         }
 
         //The Rectangular area from the original image that 
@@ -69,16 +81,29 @@ namespace WindowsGame1
 
         public void Update(GameTime theGameTime,Vector2 XY)
         {
-            KeyboardState aCurrentKeyboardState = Keyboard.GetState();
-            //UpdateMovement(aCurrentKeyboardState);
-            //UpdateJump(aCurrentKeyboardState);
-            //UpdateDuck(aCurrentKeyboardState);
-            UpdateFireball(theGameTime, aCurrentKeyboardState, XY);
-            mPreviousKeyboardState = aCurrentKeyboardState;
+            mouseState = Mouse.GetState();
+            UpdateClick(mouseState);
+            UpdateFireball(theGameTime, XY);
             base.Update(theGameTime, mSpeed, mDirection);
         }
 
-        private void UpdateFireball(GameTime theGameTime, KeyboardState aCurrentKeyboardState, Vector2 XY)
+        private void UpdateClick(MouseState state)
+        {
+            if (mCurrentState == State.Button
+                && state.X > START_POSITION_X
+                && state.X < (START_POSITION_X+(int)(mSource.Width * Scale))
+                && state.Y > START_POSITION_Y
+                && state.Y < (START_POSITION_Y+(int)(mSource.Height * Scale)))
+            {    
+                 if (state.LeftButton == ButtonState.Pressed)
+                 {
+                     mCurrentState = State.Click;
+                 }
+
+            }
+        }
+
+        private void UpdateFireball(GameTime theGameTime, Vector2 XY)
         {
             foreach (Fireball aFireball in mFireballs)
             {
@@ -96,7 +121,7 @@ namespace WindowsGame1
 
         private void ShootFireball()
         {
-            if (mCurrentState == State.Walking)
+            if (mCurrentState == State.Tower)
             {
                 bool aCreateNew = true;
             /*    foreach (Fireball aFireball in mFireballs)
@@ -125,8 +150,15 @@ namespace WindowsGame1
             {
                 aFireball.Draw(theSpriteBatch);
             }
-
-            base.Draw(theSpriteBatch);
+            if (mCurrentState == State.Click)
+            {
+                base.Draw(theSpriteBatch, Color.Red);
+                //mCurrentState = State.Button;
+            }
+            else
+            {
+                base.Draw(theSpriteBatch);
+            }
         }
 
     }

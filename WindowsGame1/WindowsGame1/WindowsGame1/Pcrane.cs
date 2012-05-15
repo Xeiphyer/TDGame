@@ -98,6 +98,7 @@ namespace WindowsGame1
                     X = 0;
                     Y = 90;
                     Position = new Vector2(X, Y);
+                  //  Game1.Lives(1);
                 }
 
               /*  if (aCurrentKeyboardState.IsKeyDown(Keys.Left) == true)

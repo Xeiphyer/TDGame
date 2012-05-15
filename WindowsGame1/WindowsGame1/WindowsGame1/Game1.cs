@@ -23,7 +23,7 @@ namespace WindowsGame1
         Vector2 mPosition = new Vector2(100, 200);
         Texture2D mSpriteTexture;
         Tower mSprite;
-      //  Tower mSprite2;
+        Tower Tbutton;
         sprite Back1;
         Pcrane enemy1;
         sprite sidebar;
@@ -33,11 +33,18 @@ namespace WindowsGame1
         bool mapScreen = false;
         bool gameScreen = false;
         SpriteFont font;
+        public int lives = 100;
+
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+        }
+
+        public void Lives(int change)
+        {
+            lives = lives - change;
         }
 
         /// <summary>
@@ -50,11 +57,11 @@ namespace WindowsGame1
         {
             this.IsMouseVisible = true;
 
-            mSprite = new Tower();
+            mSprite = new Tower("Tower", 125, 245);
             mSprite.Scale = 0.5f;
             
-         //   mSprite2 = new Tower();
-         //   mSprite2.Scale = 0.5f;
+            Tbutton = new Tower("Button", 830, 220);
+            Tbutton.Scale = 0.3f;
             
             Back1 = new sprite();
             Back1.Scale = 2.0f;
@@ -84,9 +91,7 @@ namespace WindowsGame1
 
             mSprite.LoadContent(this.Content);
 
-           // mSprite2.LoadContent(this.Content);
-          // mSprite2.Position.X = 0; //these work too
-          //  mSprite2.Position.Y = 0;
+            Tbutton.LoadContent(this.Content);
 
             Back1.LoadContent(this.Content, "Back01");
 
@@ -136,7 +141,7 @@ namespace WindowsGame1
             {
                 enemy1.Update(gameTime);
                 mSprite.Update(gameTime, enemy1.getV());
-                //  mSprite2.Update(gameTime,enemy1.getV());
+                Tbutton.Update(gameTime, enemy1.getV());
             }
 
             base.Update(gameTime);
@@ -185,10 +190,10 @@ namespace WindowsGame1
             else if(gameScreen)
             {
             Back1.Draw(this.spriteBatch);
+            sidebar.Draw(this.spriteBatch);
             enemy1.Draw(this.spriteBatch);
             mSprite.Draw(this.spriteBatch);
-           // mSprite2.Draw(this.spriteBatch);
-            sidebar.Draw(this.spriteBatch);
+            Tbutton.Draw(this.spriteBatch);
             DrawText();
             }
 
@@ -199,7 +204,7 @@ namespace WindowsGame1
 
         private void DrawText()
         {
-            spriteBatch.DrawString(font, "Lives: 100   Gold: 50   Energy: 100", new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(font, "Lives: "+lives+"   Gold: 50   Energy: 100", new Vector2(0, 0), Color.White);
         }
     }
 }
