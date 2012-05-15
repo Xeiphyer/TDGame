@@ -73,6 +73,33 @@
       <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\title.xnb</Output>
       <Time>2012-05-13T22:10:04.2890625-06:00</Time>
     </Item>
+    <Item>
+      <Source>start.png</Source>
+      <Name>start</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\start.xnb</Output>
+      <Time>2012-05-14T16:53:03.9574297-06:00</Time>
+    </Item>
+    <Item>
+      <Source>start2.png</Source>
+      <Name>start2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\start2.xnb</Output>
+      <Time>2012-05-14T16:53:04.0209062-06:00</Time>
+    </Item>
+    <Item>
+      <Source>SpriteFont1.spritefont</Source>
+      <Name>SpriteFont1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
+      <Time>2012-05-14T22:06:39.0429687-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

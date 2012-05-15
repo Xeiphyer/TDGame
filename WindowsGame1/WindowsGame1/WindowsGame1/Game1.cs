@@ -32,6 +32,7 @@ namespace WindowsGame1
         bool titleScreen = true;
         bool mapScreen = false;
         bool gameScreen = false;
+        SpriteFont font;
 
         public Game1()
         {
@@ -99,6 +100,8 @@ namespace WindowsGame1
             titleScreen = true;
             mapScreen = false;
             gameScreen = false;
+
+            font = Content.Load<SpriteFont>("SpriteFont1");
         }
 
         /// <summary>
@@ -186,11 +189,17 @@ namespace WindowsGame1
             mSprite.Draw(this.spriteBatch);
            // mSprite2.Draw(this.spriteBatch);
             sidebar.Draw(this.spriteBatch);
+            DrawText();
             }
 
             spriteBatch.End();
-
+            
             base.Draw(gameTime);
+        }
+
+        private void DrawText()
+        {
+            spriteBatch.DrawString(font, "Lives: 100   Gold: 50   Energy: 100", new Vector2(0, 0), Color.White);
         }
     }
 }
