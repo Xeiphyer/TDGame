@@ -57,7 +57,7 @@ namespace WindowsGame1
         {
             this.IsMouseVisible = true;
 
-            mSprite = new Tower("Tower", 125, 245);
+            mSprite = new Tower("Tower", 125, 200);
             mSprite.Scale = 0.5f;
             
             Tbutton = new Tower("Button", 830, 220);
@@ -190,8 +190,8 @@ namespace WindowsGame1
             else if(gameScreen)
             {
             Back1.Draw(this.spriteBatch);
-            sidebar.Draw(this.spriteBatch);
             enemy1.Draw(this.spriteBatch);
+            sidebar.Draw(this.spriteBatch);
             mSprite.Draw(this.spriteBatch);
             Tbutton.Draw(this.spriteBatch);
             DrawText();

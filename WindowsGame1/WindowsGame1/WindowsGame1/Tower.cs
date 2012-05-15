@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 
 namespace WindowsGame1
 {
@@ -23,6 +24,9 @@ namespace WindowsGame1
         ContentManager mContentManager;
         Rectangle mSource;
         int cooldown = 100;
+        SoundEffect soundEngine;
+        SoundEffectInstance soundEngineInstance;
+        SoundEffect pew;
 
         enum State
         {
@@ -77,6 +81,9 @@ namespace WindowsGame1
             Position = new Vector2(START_POSITION_X, START_POSITION_Y);
             base.LoadContent(theContentManager, WIZARD_ASSETNAME);
             Source = new Rectangle(0, 0, 200, Source.Height);
+            soundEngine = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
+            soundEngineInstance = soundEngine.CreateInstance();
+            pew = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
         }
 
         public void Update(GameTime theGameTime,Vector2 XY)
@@ -98,6 +105,7 @@ namespace WindowsGame1
                  if (state.LeftButton == ButtonState.Pressed)
                  {
                      mCurrentState = State.Click;
+                     soundEngine.Play();
                  }
 
             }
@@ -116,6 +124,7 @@ namespace WindowsGame1
             {
                 ShootFireball();
                 cooldown = 100;
+                soundEngine.Play();
             }
         }
 
