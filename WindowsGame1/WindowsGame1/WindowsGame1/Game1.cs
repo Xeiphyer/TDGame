@@ -193,6 +193,9 @@ namespace WindowsGame1
             enemy1.Draw(this.spriteBatch);
             sidebar.Draw(this.spriteBatch);
             mSprite.Draw(this.spriteBatch);
+           // MouseState Mstate = Mouse.GetState();            //code for changing the mouse image
+           // Vector2 pos = new Vector2(Mstate.X, Mstate.Y);
+           // Tbutton.Draw(this.spriteBatch, pos);
             Tbutton.Draw(this.spriteBatch);
             DrawText();
             }

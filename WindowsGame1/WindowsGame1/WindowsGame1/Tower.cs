@@ -28,19 +28,20 @@ namespace WindowsGame1
         SoundEffectInstance soundEngineInstance;
         SoundEffect pew;
 
+        State mCurrentState;
+        Vector2 mDirection = Vector2.Zero;
+        Vector2 mSpeed = Vector2.Zero;
+        Vector2 mStartingPosition = Vector2.Zero;
+        MouseState mouseState;
+        MouseState lastMouseState;
+
         enum State
         {
             Tower,
             Button,
             Click
         }
-
-        State mCurrentState;
-        Vector2 mDirection = Vector2.Zero;
-        Vector2 mSpeed = Vector2.Zero;
-        Vector2 mStartingPosition = Vector2.Zero;
-        MouseState mouseState;
-
+        
         public Tower(String str,int X, int Y)
         {
             START_POSITION_X = X;
@@ -88,24 +89,25 @@ namespace WindowsGame1
 
         public void Update(GameTime theGameTime,Vector2 XY)
         {
+            lastMouseState = mouseState;
             mouseState = Mouse.GetState();
-            UpdateClick(mouseState);
+            UpdateClick(mouseState, lastMouseState);
             UpdateFireball(theGameTime, XY);
             base.Update(theGameTime, mSpeed, mDirection);
         }
 
-        private void UpdateClick(MouseState state)
+        private void UpdateClick(MouseState mousestate, MouseState lastmousestate)
         {
             if (mCurrentState == State.Button
-                && state.X > START_POSITION_X
-                && state.X < (START_POSITION_X+(int)(mSource.Width * Scale))
-                && state.Y > START_POSITION_Y
-                && state.Y < (START_POSITION_Y+(int)(mSource.Height * Scale)))
-            {    
-                 if (state.LeftButton == ButtonState.Pressed)
+                && mousestate.X > START_POSITION_X
+                && mousestate.X < (START_POSITION_X + (int)(mSpriteTexture.Width * Scale))
+                && mousestate.Y > START_POSITION_Y
+                && mousestate.Y < (START_POSITION_Y + (int)(mSpriteTexture.Height * Scale)))
+            {
+                //soundEngine.Play();
+                if (mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
                  {
                      mCurrentState = State.Click;
-                     soundEngine.Play();
                  }
 
             }
@@ -162,7 +164,7 @@ namespace WindowsGame1
             if (mCurrentState == State.Click)
             {
                 base.Draw(theSpriteBatch, Color.Red);
-                //mCurrentState = State.Button;
+                mCurrentState = State.Button;
             }
             else
             {
