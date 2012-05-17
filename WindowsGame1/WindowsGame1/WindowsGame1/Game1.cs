@@ -195,15 +195,18 @@ namespace WindowsGame1
          //   mSprite.Draw(this.spriteBatch);
             if (Tbutton.changeMouse())
             {
-                this.IsMouseVisible = false;
-                MouseState Mstate = Mouse.GetState();            //code for changing the mouse image
+                this.IsMouseVisible = false;        //code for changing the mouse image
+                MouseState Mstate = Mouse.GetState();            
                 Tbutton.Scale = 0.5f;
+                Tbutton.setImage(this.Content,"clearTower");
                 Vector2 pos = new Vector2(Mstate.X, Mstate.Y);
                 Tbutton.Draw(this.spriteBatch, pos);
+                Tbutton.setImage(this.Content,"tower1");
             }
             else
+            {
                 this.IsMouseVisible = true;
-
+            }
             Tbutton.Scale = 0.3f;
             Tbutton.Draw(this.spriteBatch);
             DrawText();

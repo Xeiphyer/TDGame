@@ -109,6 +109,15 @@
       <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Pew_Pew-DKnight556-1379997159.xnb</Output>
       <Time>2012-05-15T16:22:53.1435547-06:00</Time>
     </Item>
+    <Item>
+      <Source>clearTower.png</Source>
+      <Name>clearTower</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\clearTower.xnb</Output>
+      <Time>2012-05-16T20:35:17.0898437-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

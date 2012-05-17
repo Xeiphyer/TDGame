@@ -15,7 +15,7 @@ namespace WindowsGame1
     {
         public int START_POSITION_X;
         public int START_POSITION_Y;
-        const string WIZARD_ASSETNAME = "tower1";
+        string WIZARD_ASSETNAME = "tower1";
         const int MOVE_UP = -1;
         const int MOVE_DOWN = 1;
         const int MOVE_LEFT = -1;
@@ -51,6 +51,11 @@ namespace WindowsGame1
             }
             else
                 return false;
+        }
+
+        public void setImage(ContentManager theContentManager, String str)
+        {
+            base.LoadContent(theContentManager, str);
         }
 
         public Tower(String str,int X, int Y)
