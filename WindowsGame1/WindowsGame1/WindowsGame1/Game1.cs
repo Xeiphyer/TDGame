@@ -22,7 +22,7 @@ namespace WindowsGame1
         SpriteBatch spriteBatch;
         Vector2 mPosition = new Vector2(100, 200);
         Texture2D mSpriteTexture;
-        Tower mSprite;
+       // Tower mSprite;
         Tower Tbutton;
         sprite Back1;
         Pcrane enemy1;
@@ -57,8 +57,8 @@ namespace WindowsGame1
         {
             this.IsMouseVisible = true;
 
-            mSprite = new Tower("Tower", 125, 200);
-            mSprite.Scale = 0.5f;
+            //mSprite = new Tower("Tower", 125, 200);
+           // mSprite.Scale = 0.5f;
             
             Tbutton = new Tower("Button", 830, 220);
             Tbutton.Scale = 0.3f;
@@ -89,7 +89,7 @@ namespace WindowsGame1
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            mSprite.LoadContent(this.Content);
+          //  mSprite.LoadContent(this.Content);
 
             Tbutton.LoadContent(this.Content);
 
@@ -140,7 +140,7 @@ namespace WindowsGame1
             else if (gameScreen)
             {
                 enemy1.Update(gameTime);
-                mSprite.Update(gameTime, enemy1.getV());
+              //  mSprite.Update(gameTime, enemy1.getV());
                 Tbutton.Update(gameTime, enemy1.getV());
             }
 
@@ -192,10 +192,19 @@ namespace WindowsGame1
             Back1.Draw(this.spriteBatch);
             enemy1.Draw(this.spriteBatch);
             sidebar.Draw(this.spriteBatch);
-            mSprite.Draw(this.spriteBatch);
-           // MouseState Mstate = Mouse.GetState();            //code for changing the mouse image
-           // Vector2 pos = new Vector2(Mstate.X, Mstate.Y);
-           // Tbutton.Draw(this.spriteBatch, pos);
+         //   mSprite.Draw(this.spriteBatch);
+            if (Tbutton.changeMouse())
+            {
+                this.IsMouseVisible = false;
+                MouseState Mstate = Mouse.GetState();            //code for changing the mouse image
+                Tbutton.Scale = 0.5f;
+                Vector2 pos = new Vector2(Mstate.X, Mstate.Y);
+                Tbutton.Draw(this.spriteBatch, pos);
+            }
+            else
+                this.IsMouseVisible = true;
+
+            Tbutton.Scale = 0.3f;
             Tbutton.Draw(this.spriteBatch);
             DrawText();
             }

@@ -13,8 +13,8 @@ namespace WindowsGame1
 {
     class Tower : sprite
     {
-        int START_POSITION_X;
-        int START_POSITION_Y;
+        public int START_POSITION_X;
+        public int START_POSITION_Y;
         const string WIZARD_ASSETNAME = "tower1";
         const int MOVE_UP = -1;
         const int MOVE_DOWN = 1;
@@ -34,6 +34,7 @@ namespace WindowsGame1
         Vector2 mStartingPosition = Vector2.Zero;
         MouseState mouseState;
         MouseState lastMouseState;
+        List<Tower> towers = new List<Tower>();
 
         enum State
         {
@@ -41,11 +42,23 @@ namespace WindowsGame1
             Button,
             Click
         }
-        
+
+        public bool changeMouse()
+        {
+            if (mCurrentState == State.Click)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
         public Tower(String str,int X, int Y)
         {
             START_POSITION_X = X;
             START_POSITION_Y = Y;
+            Position = new Vector2(START_POSITION_X, START_POSITION_Y);
+
             if(str == "Tower")
             {
                 mCurrentState = State.Tower;
@@ -74,17 +87,17 @@ namespace WindowsGame1
         public void LoadContent(ContentManager theContentManager)
         {
             mContentManager = theContentManager;
+
             foreach (Fireball aFireball in mFireballs)
             {
                 aFireball.LoadContent(theContentManager);
             }
 
-            Position = new Vector2(START_POSITION_X, START_POSITION_Y);
             base.LoadContent(theContentManager, WIZARD_ASSETNAME);
             Source = new Rectangle(0, 0, 200, Source.Height);
             soundEngine = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
             soundEngineInstance = soundEngine.CreateInstance();
-            pew = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
+           // pew = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
         }
 
         public void Update(GameTime theGameTime,Vector2 XY)
@@ -98,16 +111,24 @@ namespace WindowsGame1
 
         private void UpdateClick(MouseState mousestate, MouseState lastmousestate)
         {
+            if (mCurrentState == State.Click && mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
+                {
+                   Tower aTower = new Tower("Tower", mousestate.X, mousestate.Y);
+                   aTower.Scale = 0.5f;
+                   aTower.LoadContent(mContentManager);
+                   towers.Add(aTower);
+                   mCurrentState = State.Button;
+                }
             if (mCurrentState == State.Button
                 && mousestate.X > START_POSITION_X
                 && mousestate.X < (START_POSITION_X + (int)(mSpriteTexture.Width * Scale))
                 && mousestate.Y > START_POSITION_Y
                 && mousestate.Y < (START_POSITION_Y + (int)(mSpriteTexture.Height * Scale)))
             {
-                //soundEngine.Play();
+                //hover over button here
                 if (mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
                  {
-                     mCurrentState = State.Click;
+                     mCurrentState = State.Click;//button click here
                  }
 
             }
@@ -126,31 +147,59 @@ namespace WindowsGame1
             {
                 ShootFireball();
                 cooldown = 100;
-                soundEngine.Play();
+                //soundEngine.Play();
             }
         }
 
+       /* private void ShootFireball()
+        {
+                if (mCurrentState == State.Tower)
+                {
+                    bool aCreateNew = true;
+                        foreach (Fireball aFireball in mFireballs)
+                        {
+                            if (aFireball.Visible == false)
+                            {
+                                aCreateNew = false;
+                                aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
+                                break;
+                            }
+                        }
+
+                    if (aCreateNew == true)
+                    {
+                        Fireball aFireball = new Fireball();
+                        aFireball.LoadContent(mContentManager);
+                        aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
+                        mFireballs.Add(aFireball);
+                    }
+                }
+        }*/
+
         private void ShootFireball()
         {
-            if (mCurrentState == State.Tower)
+            foreach (Tower aTower in towers)
             {
-                bool aCreateNew = true;
-            /*    foreach (Fireball aFireball in mFireballs)
+                if (aTower.mCurrentState == State.Tower)
                 {
-                    if (aFireball.Visible == false)
+                    bool aCreateNew = true;
+                    foreach (Fireball aFireball in mFireballs)
                     {
-                        aCreateNew = false;
-                        aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(-1, -1));
-                        break;
+                        if (aFireball.Visible == false)
+                        {
+                            aCreateNew = false;
+                            aFireball.Fire(aTower.Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
+                            break;
+                        }
                     }
-                }*/
 
-                if (aCreateNew == true)
-                {
-                    Fireball aFireball = new Fireball();
-                    aFireball.LoadContent(mContentManager);
-                    aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
-                    mFireballs.Add(aFireball);
+                    if (aCreateNew == true)
+                    {
+                        Fireball aFireball = new Fireball();
+                        aFireball.LoadContent(mContentManager);
+                        aFireball.Fire(aTower.Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
+                        mFireballs.Add(aFireball);
+                    }
                 }
             }
         }
@@ -161,15 +210,29 @@ namespace WindowsGame1
             {
                 aFireball.Draw(theSpriteBatch);
             }
+            
             if (mCurrentState == State.Click)
             {
                 base.Draw(theSpriteBatch, Color.Red);
-                mCurrentState = State.Button;
+                foreach (Tower aTower in towers)
+                {
+                    aTower.Draw(theSpriteBatch);
+                }
             }
+            
             else
             {
+                foreach (Tower aTower in towers)
+                {
+                    aTower.Draw(theSpriteBatch);
+                }
                 base.Draw(theSpriteBatch);
             }
+            
+            /*else
+            {
+                base.Draw(theSpriteBatch);
+            }*/
         }
 
     }
