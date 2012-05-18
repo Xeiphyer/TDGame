@@ -36,6 +36,7 @@ namespace WindowsGame1
         int lives;
         int gold;
         int energy;
+        waves wave1;
 
 
         public Game1()
@@ -74,19 +75,21 @@ namespace WindowsGame1
             title = new sprite();
             map = new sprite();
 
+            wave1 = new waves();
+
             base.Initialize();
         }
 
         private void levelStart()
         {
-            lives = 1;
+            lives = 3;
             gold = 100;
             energy = 100;
             titleScreen = false;
             mapScreen = false;
             gameScreen = true;
             Tbutton.reset();
-
+            wave1.reset();
         }
 
         /// <summary>
@@ -116,6 +119,8 @@ namespace WindowsGame1
             gameScreen = false;
 
             font = Content.Load<SpriteFont>("SpriteFont1");
+
+            wave1.LoadContent(this.Content);
         }
 
         /// <summary>
@@ -151,6 +156,7 @@ namespace WindowsGame1
                 enemy1.Update(gameTime);
               //  mSprite.Update(gameTime, enemy1.getV());
                 Tbutton.Update(gameTime, enemy1.getV());
+                wave1.Update(gameTime);
                 lives = lives - enemy1.leaks();
                 if (lives == 0)
                 {
@@ -208,6 +214,7 @@ namespace WindowsGame1
             Back1.Draw(this.spriteBatch);
             enemy1.Draw(this.spriteBatch);
             sidebar.Draw(this.spriteBatch);
+            wave1.Draw(this.spriteBatch);
          //   mSprite.Draw(this.spriteBatch);
             if (Tbutton.changeMouse())
             {

@@ -118,6 +118,15 @@
       <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\clearTower.xnb</Output>
       <Time>2012-05-16T20:35:17.0898437-06:00</Time>
     </Item>
+    <Item>
+      <Source>next1.png</Source>
+      <Name>next1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\next1.xnb</Output>
+      <Time>2012-05-18T02:12:02.4511719-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
