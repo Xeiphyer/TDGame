@@ -22,6 +22,7 @@ namespace WindowsGame1
         const int MOVE_DOWN = 1;
         const int MOVE_LEFT = -1;
         const int MOVE_RIGHT = 1;
+        int leak = 0;
 
         enum State
         {
@@ -53,6 +54,13 @@ namespace WindowsGame1
         public Vector2 getV()
         {
             Vector2 temp = new Vector2(X, Y);
+            return temp;
+        }
+
+        public int leaks()
+        {
+            int temp = leak;
+            leak = 0;
             return temp;
         }
 
@@ -98,7 +106,7 @@ namespace WindowsGame1
                     X = 0;
                     Y = 90;
                     Position = new Vector2(X, Y);
-                  //  Game1.Lives(1);
+                    leak++;
                 }
 
               /*  if (aCurrentKeyboardState.IsKeyDown(Keys.Left) == true)

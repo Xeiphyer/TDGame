@@ -33,18 +33,15 @@ namespace WindowsGame1
         bool mapScreen = false;
         bool gameScreen = false;
         SpriteFont font;
-        public int lives = 100;
+        int lives;
+        int gold;
+        int energy;
 
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-        }
-
-        public void Lives(int change)
-        {
-            lives = lives - change;
         }
 
         /// <summary>
@@ -78,6 +75,18 @@ namespace WindowsGame1
             map = new sprite();
 
             base.Initialize();
+        }
+
+        private void levelStart()
+        {
+            lives = 1;
+            gold = 100;
+            energy = 100;
+            titleScreen = false;
+            mapScreen = false;
+            gameScreen = true;
+            Tbutton.reset();
+
         }
 
         /// <summary>
@@ -142,6 +151,12 @@ namespace WindowsGame1
                 enemy1.Update(gameTime);
               //  mSprite.Update(gameTime, enemy1.getV());
                 Tbutton.Update(gameTime, enemy1.getV());
+                lives = lives - enemy1.leaks();
+                if (lives == 0)
+                {
+                    mapScreen = true;
+                    gameScreen = false;
+                }
             }
 
             base.Update(gameTime);
@@ -164,6 +179,7 @@ namespace WindowsGame1
             {
                 mapScreen = false;
                 gameScreen = true;
+                levelStart();
                 return;
 
             }
@@ -219,7 +235,7 @@ namespace WindowsGame1
 
         private void DrawText()
         {
-            spriteBatch.DrawString(font, "Lives: "+lives+"   Gold: 50   Energy: 100", new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(font, "Lives: "+lives+"   Gold: "+gold+"   Energy: "+energy, new Vector2(0, 0), Color.White);
         }
     }
 }

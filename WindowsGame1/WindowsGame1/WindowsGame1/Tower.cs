@@ -34,7 +34,7 @@ namespace WindowsGame1
         Vector2 mStartingPosition = Vector2.Zero;
         MouseState mouseState;
         MouseState lastMouseState;
-        List<Tower> towers = new List<Tower>();
+        List<Tower> towers;
 
         enum State
         {
@@ -63,6 +63,7 @@ namespace WindowsGame1
             START_POSITION_X = X;
             START_POSITION_Y = Y;
             Position = new Vector2(START_POSITION_X, START_POSITION_Y);
+            towers = new List<Tower>();
 
             if(str == "Tower")
             {
@@ -87,7 +88,11 @@ namespace WindowsGame1
             }
         }
 
-
+         public void reset()
+         {
+             towers.Clear();
+             mFireballs.Clear();
+         }
 
         public void LoadContent(ContentManager theContentManager)
         {
