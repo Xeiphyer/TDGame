@@ -20,8 +20,8 @@ namespace WindowsGame1
         const int MOVE_DOWN = 1;
         const int MOVE_LEFT = -1;
         const int MOVE_RIGHT = 1;
-        int X = 0;
-        int Y = 0;
+        public int X = 0;
+        public int Y = 0;
 
         public Fireball()
         {
@@ -75,6 +75,7 @@ namespace WindowsGame1
         {
             if (Visible == true)
             {
+               // base.Draw(theSpriteBatch);
                 base.Draw(theSpriteBatch);
             }
         }

@@ -82,7 +82,7 @@ namespace WindowsGame1
 
         private void levelStart()
         {
-            lives = 3;
+            lives = 10;
             gold = 100;
             energy = 100;
             titleScreen = false;
@@ -158,6 +158,7 @@ namespace WindowsGame1
                 Tbutton.Update(gameTime, enemy1.getV());
                 wave1.Update(gameTime);
                 lives = lives - enemy1.leaks();
+                updateCollision();
                 if (lives == 0)
                 {
                     mapScreen = true;
@@ -191,6 +192,29 @@ namespace WindowsGame1
             }
         }
 
+        private void updateCollision()
+        {
+            Rectangle rect1;
+            Rectangle rect2;
+            List<Pcrane> cranes = wave1.getList();
+            List<Fireball> mFireballs = Tbutton.getList();
+            
+            for(int i = 0; i < cranes.Count; i++)
+            {
+                rect1 = new Rectangle(cranes[i].X,cranes[i].Y,10,10);//100s should be width then height
+
+                for(int j =0; j < mFireballs.Count; j++)
+                {
+                    rect2 = new Rectangle(mFireballs[j].X, mFireballs[j].Y, 10, 10);
+                    if(rect1.Intersects(rect2))
+                    {
+                        cranes[i].hit(1);
+                    }
+                }
+            }
+
+        }
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -212,9 +236,9 @@ namespace WindowsGame1
             else if(gameScreen)
             {
             Back1.Draw(this.spriteBatch);
-            enemy1.Draw(this.spriteBatch);
-            sidebar.Draw(this.spriteBatch);
+            enemy1.Draw(this.spriteBatch,Color.Blue);
             wave1.Draw(this.spriteBatch);
+            sidebar.Draw(this.spriteBatch);
          //   mSprite.Draw(this.spriteBatch);
             if (Tbutton.changeMouse())
             {

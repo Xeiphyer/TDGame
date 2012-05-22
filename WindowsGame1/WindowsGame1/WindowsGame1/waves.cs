@@ -133,6 +133,11 @@ namespace WindowsGame1
             }
         }
 
+        public List<Pcrane> getList()
+        {
+            return cranes;
+        }
+
         public override void Draw(SpriteBatch theSpriteBatch)
         {
             foreach (Pcrane aCrane in cranes)

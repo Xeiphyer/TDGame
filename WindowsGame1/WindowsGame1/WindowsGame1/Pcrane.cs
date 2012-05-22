@@ -15,14 +15,16 @@ namespace WindowsGame1
     class Pcrane : sprite
     {
         const string WIZARD_ASSETNAME = "Pcrane";
-        int X = 0;
-        int Y = 90;
+        public int X = 0;
+        public int Y = 90;
         const int WIZARD_SPEED = 200;
         const int MOVE_UP = -1;
         const int MOVE_DOWN = 1;
         const int MOVE_LEFT = -1;
         const int MOVE_RIGHT = 1;
         int leak = 0;
+        int Hp = 1;
+        bool Visible = true;
 
         enum State
         {
@@ -42,12 +44,21 @@ namespace WindowsGame1
             base.LoadContent(theContentManager, WIZARD_ASSETNAME);
         }
 
+        public void hit(int dmg)
+        {
+            Hp = Hp - dmg;
+        }
+
         public void Update(GameTime theGameTime)
         {
             KeyboardState aCurrentKeyboardState = Keyboard.GetState();
             UpdateMovement(aCurrentKeyboardState);
             mPreviousKeyboardState = aCurrentKeyboardState;
             base.Update(theGameTime, mSpeed, mDirection);
+            if (Hp <= 0)
+            {
+                this.Visible = false;
+            }
 
         }
 
@@ -66,11 +77,11 @@ namespace WindowsGame1
 
         private void UpdateMovement(KeyboardState aCurrentKeyboardState)
         {
-            if (mCurrentState == State.Walking)
-            {
-                mSpeed = Vector2.Zero;
-                mDirection = Vector2.Zero;
+            mSpeed = Vector2.Zero;
+            mDirection = Vector2.Zero;
 
+            if (Visible == true)
+            {
                 if (X < 180 && Y < 100)
                 {
                     mSpeed.X = WIZARD_SPEED;
@@ -137,6 +148,14 @@ namespace WindowsGame1
                     Y = Y + MOVE_DOWN;
                 }*/
 
+            }
+        }
+
+        public override void Draw(SpriteBatch theSpriteBatch)//Draw the sprite to the screen
+        {
+            if (Visible == true)
+            {
+                theSpriteBatch.Draw(mSpriteTexture, Position, new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
             }
         }
 

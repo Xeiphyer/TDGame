@@ -214,6 +214,11 @@ namespace WindowsGame1
             }
         }
 
+        public List<Fireball> getList()
+        {
+            return mFireballs;
+        }
+
         public override void Draw(SpriteBatch theSpriteBatch)
         {
             foreach (Fireball aFireball in mFireballs)

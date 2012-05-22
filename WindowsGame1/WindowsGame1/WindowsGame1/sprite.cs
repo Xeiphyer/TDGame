@@ -37,6 +37,10 @@ namespace WindowsGame1
         {
             theSpriteBatch.Draw(mSpriteTexture, pos, new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
         }
+        public virtual void Draw(SpriteBatch theSpriteBatch, Rectangle rec)//Draw the sprite to the screen
+        {
+            theSpriteBatch.Draw(mSpriteTexture, Position, rec, Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
+        }
 
         public float Scale
         {
