@@ -25,10 +25,12 @@ namespace WindowsGame1
         int leak = 0;
         int Hp = 1;
         bool Visible = true;
+        int cash = 0;
 
         enum State
         {
-            Walking
+            Walking,
+            Dead
         }
 
         State mCurrentState = State.Walking;
@@ -55,9 +57,11 @@ namespace WindowsGame1
             UpdateMovement(aCurrentKeyboardState);
             mPreviousKeyboardState = aCurrentKeyboardState;
             base.Update(theGameTime, mSpeed, mDirection);
-            if (Hp <= 0)
+            if (Hp <= 0 && mCurrentState == State.Walking)
             {
                 this.Visible = false;
+                cash = 10;
+                mCurrentState = State.Dead;
             }
 
         }
@@ -72,6 +76,13 @@ namespace WindowsGame1
         {
             int temp = leak;
             leak = 0;
+            return temp;
+        }
+
+        public int bounty()
+        {
+            int temp = cash;
+            cash = 0;
             return temp;
         }
 

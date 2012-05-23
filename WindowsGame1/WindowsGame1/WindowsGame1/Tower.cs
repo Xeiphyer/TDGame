@@ -43,14 +43,17 @@ namespace WindowsGame1
             Click
         }
 
-        public bool changeMouse()
+        public bool changeMouse(int cash)
         {
-            if (mCurrentState == State.Click)
+            if (mCurrentState == State.Click && cash >= 50)
             {
                 return true;
             }
             else
+            {
+                mCurrentState = State.Button;
                 return false;
+            }
         }
 
         public void setImage(ContentManager theContentManager, String str)
@@ -110,16 +113,16 @@ namespace WindowsGame1
            // pew = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
         }
 
-        public void Update(GameTime theGameTime,Vector2 XY)
+        public int Update(GameTime theGameTime,Vector2 XY)
         {
             lastMouseState = mouseState;
             mouseState = Mouse.GetState();
-            UpdateClick(mouseState, lastMouseState);
             UpdateFireball(theGameTime, XY);
             base.Update(theGameTime, mSpeed, mDirection);
+            return UpdateClick(mouseState, lastMouseState);
         }
 
-        private void UpdateClick(MouseState mousestate, MouseState lastmousestate)
+        private int UpdateClick(MouseState mousestate, MouseState lastmousestate)
         {
             if (mCurrentState == State.Click && mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
                 {
@@ -128,20 +131,22 @@ namespace WindowsGame1
                    aTower.LoadContent(mContentManager);
                    towers.Add(aTower);
                    mCurrentState = State.Button;
+                   return 50;
                 }
             if (mCurrentState == State.Button
                 && mousestate.X > START_POSITION_X
                 && mousestate.X < (START_POSITION_X + (int)(mSpriteTexture.Width * Scale))
                 && mousestate.Y > START_POSITION_Y
                 && mousestate.Y < (START_POSITION_Y + (int)(mSpriteTexture.Height * Scale)))
+                
             {
                 //hover over button here
                 if (mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
-                 {
-                     mCurrentState = State.Click;//button click here
-                 }
-
+                {
+                    mCurrentState = State.Click;//button click here
+                }
             }
+            return 0;
         }
 
         private void UpdateFireball(GameTime theGameTime, Vector2 XY)

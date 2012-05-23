@@ -13,9 +13,6 @@ using Microsoft.Xna.Framework.Media;
 
 namespace WindowsGame1
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
@@ -45,12 +42,6 @@ namespace WindowsGame1
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
             this.IsMouseVisible = true;
@@ -92,10 +83,6 @@ namespace WindowsGame1
             wave1.reset();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -123,20 +110,11 @@ namespace WindowsGame1
             wave1.LoadContent(this.Content);
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
@@ -155,7 +133,7 @@ namespace WindowsGame1
             {
                 enemy1.Update(gameTime);
               //  mSprite.Update(gameTime, enemy1.getV());
-                Tbutton.Update(gameTime, enemy1.getV());
+                gold = gold - Tbutton.Update(gameTime, enemy1.getV());
                 wave1.Update(gameTime);
                 lives = lives - enemy1.leaks();
                 updateCollision();
@@ -201,7 +179,9 @@ namespace WindowsGame1
             
             for(int i = 0; i < cranes.Count; i++)
             {
-                rect1 = new Rectangle(cranes[i].X,cranes[i].Y,10,10);//100s should be width then height
+                rect1 = new Rectangle(cranes[i].X,cranes[i].Y,10,10);//10s should be width then height
+                lives = lives - cranes[i].leaks();
+                gold = gold + cranes[i].bounty();
 
                 for(int j =0; j < mFireballs.Count; j++)
                 {
@@ -240,7 +220,7 @@ namespace WindowsGame1
             wave1.Draw(this.spriteBatch);
             sidebar.Draw(this.spriteBatch);
          //   mSprite.Draw(this.spriteBatch);
-            if (Tbutton.changeMouse())
+            if (Tbutton.changeMouse(gold))
             {
                 this.IsMouseVisible = false;        //code for changing the mouse image
                 MouseState Mstate = Mouse.GetState();            
