@@ -20,8 +20,6 @@ namespace WindowsGame1
         const int MOVE_DOWN = 1;
         const int MOVE_LEFT = -1;
         const int MOVE_RIGHT = 1;
-        public int X = 0;
-        public int Y = 0;
 
         public Fireball()
         {
@@ -39,33 +37,30 @@ namespace WindowsGame1
             if (Vector2.Distance(mStartPosition, Position) > MAX_DISTANCE)
             {
                 Visible = false;
+                //Position = mStartPosition;
             }
 
             if (Visible == true)
             {
-                if (X > XY.X)
+                if (Position.X > XY.X)
                 {
                     mDirection.X = MOVE_LEFT;
-                    X = X + MOVE_LEFT;
                 }
 
-                else if (X < XY.X)
+                else if (Position.X < XY.X)
                 {
                     mDirection.X = MOVE_RIGHT;
-                    X = X + MOVE_RIGHT;
                 }
 
-                if (Y > XY.Y)
-                {
-                    mDirection.Y = MOVE_UP;
-                    Y = Y + MOVE_UP;
-                }
+                 if (Position.Y > XY.Y)
+                 {
+                     mDirection.Y = MOVE_UP;
+                 }
 
-                else if (Y < XY.Y)
-                {
-                    mDirection.Y = MOVE_DOWN;
-                    Y = Y + MOVE_DOWN;
-                }
+                 else if (Position.Y < XY.Y)
+                 {
+                     mDirection.Y = MOVE_DOWN;
+                 }
             }
             base.Update(theGameTime, mSpeed, mDirection);
         }
@@ -78,6 +73,11 @@ namespace WindowsGame1
                // base.Draw(theSpriteBatch);
                 base.Draw(theSpriteBatch);
             }
+        }
+
+        public Vector2 getPos()
+        {
+            return Position;
         }
 
         public void Fire(Vector2 theStartPosition, Vector2 theSpeed, Vector2 theDirection)

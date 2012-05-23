@@ -73,8 +73,8 @@ namespace WindowsGame1
 
         private void levelStart()
         {
-            lives = 10;
-            gold = 100;
+            lives = 20;
+            gold = 200;
             energy = 100;
             titleScreen = false;
             mapScreen = false;
@@ -179,16 +179,22 @@ namespace WindowsGame1
             
             for(int i = 0; i < cranes.Count; i++)
             {
-                rect1 = new Rectangle(cranes[i].X,cranes[i].Y,10,10);//10s should be width then height
+                Vector2 temPos1 = cranes[i].getPos();
+                rect1 = new Rectangle((int)temPos1.X,(int)temPos1.Y,70,70);//50s should be width then height
                 lives = lives - cranes[i].leaks();
                 gold = gold + cranes[i].bounty();
 
                 for(int j =0; j < mFireballs.Count; j++)
                 {
-                    rect2 = new Rectangle(mFireballs[j].X, mFireballs[j].Y, 10, 10);
-                    if(rect1.Intersects(rect2))
+                    if (mFireballs[j].Visible == true && cranes[i].Visible == true)
                     {
-                        cranes[i].hit(1);
+                        Vector2 temPos2 = mFireballs[j].getPos();
+                        rect2 = new Rectangle((int)temPos2.X, (int)temPos2.Y, 20, 20);
+                        if (rect1.Intersects(rect2))
+                        {
+                            cranes[i].hit(1);
+                            mFireballs[j].Visible = false;
+                        }
                     }
                 }
             }

@@ -24,7 +24,7 @@ namespace WindowsGame1
         const int MOVE_RIGHT = 1;
         int leak = 0;
         int Hp = 1;
-        bool Visible = true;
+        public bool Visible = true;
         int cash = 0;
 
         enum State
@@ -93,37 +93,34 @@ namespace WindowsGame1
 
             if (Visible == true)
             {
-                if (X < 180 && Y < 100)
+                if (Position.X < 600 && Position.Y < 250)
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_RIGHT;
-                    X = X + MOVE_RIGHT;
                 }
-                if (X == 180 && Y < 145)
+                if (Position.X >= 600 && Position.Y < 270)
                 {
                     mSpeed.Y = WIZARD_SPEED;
                     mDirection.Y = MOVE_DOWN;
-                    Y = Y + MOVE_DOWN;
                 }
-                if (X > 30 && Y == 145)
+                if (Position.X > 100 && Position.Y >= 270)
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_LEFT;
-                    X = X + MOVE_LEFT;
                 }
-                if (X == 30 && Y < 190 && Y > 90)
+                if (Position.X <= 100 && Position.Y < 440 && Position.Y >= 270)
                 {
                     mSpeed.Y = WIZARD_SPEED;
                     mDirection.Y = MOVE_DOWN;
                     Y = Y + MOVE_DOWN;
                 }
-                if (Y == 190 && X < 230)
+                if (Position.Y >= 440 && Position.X < 770)
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_RIGHT;
                     X = X + MOVE_RIGHT;
                 }
-                if (X == 230)
+                if (Position.X >= 770)
                 {
                     X = 0;
                     Y = 90;
@@ -160,6 +157,11 @@ namespace WindowsGame1
                 }*/
 
             }
+        }
+
+        public Vector2 getPos()
+        {
+            return Position;
         }
 
         public override void Draw(SpriteBatch theSpriteBatch)//Draw the sprite to the screen
