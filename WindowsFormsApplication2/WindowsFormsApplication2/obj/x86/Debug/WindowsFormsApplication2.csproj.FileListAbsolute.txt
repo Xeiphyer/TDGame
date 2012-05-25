@@ -7,3 +7,5 @@ C:\Users\Phil\TDGame\WindowsFormsApplication2\WindowsFormsApplication2\obj\x86\D
 C:\Users\Phil\TDGame\WindowsFormsApplication2\WindowsFormsApplication2\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Phil\TDGame\WindowsFormsApplication2\WindowsFormsApplication2\obj\x86\Debug\WindowsFormsApplication2.exe
 C:\Users\Phil\TDGame\WindowsFormsApplication2\WindowsFormsApplication2\obj\x86\Debug\WindowsFormsApplication2.pdb
+C:\Users\Sean\Desktop\TDGame\WindowsFormsApplication2\WindowsFormsApplication2\obj\x86\Debug\WindowsFormsApplication2.exe
+C:\Users\Sean\Desktop\TDGame\WindowsFormsApplication2\WindowsFormsApplication2\obj\x86\Debug\WindowsFormsApplication2.pdb
