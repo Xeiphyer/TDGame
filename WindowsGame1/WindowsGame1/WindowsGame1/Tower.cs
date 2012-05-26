@@ -110,7 +110,7 @@ namespace WindowsGame1
             Source = new Rectangle(0, 0, 200, Source.Height);
             soundEngine = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
             soundEngineInstance = soundEngine.CreateInstance();
-           // pew = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
+           //pew = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
         }
 
         public int Update(GameTime theGameTime,Vector2 XY)

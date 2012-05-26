@@ -68,7 +68,7 @@ namespace WindowsGame1
 
         public Vector2 getV()
         {
-            Vector2 temp = new Vector2(X, Y);
+            Vector2 temp = new Vector2(Position.X, Position.Y);
             return temp;
         }
 
