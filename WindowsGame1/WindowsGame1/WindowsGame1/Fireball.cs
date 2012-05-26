@@ -16,7 +16,10 @@ namespace WindowsGame1
         Vector2 mStartPosition;
         Vector2 mSpeed;
         Vector2 mDirection;
-
+        const int MOVE_UP = -1;
+        const int MOVE_DOWN = 1;
+        const int MOVE_LEFT = -1;
+        const int MOVE_RIGHT = 1;
 
         public Fireball()
         {
@@ -29,25 +32,52 @@ namespace WindowsGame1
             Scale = 0.3f;
         }
 
-        public void Update(GameTime theGameTime)
+        public void Update(GameTime theGameTime, Vector2 XY)//XY is from Pcrane
         {
             if (Vector2.Distance(mStartPosition, Position) > MAX_DISTANCE)
             {
                 Visible = false;
+                //Position = mStartPosition;
             }
 
             if (Visible == true)
             {
-                base.Update(theGameTime, mSpeed, mDirection);
+                if (Position.X > XY.X)
+                {
+                    mDirection.X = MOVE_LEFT;
+                }
+
+                else if (Position.X < XY.X)
+                {
+                    mDirection.X = MOVE_RIGHT;
+                }
+
+                 if (Position.Y > XY.Y)
+                 {
+                     mDirection.Y = MOVE_UP;
+                 }
+
+                 else if (Position.Y < XY.Y)
+                 {
+                     mDirection.Y = MOVE_DOWN;
+                 }
             }
+            base.Update(theGameTime, mSpeed, mDirection);
         }
+
 
         public override void Draw(SpriteBatch theSpriteBatch)
         {
             if (Visible == true)
             {
+               // base.Draw(theSpriteBatch);
                 base.Draw(theSpriteBatch);
             }
+        }
+
+        public Vector2 getPos()
+        {
+            return Position;
         }
 
         public void Fire(Vector2 theStartPosition, Vector2 theSpeed, Vector2 theDirection)
@@ -57,6 +87,8 @@ namespace WindowsGame1
             mSpeed = theSpeed;
             mDirection = theDirection;
             Visible = true;
+            // int X = (int)mStartPosition.X;
+            // int Y = (int)mStartPosition.Y;
         }
 
 

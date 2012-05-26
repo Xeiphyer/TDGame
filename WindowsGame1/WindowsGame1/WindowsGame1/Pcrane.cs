@@ -15,17 +15,22 @@ namespace WindowsGame1
     class Pcrane : sprite
     {
         const string WIZARD_ASSETNAME = "Pcrane";
-        int X = 0;
-        int Y = 90;
+        public int X = 0;
+        public int Y = 90;
         const int WIZARD_SPEED = 200;
         const int MOVE_UP = -1;
         const int MOVE_DOWN = 1;
         const int MOVE_LEFT = -1;
         const int MOVE_RIGHT = 1;
+        int leak = 0;
+        int Hp = 1;
+        public bool Visible = true;
+        int cash = 0;
 
         enum State
         {
-            Walking
+            Walking,
+            Dead
         }
 
         State mCurrentState = State.Walking;
@@ -41,23 +46,89 @@ namespace WindowsGame1
             base.LoadContent(theContentManager, WIZARD_ASSETNAME);
         }
 
+        public void hit(int dmg)
+        {
+            Hp = Hp - dmg;
+        }
+
         public void Update(GameTime theGameTime)
         {
             KeyboardState aCurrentKeyboardState = Keyboard.GetState();
             UpdateMovement(aCurrentKeyboardState);
             mPreviousKeyboardState = aCurrentKeyboardState;
             base.Update(theGameTime, mSpeed, mDirection);
+            if (Hp <= 0 && mCurrentState == State.Walking)
+            {
+                this.Visible = false;
+                cash = 10;
+                mCurrentState = State.Dead;
+            }
 
+        }
+
+        public Vector2 getV()
+        {
+            Vector2 temp = new Vector2(X, Y);
+            return temp;
+        }
+
+        public int leaks()
+        {
+            int temp = leak;
+            leak = 0;
+            return temp;
+        }
+
+        public int bounty()
+        {
+            int temp = cash;
+            cash = 0;
+            return temp;
         }
 
         private void UpdateMovement(KeyboardState aCurrentKeyboardState)
         {
-            if (mCurrentState == State.Walking)
-            {
-                mSpeed = Vector2.Zero;
-                mDirection = Vector2.Zero;
+            mSpeed = Vector2.Zero;
+            mDirection = Vector2.Zero;
 
-                if (aCurrentKeyboardState.IsKeyDown(Keys.Left) == true)
+            if (Visible == true)
+            {
+                if (Position.X < 600 && Position.Y < 250)
+                {
+                    mSpeed.X = WIZARD_SPEED;
+                    mDirection.X = MOVE_RIGHT;
+                }
+                if (Position.X >= 600 && Position.Y < 270)
+                {
+                    mSpeed.Y = WIZARD_SPEED;
+                    mDirection.Y = MOVE_DOWN;
+                }
+                if (Position.X > 100 && Position.Y >= 270)
+                {
+                    mSpeed.X = WIZARD_SPEED;
+                    mDirection.X = MOVE_LEFT;
+                }
+                if (Position.X <= 100 && Position.Y < 440 && Position.Y >= 270)
+                {
+                    mSpeed.Y = WIZARD_SPEED;
+                    mDirection.Y = MOVE_DOWN;
+                    Y = Y + MOVE_DOWN;
+                }
+                if (Position.Y >= 440 && Position.X < 770)
+                {
+                    mSpeed.X = WIZARD_SPEED;
+                    mDirection.X = MOVE_RIGHT;
+                    X = X + MOVE_RIGHT;
+                }
+                if (Position.X >= 770)
+                {
+                    X = 0;
+                    Y = 90;
+                    Position = new Vector2(X, Y);
+                    leak++;
+                }
+
+              /*  if (aCurrentKeyboardState.IsKeyDown(Keys.Left) == true)
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_LEFT;
@@ -83,15 +154,23 @@ namespace WindowsGame1
                     mSpeed.Y = WIZARD_SPEED;
                     mDirection.Y = MOVE_DOWN;
                     Y = Y + MOVE_DOWN;
-                }
+                }*/
 
             }
-
         }
 
+        public Vector2 getPos()
+        {
+            return Position;
+        }
 
-
-
+        public override void Draw(SpriteBatch theSpriteBatch)//Draw the sprite to the screen
+        {
+            if (Visible == true)
+            {
+                theSpriteBatch.Draw(mSpriteTexture, Position, new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
+            }
+        }
 
     }
 }
