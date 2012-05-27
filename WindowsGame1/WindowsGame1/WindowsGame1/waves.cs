@@ -32,6 +32,7 @@ namespace WindowsGame1
         ContentManager mContentManager;
         int cooldown = 25;
         int counter;
+        Color color = Color.White;
 
         Vector2 mDirection = Vector2.Zero;
         Vector2 mSpeed = Vector2.Zero;
@@ -48,14 +49,19 @@ namespace WindowsGame1
             spawned
         }
 
+        public waves()
+        {
+
+        }
+
         public void setImage(ContentManager theContentManager, String str)
         {
             base.LoadContent(theContentManager, str);
         }
 
-        public waves()
+        public void setColor(Color clr)
         {
-
+            color = clr;
         }
 
         public void reset()
@@ -167,9 +173,9 @@ namespace WindowsGame1
             {
                 foreach (Pcrane aCrane in cranes)
                 {
-                    aCrane.Draw(theSpriteBatch);
+                    aCrane.Draw(theSpriteBatch, color);
                 }
-                base.Draw(theSpriteBatch);
+                base.Draw(theSpriteBatch, color);
             }
         }
 

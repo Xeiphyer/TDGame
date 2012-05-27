@@ -83,6 +83,7 @@ namespace WindowsGame1
             gameScreen = true;
             Tbutton.reset();
             wave1.reset();
+            wave2.reset();
         }
 
         protected override void LoadContent()
@@ -112,6 +113,7 @@ namespace WindowsGame1
             wave1.LoadContent(this.Content);
 
             wave2.LoadContent(this.Content);
+            wave2.setColor(Color.Tomato);
         }
 
         protected override void UnloadContent()
@@ -237,10 +239,19 @@ namespace WindowsGame1
             }
             else if(gameScreen)
             {
-            Back1.Draw(this.spriteBatch);
-            enemy1.Draw(this.spriteBatch,Color.Blue);
-            wave1.Draw(this.spriteBatch);
-            sidebar.Draw(this.spriteBatch);
+                Back1.Draw(this.spriteBatch);
+                enemy1.Draw(this.spriteBatch,Color.Blue);
+
+                if (wave1.getDone() == false)
+                {
+                    wave1.Draw(this.spriteBatch);
+                }
+                if (wave2.getDone() == false && wave1.getDone() == true)
+                {
+                    wave2.Draw(this.spriteBatch);
+                }
+
+                sidebar.Draw(this.spriteBatch);
          //   mSprite.Draw(this.spriteBatch);
             if (Tbutton.changeMouse(gold))
             {
