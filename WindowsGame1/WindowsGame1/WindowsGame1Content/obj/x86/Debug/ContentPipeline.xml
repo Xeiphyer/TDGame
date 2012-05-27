@@ -92,24 +92,6 @@
       <Time>2012-05-14T16:53:04.0209062-06:00</Time>
     </Item>
     <Item>
-      <Source>SpriteFont1.spritefont</Source>
-      <Name>SpriteFont1</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
-      <Time>2012-05-14T22:06:39.0429687-06:00</Time>
-    </Item>
-    <Item>
-      <Source>Pew_Pew-DKnight556-1379997159.wav</Source>
-      <Name>Pew_Pew-DKnight556-1379997159</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Pew_Pew-DKnight556-1379997159.xnb</Output>
-      <Time>2012-05-15T16:22:53.1435547-06:00</Time>
-    </Item>
-    <Item>
       <Source>clearTower.png</Source>
       <Name>clearTower</Name>
       <Importer>TextureImporter</Importer>
@@ -126,6 +108,24 @@
       <Options>None</Options>
       <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\next1.xnb</Output>
       <Time>2012-05-18T02:12:02.4511719-06:00</Time>
+    </Item>
+    <Item>
+      <Source>SpriteFont1.spritefont</Source>
+      <Name>SpriteFont1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
+      <Time>2012-05-14T22:06:39.0429687-06:00</Time>
+    </Item>
+    <Item>
+      <Source>Pew_Pew-DKnight556-1379997159.wav</Source>
+      <Name>Pew_Pew-DKnight556-1379997159</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Pew_Pew-DKnight556-1379997159.xnb</Output>
+      <Time>2012-05-15T16:22:53.1435547-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

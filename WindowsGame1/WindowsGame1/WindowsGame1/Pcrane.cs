@@ -51,6 +51,16 @@ namespace WindowsGame1
             Hp = Hp - dmg;
         }
 
+        public bool dead()
+        {
+            if (mCurrentState == State.Dead)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
         public void Update(GameTime theGameTime)
         {
             KeyboardState aCurrentKeyboardState = Keyboard.GetState();
@@ -68,7 +78,7 @@ namespace WindowsGame1
 
         public Vector2 getV()
         {
-            Vector2 temp = new Vector2(X, Y);
+            Vector2 temp = new Vector2(Position.X, Position.Y);
             return temp;
         }
 

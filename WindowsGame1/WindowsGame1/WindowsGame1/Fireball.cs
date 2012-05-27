@@ -42,7 +42,12 @@ namespace WindowsGame1
 
             if (Visible == true)
             {
-                if (Position.X > XY.X)
+                if (Position.X == XY.X)
+                {
+                    mDirection.X = 0;
+                }
+                
+                else if (Position.X > XY.X)
                 {
                     mDirection.X = MOVE_LEFT;
                 }
@@ -52,15 +57,21 @@ namespace WindowsGame1
                     mDirection.X = MOVE_RIGHT;
                 }
 
-                 if (Position.Y > XY.Y)
-                 {
-                     mDirection.Y = MOVE_UP;
-                 }
+                if (Position.Y == XY.Y)
+                {
+                    mDirection.Y = 0;
+                }
 
-                 else if (Position.Y < XY.Y)
-                 {
-                     mDirection.Y = MOVE_DOWN;
-                 }
+                else if (Position.Y > XY.Y)
+                {
+                    mDirection.Y = MOVE_UP;
+                }
+
+                else if (Position.Y < XY.Y)
+                {
+                    mDirection.Y = MOVE_DOWN;
+                }
+
             }
             base.Update(theGameTime, mSpeed, mDirection);
         }

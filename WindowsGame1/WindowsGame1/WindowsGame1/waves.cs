@@ -39,11 +39,13 @@ namespace WindowsGame1
         MouseState mouseState;
         MouseState lastMouseState;
 
+        bool done = false;
 
         enum State
         {
             scroll,
-            spawn
+            spawn,
+            spawned
         }
 
         public void setImage(ContentManager theContentManager, String str)
@@ -64,6 +66,7 @@ namespace WindowsGame1
             counter = 10;
             state = State.scroll;
             Position = new Vector2(START_POSITION_X, START_POSITION_Y);
+            done = false;
         }
 
         public void LoadContent(ContentManager theContentManager)
@@ -111,9 +114,23 @@ namespace WindowsGame1
 
         private void UpdateCranes(GameTime theGameTime)
         {
-            foreach (Pcrane aCrane in cranes)
+            /*foreach (Pcrane aCrane in cranes)
             {
                 aCrane.Update(theGameTime);
+            }*/
+
+            if (cranes.Count == 0 && state == State.spawned)
+            {
+                done = true;
+            }
+
+            for (int i = 0; i < cranes.Count; i++)
+            {
+                cranes[i].Update(theGameTime);
+                if (cranes[i].dead() == true)
+                {
+                    cranes.Remove(cranes[i]);
+                }
             }
 
             --cooldown;
@@ -128,9 +145,10 @@ namespace WindowsGame1
                 --counter;
                 if (counter == 0)
                 {
-                    state = State.scroll;
+                    state = State.spawned;
                 }
             }
+
         }
 
         public List<Pcrane> getList()
@@ -138,16 +156,21 @@ namespace WindowsGame1
             return cranes;
         }
 
+        public bool getDone()
+        {
+            return done;
+        }
+
         public override void Draw(SpriteBatch theSpriteBatch)
         {
-            foreach (Pcrane aCrane in cranes)
+            if (done == false)
             {
-                aCrane.Draw(theSpriteBatch);
+                foreach (Pcrane aCrane in cranes)
+                {
+                    aCrane.Draw(theSpriteBatch);
+                }
+                base.Draw(theSpriteBatch);
             }
-
-            base.Draw(theSpriteBatch);
-
-
         }
 
     }

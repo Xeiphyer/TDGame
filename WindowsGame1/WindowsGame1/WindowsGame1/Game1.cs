@@ -34,6 +34,7 @@ namespace WindowsGame1
         int gold;
         int energy;
         waves wave1;
+        waves wave2;
 
 
         public Game1()
@@ -67,6 +68,7 @@ namespace WindowsGame1
             map = new sprite();
 
             wave1 = new waves();
+            wave2 = new waves();
 
             base.Initialize();
         }
@@ -108,6 +110,8 @@ namespace WindowsGame1
             font = Content.Load<SpriteFont>("SpriteFont1");
 
             wave1.LoadContent(this.Content);
+
+            wave2.LoadContent(this.Content);
         }
 
         protected override void UnloadContent()
@@ -134,9 +138,17 @@ namespace WindowsGame1
                 enemy1.Update(gameTime);
               //  mSprite.Update(gameTime, enemy1.getV());
                 gold = gold - Tbutton.Update(gameTime, enemy1.getV());
-                wave1.Update(gameTime);
                 lives = lives - enemy1.leaks();
-                updateCollision();
+                if (wave1.getDone() == false)
+                {
+                    wave1.Update(gameTime);
+                    updateCollision(wave1);
+                }
+                if (wave2.getDone() == false && wave1.getDone() == true)
+                {
+                    wave2.Update(gameTime);
+                    updateCollision(wave2);
+                }
                 if (lives == 0)
                 {
                     mapScreen = true;
@@ -170,19 +182,23 @@ namespace WindowsGame1
             }
         }
 
-        private void updateCollision()
+        private void updateCollision(waves wave)
         {
             Rectangle rect1;
             Rectangle rect2;
-            List<Pcrane> cranes = wave1.getList();
+            List<Pcrane> cranes = wave.getList();
             List<Fireball> mFireballs = Tbutton.getList();
             
             for(int i = 0; i < cranes.Count; i++)
             {
                 Vector2 temPos1 = cranes[i].getPos();
-                rect1 = new Rectangle((int)temPos1.X,(int)temPos1.Y,70,70);//50s should be width then height
+                rect1 = new Rectangle((int)temPos1.X,(int)temPos1.Y,70,70);//70s should be width then height
                 lives = lives - cranes[i].leaks();
                 gold = gold + cranes[i].bounty();
+              /*  if (cranes[i].dead() == true)
+                {
+                    cranes.Remove(cranes[i]);
+                }*/
 
                 for(int j =0; j < mFireballs.Count; j++)
                 {
