@@ -51,7 +51,7 @@ namespace WindowsGame1
                 //Recalculate the Size of the Sprite with the new scale
                 try
                 {
-                    Rectangle temp = new Rectangle(0, 0, (int)(mSpriteTexture.Width * Scale), (int)(mSpriteTexture.Height * Scale));
+                    Rectangle temp = new Rectangle((int)Position.X, (int)Position.Y, (int)(mSpriteTexture.Width * Scale), (int)(mSpriteTexture.Height * Scale));
                     Size = temp;
                 }
                 catch(Exception e)
@@ -60,7 +60,6 @@ namespace WindowsGame1
                 }
             }
         }
-
 
         public void Update(GameTime theGameTime, Vector2 theSpeed, Vector2 theDirection)//Update the Sprite and change it's position based on the passed in speed, direction and elapsed time.
         {

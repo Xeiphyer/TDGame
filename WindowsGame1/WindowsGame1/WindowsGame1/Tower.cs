@@ -36,6 +36,8 @@ namespace WindowsGame1
         MouseState lastMouseState;
         List<Tower> towers;
 
+        sprite range = new sprite();
+
         enum State
         {
             Tower,
@@ -61,21 +63,39 @@ namespace WindowsGame1
             base.LoadContent(theContentManager, str);
         }
 
+        public Rectangle getRange()
+        {
+            return base.Size;
+        }
+
         public Tower(String str,int X, int Y)
         {
             START_POSITION_X = X;
             START_POSITION_Y = Y;
             Position = new Vector2(START_POSITION_X, START_POSITION_Y);
             towers = new List<Tower>();
+            range.Position = new Vector2(START_POSITION_X-100, START_POSITION_Y-100);
 
             if(str == "Tower")
             {
                 mCurrentState = State.Tower;
+                range.scale = 2.5f;
             }
             else if(str == "Button")
             {
                 mCurrentState = State.Button;
+                range.scale = 0.01f;
             }
+        }
+
+        public List<Tower> getTowers()
+        {
+            return towers;
+        }
+
+        public Vector2 getPos()
+        {
+            return Position;
         }
 
         //The Rectangular area from the original image that 
@@ -107,17 +127,28 @@ namespace WindowsGame1
             }
 
             base.LoadContent(theContentManager, WIZARD_ASSETNAME);
+            range.LoadContent(theContentManager, "circle");
             Source = new Rectangle(0, 0, 200, Source.Height);
             soundEngine = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
             soundEngineInstance = soundEngine.CreateInstance();
            //pew = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
         }
 
-        public int Update(GameTime theGameTime,Vector2 XY)
+        public int Update(GameTime theGameTime)
+        {
+            lastMouseState = mouseState;
+            mouseState = Mouse.GetState();
+            range.Update(theGameTime, mSpeed, mDirection);
+            base.Update(theGameTime, mSpeed, mDirection);
+            return UpdateClick(mouseState, lastMouseState);
+        }
+
+        public int Update(GameTime theGameTime, Vector2 XY)
         {
             lastMouseState = mouseState;
             mouseState = Mouse.GetState();
             UpdateFireball(theGameTime, XY);
+            range.Update(theGameTime, mSpeed, mDirection);
             base.Update(theGameTime, mSpeed, mDirection);
             return UpdateClick(mouseState, lastMouseState);
         }
@@ -247,6 +278,7 @@ namespace WindowsGame1
                     aTower.Draw(theSpriteBatch);
                 }
                 base.Draw(theSpriteBatch);
+                range.Draw(theSpriteBatch);
             }
             
             /*else

@@ -98,8 +98,6 @@ namespace WindowsGame1
             mSpeed = theSpeed;
             mDirection = theDirection;
             Visible = true;
-            // int X = (int)mStartPosition.X;
-            // int Y = (int)mStartPosition.Y;
         }
 
 

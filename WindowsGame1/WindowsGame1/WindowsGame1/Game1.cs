@@ -139,17 +139,17 @@ namespace WindowsGame1
             {
                 enemy1.Update(gameTime);
               //  mSprite.Update(gameTime, enemy1.getV());
-                gold = gold - Tbutton.Update(gameTime, enemy1.getV());
+                gold = gold - Tbutton.Update(gameTime);
                 lives = lives - enemy1.leaks();
                 if (wave1.getDone() == false)
                 {
                     wave1.Update(gameTime);
-                    updateCollision(wave1);
+                    updateCollision(wave1, gameTime);
                 }
                 if (wave2.getDone() == false && wave1.getDone() == true)
                 {
                     wave2.Update(gameTime);
-                    updateCollision(wave2);
+                    updateCollision(wave2,gameTime);
                 }
                 if (lives == 0)
                 {
@@ -184,23 +184,20 @@ namespace WindowsGame1
             }
         }
 
-        private void updateCollision(waves wave)
+        private void updateCollision(waves wave, GameTime gametime)
         {
             Rectangle rect1;
             Rectangle rect2;
             List<Pcrane> cranes = wave.getList();
             List<Fireball> mFireballs = Tbutton.getList();
-            
+
+            //*****************************fireball enemy collision***********************************//
             for(int i = 0; i < cranes.Count; i++)
             {
                 Vector2 temPos1 = cranes[i].getPos();
                 rect1 = new Rectangle((int)temPos1.X,(int)temPos1.Y,70,70);//70s should be width then height
                 lives = lives - cranes[i].leaks();
                 gold = gold + cranes[i].bounty();
-              /*  if (cranes[i].dead() == true)
-                {
-                    cranes.Remove(cranes[i]);
-                }*/
 
                 for(int j =0; j < mFireballs.Count; j++)
                 {
@@ -217,6 +214,24 @@ namespace WindowsGame1
                 }
             }
 
+            //**********************targeting logic***********************//
+          /*  List<Tower> towers = Tbutton.getTowers();
+
+            for (int i = 0; i < towers.Count; i++)
+            {
+                Vector2 temPos2 = towers[i].getPos();
+                rect2 = new Rectangle((int)temPos2.X, (int)temPos2.Y, 200, 200);
+                for (int j = 0; j < cranes.Count; j++)
+                {
+                    Vector2 temPos1 = cranes[i].getPos();
+                    rect1 = new Rectangle((int)temPos1.X, (int)temPos1.Y, 70, 70);//70s should be width then height
+                    if(rect2.Intersects(rect1))
+                    {
+                      towers[i].Update(gametime, cranes[j].getPos());
+                    }
+                }
+            }*/
+
         }
 
         protected override void Draw(GameTime gameTime)
@@ -226,16 +241,12 @@ namespace WindowsGame1
 
             if (titleScreen)
             {
-
                 title.Draw(this.spriteBatch);
-
             }
 
             else if (mapScreen)
             {
-
                 map.Draw(this.spriteBatch);
-
             }
             else if(gameScreen)
             {

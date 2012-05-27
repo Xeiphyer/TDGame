@@ -133,7 +133,7 @@ namespace WindowsGame1
             for (int i = 0; i < cranes.Count; i++)
             {
                 cranes[i].Update(theGameTime);
-                if (cranes[i].dead() == true)
+                if (cranes[i].dead() == true && cranes[i].bounty() == 0)
                 {
                     cranes.Remove(cranes[i]);
                 }

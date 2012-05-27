@@ -38,8 +38,6 @@ namespace WindowsGame1
         Vector2 mDirection = Vector2.Zero;
         Vector2 mSpeed = Vector2.Zero;
 
-        KeyboardState mPreviousKeyboardState;
-
         public void LoadContent(ContentManager theContentManager)
         {
             Position = new Vector2(X, Y);
@@ -49,6 +47,11 @@ namespace WindowsGame1
         public void hit(int dmg)
         {
             Hp = Hp - dmg;
+        }
+
+        public Rectangle getRec()
+        {
+            return base.Size;
         }
 
         public bool dead()
@@ -63,9 +66,8 @@ namespace WindowsGame1
 
         public void Update(GameTime theGameTime)
         {
-            KeyboardState aCurrentKeyboardState = Keyboard.GetState();
-            UpdateMovement(aCurrentKeyboardState);
-            mPreviousKeyboardState = aCurrentKeyboardState;
+            this.UpdateMovement();
+
             base.Update(theGameTime, mSpeed, mDirection);
             if (Hp <= 0 && mCurrentState == State.Walking)
             {
@@ -96,7 +98,7 @@ namespace WindowsGame1
             return temp;
         }
 
-        private void UpdateMovement(KeyboardState aCurrentKeyboardState)
+        private void UpdateMovement()
         {
             mSpeed = Vector2.Zero;
             mDirection = Vector2.Zero;
@@ -122,13 +124,11 @@ namespace WindowsGame1
                 {
                     mSpeed.Y = WIZARD_SPEED;
                     mDirection.Y = MOVE_DOWN;
-                    Y = Y + MOVE_DOWN;
                 }
                 if (Position.Y >= 440 && Position.X < 770)
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_RIGHT;
-                    X = X + MOVE_RIGHT;
                 }
                 if (Position.X >= 770)
                 {
@@ -137,35 +137,6 @@ namespace WindowsGame1
                     Position = new Vector2(X, Y);
                     leak++;
                 }
-
-              /*  if (aCurrentKeyboardState.IsKeyDown(Keys.Left) == true)
-                {
-                    mSpeed.X = WIZARD_SPEED;
-                    mDirection.X = MOVE_LEFT;
-                    X = X + MOVE_LEFT;
-                }
-
-                else if (aCurrentKeyboardState.IsKeyDown(Keys.Right) == true)
-                {
-                    mSpeed.X = WIZARD_SPEED;
-                    mDirection.X = MOVE_RIGHT;
-                    X = X + MOVE_RIGHT;
-                }
-                
-                if (aCurrentKeyboardState.IsKeyDown(Keys.Up) == true)
-                {
-                    mSpeed.Y = WIZARD_SPEED;
-                    mDirection.Y = MOVE_UP;
-                    Y = Y + MOVE_UP;
-                }
-
-                else if (aCurrentKeyboardState.IsKeyDown(Keys.Down) == true)
-                {
-                    mSpeed.Y = WIZARD_SPEED;
-                    mDirection.Y = MOVE_DOWN;
-                    Y = Y + MOVE_DOWN;
-                }*/
-
             }
         }
 
