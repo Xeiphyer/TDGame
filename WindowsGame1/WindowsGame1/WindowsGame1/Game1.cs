@@ -100,7 +100,7 @@ namespace WindowsGame1
             enemy1.LoadContent(this.Content);
 
             sidebar.LoadContent(this.Content, "side");
-            sidebar.Position.X = 800;
+            sidebar.setPosition(new Vector2(800,0));
 
             title.LoadContent(this.Content, "title");
             map.LoadContent(this.Content, "Map");
@@ -139,7 +139,9 @@ namespace WindowsGame1
             {
                 enemy1.Update(gameTime);
               //  mSprite.Update(gameTime, enemy1.getV());
-                gold = gold - Tbutton.Update(gameTime);
+
+                Tbutton.setTarget(enemy1.getPosition());
+                
                 lives = lives - enemy1.leaks();
                 if (wave1.getDone() == false)
                 {
@@ -156,6 +158,7 @@ namespace WindowsGame1
                     mapScreen = true;
                     gameScreen = false;
                 }
+                gold = gold - Tbutton.Update(gameTime);
             }
 
             base.Update(gameTime);
@@ -194,7 +197,7 @@ namespace WindowsGame1
             //*****************************fireball enemy collision***********************************//
             for(int i = 0; i < cranes.Count; i++)
             {
-                Vector2 temPos1 = cranes[i].getPos();
+                Vector2 temPos1 = cranes[i].getPosition();
                 rect1 = new Rectangle((int)temPos1.X,(int)temPos1.Y,70,70);//70s should be width then height
                 lives = lives - cranes[i].leaks();
                 gold = gold + cranes[i].bounty();
@@ -203,7 +206,7 @@ namespace WindowsGame1
                 {
                     if (mFireballs[j].Visible == true && cranes[i].Visible == true)
                     {
-                        Vector2 temPos2 = mFireballs[j].getPos();
+                        Vector2 temPos2 = mFireballs[j].getPosition();
                         rect2 = new Rectangle((int)temPos2.X, (int)temPos2.Y, 20, 20);
                         if (rect1.Intersects(rect2))
                         {
@@ -213,24 +216,6 @@ namespace WindowsGame1
                     }
                 }
             }
-
-            //**********************targeting logic***********************//
-          /*  List<Tower> towers = Tbutton.getTowers();
-
-            for (int i = 0; i < towers.Count; i++)
-            {
-                Vector2 temPos2 = towers[i].getPos();
-                rect2 = new Rectangle((int)temPos2.X, (int)temPos2.Y, 200, 200);
-                for (int j = 0; j < cranes.Count; j++)
-                {
-                    Vector2 temPos1 = cranes[i].getPos();
-                    rect1 = new Rectangle((int)temPos1.X, (int)temPos1.Y, 70, 70);//70s should be width then height
-                    if(rect2.Intersects(rect1))
-                    {
-                      towers[i].Update(gametime, cranes[j].getPos());
-                    }
-                }
-            }*/
 
         }
 

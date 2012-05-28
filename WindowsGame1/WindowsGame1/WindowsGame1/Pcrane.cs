@@ -40,7 +40,7 @@ namespace WindowsGame1
 
         public void LoadContent(ContentManager theContentManager)
         {
-            Position = new Vector2(X, Y);
+            setPosition(new Vector2(X, Y));
             base.LoadContent(theContentManager, WIZARD_ASSETNAME);
         }
 
@@ -78,11 +78,11 @@ namespace WindowsGame1
 
         }
 
-        public Vector2 getV()
+        /*public Vector2 getV()
         {
             Vector2 temp = new Vector2(Position.X, Position.Y);
             return temp;
-        }
+        }*/
 
         public int leaks()
         {
@@ -105,51 +105,44 @@ namespace WindowsGame1
 
             if (Visible == true)
             {
-                if (Position.X < 600 && Position.Y < 250)
+                if (getPosition().X < 600 && getPosition().Y < 250)
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_RIGHT;
                 }
-                if (Position.X >= 600 && Position.Y < 270)
+                if (getPosition().X >= 600 && getPosition().Y < 270)
                 {
                     mSpeed.Y = WIZARD_SPEED;
                     mDirection.Y = MOVE_DOWN;
                 }
-                if (Position.X > 100 && Position.Y >= 270)
+                if (getPosition().X > 100 && getPosition().Y >= 270)
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_LEFT;
                 }
-                if (Position.X <= 100 && Position.Y < 440 && Position.Y >= 270)
+                if (getPosition().X <= 100 && getPosition().Y < 440 && getPosition().Y >= 270)
                 {
                     mSpeed.Y = WIZARD_SPEED;
                     mDirection.Y = MOVE_DOWN;
                 }
-                if (Position.Y >= 440 && Position.X < 770)
+                if (getPosition().Y >= 440 && getPosition().X < 770)
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_RIGHT;
                 }
-                if (Position.X >= 770)
+                if (getPosition().X >= 770)
                 {
-                    X = 0;
-                    Y = 90;
-                    Position = new Vector2(X, Y);
+                    setPosition(new Vector2(0, 90));
                     leak++;
                 }
             }
-        }
-
-        public Vector2 getPos()
-        {
-            return Position;
         }
 
         public override void Draw(SpriteBatch theSpriteBatch)//Draw the sprite to the screen
         {
             if (Visible == true)
             {
-                theSpriteBatch.Draw(mSpriteTexture, Position, new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
+                theSpriteBatch.Draw(mSpriteTexture, getPosition(), new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
             }
         }
 

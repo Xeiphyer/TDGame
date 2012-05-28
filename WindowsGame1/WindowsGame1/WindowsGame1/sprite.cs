@@ -12,7 +12,7 @@ namespace WindowsGame1
 {
     class sprite
     {
-        public Vector2 Position = new Vector2(0, 0);//The current position of the Sprite
+        Vector2 Position = new Vector2(0, 0);//The current position of the Sprite
         protected Texture2D mSpriteTexture;//The texture object used when drawing the sprite
         public Rectangle Size;//The size of the Sprite
         public float scale = 1.0f;//Used to size the Sprite up or down from the original image
@@ -59,6 +59,18 @@ namespace WindowsGame1
                     Console.WriteLine("Something went wrong with your resize :("+e);
                 }
             }
+        }
+
+        public void setPosition(Vector2 xy)
+        {
+            Position = xy;
+            Size.X = (int)xy.X;
+            Size.Y = (int)xy.Y;
+        }
+
+        public Vector2 getPosition()
+        {
+            return Position;
         }
 
         public void Update(GameTime theGameTime, Vector2 theSpeed, Vector2 theDirection)//Update the Sprite and change it's position based on the passed in speed, direction and elapsed time.

@@ -23,7 +23,7 @@ namespace WindowsGame1
         List<Fireball> mFireballs = new List<Fireball>();
         ContentManager mContentManager;
         Rectangle mSource;
-        int cooldown = 100;
+        int cooldown = 10;
         SoundEffect soundEngine;
         SoundEffectInstance soundEngineInstance;
         SoundEffect pew;
@@ -35,6 +35,8 @@ namespace WindowsGame1
         MouseState mouseState;
         MouseState lastMouseState;
         List<Tower> towers;
+
+        Vector2 target;
 
         sprite range = new sprite();
 
@@ -68,13 +70,18 @@ namespace WindowsGame1
             return base.Size;
         }
 
+        public void setTarget(Vector2 newTarget)
+        {
+            target = newTarget;
+        }
+
         public Tower(String str,int X, int Y)
         {
             START_POSITION_X = X;
             START_POSITION_Y = Y;
-            Position = new Vector2(START_POSITION_X, START_POSITION_Y);
+            setPosition(new Vector2(START_POSITION_X, START_POSITION_Y));
             towers = new List<Tower>();
-            range.Position = new Vector2(START_POSITION_X-100, START_POSITION_Y-100);
+            range.setPosition(new Vector2(START_POSITION_X-100, START_POSITION_Y-100));
 
             if(str == "Tower")
             {
@@ -91,11 +98,6 @@ namespace WindowsGame1
         public List<Tower> getTowers()
         {
             return towers;
-        }
-
-        public Vector2 getPos()
-        {
-            return Position;
         }
 
         //The Rectangular area from the original image that 
@@ -138,6 +140,7 @@ namespace WindowsGame1
         {
             lastMouseState = mouseState;
             mouseState = Mouse.GetState();
+            UpdateFireball(theGameTime, target);
             range.Update(theGameTime, mSpeed, mDirection);
             base.Update(theGameTime, mSpeed, mDirection);
             return UpdateClick(mouseState, lastMouseState);
@@ -191,8 +194,8 @@ namespace WindowsGame1
 
             if (cooldown <= 0)
             {
-                ShootFireball();
-                cooldown = 100;
+                ShootFireball(XY);
+                cooldown = 10;
                 //soundEngine.Play();
             }
         }
@@ -222,7 +225,7 @@ namespace WindowsGame1
                 }
         }*/
 
-        private void ShootFireball()
+        private void ShootFireball(Vector2 enemyPos)
         {
             foreach (Tower aTower in towers)
             {
@@ -234,7 +237,7 @@ namespace WindowsGame1
                         if (aFireball.Visible == false)
                         {
                             aCreateNew = false;
-                            aFireball.Fire(aTower.Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
+                            aFireball.Fire(aTower.getPosition() + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
                             break;
                         }
                     }
@@ -243,7 +246,7 @@ namespace WindowsGame1
                     {
                         Fireball aFireball = new Fireball();
                         aFireball.LoadContent(mContentManager);
-                        aFireball.Fire(aTower.Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
+                        aFireball.Fire(aTower.getPosition() + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
                         mFireballs.Add(aFireball);
                     }
                 }

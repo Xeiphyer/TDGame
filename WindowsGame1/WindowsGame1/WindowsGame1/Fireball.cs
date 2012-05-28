@@ -34,7 +34,8 @@ namespace WindowsGame1
 
         public void Update(GameTime theGameTime, Vector2 XY)//XY is from Pcrane
         {
-            if (Vector2.Distance(mStartPosition, Position) > MAX_DISTANCE)
+            Vector2 temp = this.getPosition();
+            if (Vector2.Distance(mStartPosition, temp) > MAX_DISTANCE)
             {
                 Visible = false;
                 //Position = mStartPosition;
@@ -42,32 +43,32 @@ namespace WindowsGame1
 
             if (Visible == true)
             {
-                if (Position.X == XY.X)
+                if (getPosition().X == XY.X)
                 {
                     mDirection.X = 0;
                 }
-                
-                else if (Position.X > XY.X)
+
+                else if (getPosition().X > XY.X)
                 {
                     mDirection.X = MOVE_LEFT;
                 }
 
-                else if (Position.X < XY.X)
+                else if (getPosition().X < XY.X)
                 {
                     mDirection.X = MOVE_RIGHT;
                 }
 
-                if (Position.Y == XY.Y)
+                if (getPosition().Y == XY.Y)
                 {
                     mDirection.Y = 0;
                 }
 
-                else if (Position.Y > XY.Y)
+                else if (getPosition().Y > XY.Y)
                 {
                     mDirection.Y = MOVE_UP;
                 }
 
-                else if (Position.Y < XY.Y)
+                else if (getPosition().Y < XY.Y)
                 {
                     mDirection.Y = MOVE_DOWN;
                 }
@@ -86,14 +87,14 @@ namespace WindowsGame1
             }
         }
 
-        public Vector2 getPos()
+        /*public Vector2 getPos()
         {
             return Position;
-        }
+        }*/
 
         public void Fire(Vector2 theStartPosition, Vector2 theSpeed, Vector2 theDirection)
         {
-            Position = theStartPosition;
+            setPosition(theStartPosition);
             mStartPosition = theStartPosition;
             mSpeed = theSpeed;
             mDirection = theDirection;

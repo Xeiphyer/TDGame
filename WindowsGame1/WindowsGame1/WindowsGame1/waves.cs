@@ -71,7 +71,7 @@ namespace WindowsGame1
             cranes.Clear();
             counter = 10;
             state = State.scroll;
-            Position = new Vector2(START_POSITION_X, START_POSITION_Y);
+            setPosition(new Vector2(START_POSITION_X, START_POSITION_Y));
             done = false;
         }
 
