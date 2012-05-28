@@ -18,7 +18,6 @@ namespace WindowsGame1
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Vector2 mPosition = new Vector2(100, 200);
-        Texture2D mSpriteTexture;
        // Tower mSprite;
         Tower Tbutton;
         sprite Back1;
@@ -255,7 +254,7 @@ namespace WindowsGame1
                 MouseState Mstate = Mouse.GetState();            
                 Tbutton.Scale = 0.5f;
                 Tbutton.setImage(this.Content,"clearTower");
-                Vector2 pos = new Vector2(Mstate.X, Mstate.Y);
+                Vector2 pos = new Vector2(Mstate.X - 35, Mstate.Y - 35);     // *X1* Center tower on mouse. Change to 1/2 texture size.   
                 Tbutton.Draw(this.spriteBatch, pos);
                 Tbutton.setImage(this.Content,"tower1");
             }
