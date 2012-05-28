@@ -157,7 +157,7 @@ namespace WindowsGame1
         {
             if (mCurrentState == State.Click && mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
                 {
-                   Tower aTower = new Tower("Tower", mousestate.X, mousestate.Y);
+                   Tower aTower = new Tower("Tower", mousestate.X - 35, mousestate.Y - 35);    // *X1* Center tower on mouse. Change to 1/2 texture size.
                    aTower.Scale = 0.5f;
                    aTower.LoadContent(mContentManager);
                    towers.Add(aTower);
