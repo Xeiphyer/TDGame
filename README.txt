@@ -1,1 +1,3 @@
+Check my Commit message on the game, its pretty long. Also...
+
 Once we get this new stuff finished and have it working so far, we should make a copy of the game so we have a stable version, and the buggy version we are working on. Just in case we mess things up, it'll be easier than trying to remember when the last time everything worked properly was.
