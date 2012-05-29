@@ -128,8 +128,9 @@ namespace WindowsGame1
             {
                 enemy1.Update(gameTime);
  
-                Tbutton.setTarget(enemy1.getPosition());
-                
+                //Tbutton.setTarget(enemy1);
+                updateTarget();
+
                 if (wave1.getDone() == false)
                 {
                     wave1.Update(gameTime);
@@ -201,7 +202,27 @@ namespace WindowsGame1
                     }
                 }
             }
+        }
 
+        private void updateTarget()//I think the problem is the positions of the rectangles, I wish I could see them to test...
+        {
+            Rectangle rect1;
+            Rectangle rect2;
+            List<Tower> towers = Tbutton.getTowers();
+            List<Pcrane> flock = wave1.getList();
+
+            for (int i = 0; i < towers.Count; i++)
+            {
+                rect1 = new Rectangle((int)towers[i].getPosition().X, (int)towers[i].getPosition().Y, 500, 500);
+                for (int j = 0; j < flock.Count; j++)
+                {
+                    rect2 = new Rectangle((int)flock[j].getPosition().X, (int)flock[j].getPosition().Y, 70, 70);
+                    if (towers[i].getTarget() == null && rect1.Intersects(rect2))
+                    {
+                        towers[i].setTarget(flock[j]);
+                    }
+                }
+            }
         }
 
         protected override void Draw(GameTime gameTime)

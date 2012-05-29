@@ -36,7 +36,7 @@ namespace WindowsGame1
         MouseState lastMouseState;
         List<Tower> towers;
 
-        Vector2 target;
+        Pcrane target;
 
         sprite range = new sprite();
 
@@ -70,7 +70,12 @@ namespace WindowsGame1
             return base.Size;
         }
 
-        public void setTarget(Vector2 newTarget)
+        public Pcrane getTarget()
+        {
+            return target;
+        }
+
+        public void setTarget(Pcrane newTarget)
         {
             target = newTarget;
         }
@@ -140,13 +145,16 @@ namespace WindowsGame1
         {
             lastMouseState = mouseState;
             mouseState = Mouse.GetState();
-            UpdateFireball(theGameTime, target);
+            if (target != null)
+            {
+                UpdateFireball(theGameTime, target.getPosition());
+            }
             range.Update(theGameTime, mSpeed, mDirection);
             base.Update(theGameTime, mSpeed, mDirection);
             UpdateClick(mouseState, lastMouseState);
         }
 
-        public void Update(GameTime theGameTime, Vector2 XY)
+       /* public void Update(GameTime theGameTime, Vector2 XY)
         {
             lastMouseState = mouseState;
             mouseState = Mouse.GetState();
@@ -154,7 +162,7 @@ namespace WindowsGame1
             range.Update(theGameTime, mSpeed, mDirection);
             base.Update(theGameTime, mSpeed, mDirection);
             UpdateClick(mouseState, lastMouseState);
-        }
+        }*/
 
         private void UpdateClick(MouseState mousestate, MouseState lastmousestate)
         {
