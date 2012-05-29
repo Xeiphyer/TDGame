@@ -29,17 +29,9 @@ namespace WindowsGame1
         {
             theSpriteBatch.Draw(mSpriteTexture, Position, new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
         }
-        public virtual void Draw(SpriteBatch theSpriteBatch, Color clr)//Draw the sprite to the screen
+        public void Draw(SpriteBatch theSpriteBatch, Color clr)//Draw the sprite to the screen
         {
             theSpriteBatch.Draw(mSpriteTexture, Position, new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), clr, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
-        }
-        public virtual void Draw(SpriteBatch theSpriteBatch, Vector2 pos)//Draw the sprite to the screen
-        {
-            theSpriteBatch.Draw(mSpriteTexture, pos, new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
-        }
-        public virtual void Draw(SpriteBatch theSpriteBatch, Rectangle rec)//Draw the sprite to the screen
-        {
-            theSpriteBatch.Draw(mSpriteTexture, Position, rec, Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
         }
 
         public float Scale
@@ -71,6 +63,16 @@ namespace WindowsGame1
         public Vector2 getPosition()
         {
             return Position;
+        }
+
+        public int getHeight()
+        {
+            return Size.Height;
+        }
+
+        public int getWidth()
+        {
+            return Size.Width;
         }
 
         public void Update(GameTime theGameTime, Vector2 theSpeed, Vector2 theDirection)//Update the Sprite and change it's position based on the passed in speed, direction and elapsed time.

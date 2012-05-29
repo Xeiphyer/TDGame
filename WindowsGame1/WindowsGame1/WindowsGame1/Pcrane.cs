@@ -14,18 +14,14 @@ namespace WindowsGame1
 {
     class Pcrane : sprite
     {
-        const string WIZARD_ASSETNAME = "Pcrane";
-        public int X = 0;
-        public int Y = 90;
+        const string ASSETNAME = "Pcrane";
         const int WIZARD_SPEED = 200;
         const int MOVE_UP = -1;
         const int MOVE_DOWN = 1;
         const int MOVE_LEFT = -1;
         const int MOVE_RIGHT = 1;
-        int leak = 0;
         int Hp = 1;
         public bool Visible = true;
-        int cash = 0;
 
         enum State
         {
@@ -40,8 +36,8 @@ namespace WindowsGame1
 
         public void LoadContent(ContentManager theContentManager)
         {
-            setPosition(new Vector2(X, Y));
-            base.LoadContent(theContentManager, WIZARD_ASSETNAME);
+            setPosition(new Vector2(0, 90));
+            base.LoadContent(theContentManager, ASSETNAME);
         }
 
         public void hit(int dmg)
@@ -72,30 +68,10 @@ namespace WindowsGame1
             if (Hp <= 0 && mCurrentState == State.Walking)
             {
                 this.Visible = false;
-                cash = 10;
+                Stats.setGold(Stats.getGold() + 10);
                 mCurrentState = State.Dead;
             }
 
-        }
-
-        /*public Vector2 getV()
-        {
-            Vector2 temp = new Vector2(Position.X, Position.Y);
-            return temp;
-        }*/
-
-        public int leaks()
-        {
-            int temp = leak;
-            leak = 0;
-            return temp;
-        }
-
-        public int bounty()
-        {
-            int temp = cash;
-            cash = 0;
-            return temp;
         }
 
         private void UpdateMovement()
@@ -133,7 +109,7 @@ namespace WindowsGame1
                 if (getPosition().X >= 770)
                 {
                     setPosition(new Vector2(0, 90));
-                    leak++;
+                    Stats.setLives(Stats.getLives() - 1);
                 }
             }
         }

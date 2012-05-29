@@ -47,9 +47,9 @@ namespace WindowsGame1
             Click
         }
 
-        public bool changeMouse(int cash)
+        public bool changeMouse()
         {
-            if (mCurrentState == State.Click && cash >= 50)
+            if (mCurrentState == State.Click && Stats.getGold() >= 50)
             {
                 return true;
             }
@@ -75,20 +75,20 @@ namespace WindowsGame1
             target = newTarget;
         }
 
-        public Tower(String str,int X, int Y)
+        public Tower(String str, int X, int Y)
         {
             START_POSITION_X = X;
             START_POSITION_Y = Y;
             setPosition(new Vector2(START_POSITION_X, START_POSITION_Y));
             towers = new List<Tower>();
-            range.setPosition(new Vector2(START_POSITION_X-100, START_POSITION_Y-100));
+            range.setPosition(new Vector2(START_POSITION_X - 100, START_POSITION_Y - 100));
 
-            if(str == "Tower")
+            if (str == "Tower")
             {
                 mCurrentState = State.Tower;
                 range.scale = 2.5f;
             }
-            else if(str == "Button")
+            else if (str == "Button")
             {
                 mCurrentState = State.Button;
                 range.scale = 0.01f;
@@ -102,7 +102,7 @@ namespace WindowsGame1
 
         //The Rectangular area from the original image that 
         //defines the Sprite. 
-         public Rectangle Source
+        public Rectangle Source
         {
             get { return mSource; }
 
@@ -113,11 +113,11 @@ namespace WindowsGame1
             }
         }
 
-         public void reset()
-         {
-             towers.Clear();
-             mFireballs.Clear();
-         }
+        public void reset()
+        {
+            towers.Clear();
+            mFireballs.Clear();
+        }
 
         public void LoadContent(ContentManager theContentManager)
         {
@@ -133,46 +133,45 @@ namespace WindowsGame1
             Source = new Rectangle(0, 0, 200, Source.Height);
             soundEngine = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
             soundEngineInstance = soundEngine.CreateInstance();
-           //pew = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
+            //pew = theContentManager.Load<SoundEffect>("Pew_Pew-DKnight556-1379997159");
         }
 
-        public int Update(GameTime theGameTime)
+        public void Update(GameTime theGameTime)
         {
             lastMouseState = mouseState;
             mouseState = Mouse.GetState();
             UpdateFireball(theGameTime, target);
             range.Update(theGameTime, mSpeed, mDirection);
             base.Update(theGameTime, mSpeed, mDirection);
-            return UpdateClick(mouseState, lastMouseState);
+            UpdateClick(mouseState, lastMouseState);
         }
 
-        public int Update(GameTime theGameTime, Vector2 XY)
+        public void Update(GameTime theGameTime, Vector2 XY)
         {
             lastMouseState = mouseState;
             mouseState = Mouse.GetState();
             UpdateFireball(theGameTime, XY);
             range.Update(theGameTime, mSpeed, mDirection);
             base.Update(theGameTime, mSpeed, mDirection);
-            return UpdateClick(mouseState, lastMouseState);
+            UpdateClick(mouseState, lastMouseState);
         }
 
-        private int UpdateClick(MouseState mousestate, MouseState lastmousestate)
+        private void UpdateClick(MouseState mousestate, MouseState lastmousestate)
         {
-            if (mCurrentState == State.Click && mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
-                {
-                   Tower aTower = new Tower("Tower", mousestate.X - 35, mousestate.Y - 35);    // *X1* Center tower on mouse. Change to 1/2 texture size.
-                   aTower.Scale = 0.5f;
-                   aTower.LoadContent(mContentManager);
-                   towers.Add(aTower);
-                   mCurrentState = State.Button;
-                   return 50;
-                }
+            if (mCurrentState == State.Click && mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released && Stats.getGold() >= 50)
+            {
+                Tower aTower = new Tower("Tower", mousestate.X - 35, mousestate.Y - 35);    // *X1* Center tower on mouse. Change to 1/2 texture size.
+                aTower.Scale = 0.5f;
+                aTower.LoadContent(mContentManager);
+                towers.Add(aTower);
+                mCurrentState = State.Button;
+                Stats.setGold(Stats.getGold()-50);
+            }
             if (mCurrentState == State.Button
                 && mousestate.X > START_POSITION_X
                 && mousestate.X < (START_POSITION_X + (int)(mSpriteTexture.Width * Scale))
                 && mousestate.Y > START_POSITION_Y
                 && mousestate.Y < (START_POSITION_Y + (int)(mSpriteTexture.Height * Scale)))
-                
             {
                 //hover over button here
                 if (mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
@@ -180,7 +179,6 @@ namespace WindowsGame1
                     mCurrentState = State.Click;//button click here
                 }
             }
-            return 0;
         }
 
         private void UpdateFireball(GameTime theGameTime, Vector2 XY)
@@ -200,30 +198,30 @@ namespace WindowsGame1
             }
         }
 
-       /* private void ShootFireball()
-        {
-                if (mCurrentState == State.Tower)
-                {
-                    bool aCreateNew = true;
-                        foreach (Fireball aFireball in mFireballs)
-                        {
-                            if (aFireball.Visible == false)
-                            {
-                                aCreateNew = false;
-                                aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
-                                break;
-                            }
-                        }
+        /* private void ShootFireball()
+         {
+                 if (mCurrentState == State.Tower)
+                 {
+                     bool aCreateNew = true;
+                         foreach (Fireball aFireball in mFireballs)
+                         {
+                             if (aFireball.Visible == false)
+                             {
+                                 aCreateNew = false;
+                                 aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
+                                 break;
+                             }
+                         }
 
-                    if (aCreateNew == true)
-                    {
-                        Fireball aFireball = new Fireball();
-                        aFireball.LoadContent(mContentManager);
-                        aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
-                        mFireballs.Add(aFireball);
-                    }
-                }
-        }*/
+                     if (aCreateNew == true)
+                     {
+                         Fireball aFireball = new Fireball();
+                         aFireball.LoadContent(mContentManager);
+                         aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
+                         mFireballs.Add(aFireball);
+                     }
+                 }
+         }*/
 
         private void ShootFireball(Vector2 enemyPos)
         {
@@ -264,7 +262,7 @@ namespace WindowsGame1
             {
                 aFireball.Draw(theSpriteBatch);
             }
-            
+
             if (mCurrentState == State.Click)
             {
                 base.Draw(theSpriteBatch, Color.Red);
@@ -273,7 +271,7 @@ namespace WindowsGame1
                     aTower.Draw(theSpriteBatch);
                 }
             }
-            
+
             else
             {
                 foreach (Tower aTower in towers)
@@ -283,12 +281,12 @@ namespace WindowsGame1
                 base.Draw(theSpriteBatch);
                 range.Draw(theSpriteBatch);
             }
-            
-            /*else
-            {
-                base.Draw(theSpriteBatch);
-            }*/
+
         }
 
+        public void Draw(SpriteBatch theSpriteBatch, Vector2 pos)//Draw the sprite to the screen
+        {
+            theSpriteBatch.Draw(mSpriteTexture, pos, new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
+        }
     }
 }

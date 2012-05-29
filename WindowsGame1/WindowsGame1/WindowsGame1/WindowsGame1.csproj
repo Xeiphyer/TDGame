@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Stats.cs" />
     <Compile Include="Fireball.cs" />
     <Compile Include="Pcrane.cs" />
     <Compile Include="sprite.cs" />
