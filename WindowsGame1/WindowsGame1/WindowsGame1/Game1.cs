@@ -129,17 +129,19 @@ namespace WindowsGame1
                 enemy1.Update(gameTime);
  
                 //Tbutton.setTarget(enemy1);
-                updateTarget();
+                
 
                 if (wave1.getDone() == false)
                 {
                     wave1.Update(gameTime);
                     updateCollision(wave1, gameTime);
+                    updateTarget(wave1);
                 }
                 if (wave2.getDone() == false && wave1.getDone() == true)
                 {
                     wave2.Update(gameTime);
                     updateCollision(wave2,gameTime);
+                    updateTarget(wave2);
                 }
                 if (Stats.getLives() <= 0)
                 {
@@ -204,22 +206,25 @@ namespace WindowsGame1
             }
         }
 
-        private void updateTarget()//I think the problem is the positions of the rectangles, I wish I could see them to test...
+        private void updateTarget(waves waves)//I think the problem is the positions of the rectangles, I wish I could see them to test...
         {
             Rectangle rect1;
             Rectangle rect2;
             List<Tower> towers = Tbutton.getTowers();
-            List<Pcrane> flock = wave1.getList();
-
+            List<Pcrane> flock = waves.getList();
+            
             for (int i = 0; i < towers.Count; i++)
             {
-                rect1 = new Rectangle((int)towers[i].getPosition().X, (int)towers[i].getPosition().Y, 500, 500);
+                rect1 = new Rectangle((int)towers[i].getPosition().X, (int)towers[i].getPosition().Y, 700, 700);
+                //rect1 = towers[i].getRange(); //this needs to be fixed
                 for (int j = 0; j < flock.Count; j++)
                 {
                     rect2 = new Rectangle((int)flock[j].getPosition().X, (int)flock[j].getPosition().Y, 70, 70);
+                    //rect2 = flock[j].getRec(); //this is wrong too
                     if (towers[i].getTarget() == null && rect1.Intersects(rect2))
                     {
-                        towers[i].setTarget(flock[j]);
+                        Tbutton.setTarget(flock[j]);
+                        //towers[i].setTarget(flock[j]); //I have no idea why this won't work
                     }
                 }
             }

@@ -32,6 +32,11 @@ namespace WindowsGame1
             Scale = 0.3f;
         }
 
+        public void setVisible(bool tf)
+        {
+            Visible = tf;
+        }
+
         public void Update(GameTime theGameTime, Vector2 XY)//XY is from Pcrane
         {
             Vector2 temp = this.getPosition();

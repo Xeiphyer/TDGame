@@ -145,9 +145,10 @@ namespace WindowsGame1
         {
             lastMouseState = mouseState;
             mouseState = Mouse.GetState();
-            if (target != null)
+            UpdateFireball(theGameTime);
+            if (target != null && target.dead() == true)
             {
-                UpdateFireball(theGameTime, target.getPosition());
+                target = null;
             }
             range.Update(theGameTime, mSpeed, mDirection);
             base.Update(theGameTime, mSpeed, mDirection);
@@ -189,18 +190,25 @@ namespace WindowsGame1
             }
         }
 
-        private void UpdateFireball(GameTime theGameTime, Vector2 XY)
+        private void UpdateFireball(GameTime theGameTime)
         {
             foreach (Fireball aFireball in mFireballs)
             {
-                aFireball.Update(theGameTime, XY);
+                if (target != null)
+                {
+                    aFireball.Update(theGameTime, target.getPosition());
+                }
+                else
+                {
+                    aFireball.setVisible(false);
+                }
             }
 
             cooldown = --cooldown;
 
-            if (cooldown <= 0)
+            if (cooldown <= 0 && target != null)
             {
-                ShootFireball(XY);
+                ShootFireball(target.getPosition());
                 cooldown = 10;
                 //soundEngine.Play();
             }
