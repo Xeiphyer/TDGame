@@ -20,8 +20,10 @@ namespace WindowsGame1
         const int MOVE_DOWN = 1;
         const int MOVE_LEFT = -1;
         const int MOVE_RIGHT = 1;
-        int Hp = 1;
+        int Hp = 10;
         public bool Visible = true;
+        Texture2D HealthBar;
+        //sprite HealthBar;
 
         enum State
         {
@@ -38,11 +40,16 @@ namespace WindowsGame1
         {
             setPosition(new Vector2(0, 90));
             base.LoadContent(theContentManager, ASSETNAME);
+            //HealthBar = new sprite();
+            //HealthBar.LoadContent(theContentManager, "HealthBar_thumb");
+            HealthBar = theContentManager.Load<Texture2D>("HealthBar_thumb") as Texture2D;
+            //HealthBar.scale = 0.5f;
         }
 
         public void hit(int dmg)
         {
             Hp = Hp - dmg;
+            Hp = (int)MathHelper.Clamp(Hp, 0, 100);//keeps Hp between 0 and 100 for health bar
         }
 
         public Rectangle getRec()
@@ -114,11 +121,21 @@ namespace WindowsGame1
             }
         }
 
-        public override void Draw(SpriteBatch theSpriteBatch)//Draw the sprite to the screen
+        public override void Draw(SpriteBatch theSpriteBatch, Color clr)//Draw the sprite to the screen
         {
             if (Visible == true)
             {
-                theSpriteBatch.Draw(mSpriteTexture, getPosition(), new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
+                
+                theSpriteBatch.Draw(mSpriteTexture, getPosition(), new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), clr, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
+
+                //backround of health bar
+                theSpriteBatch.Draw(HealthBar, new Vector2 (base.getPosition().X, base.getPosition().Y+90), new Rectangle(0, 45, HealthBar.Width, 13), Color.Gray);
+                
+                //Draw the current health level based on the current Health
+                theSpriteBatch.Draw(HealthBar, new Rectangle((int)base.getPosition().X, (int)base.getPosition().Y+90, (int)(HealthBar.Width * ((double)Hp / 10)), 13), new Rectangle(0, 45, HealthBar.Width, 44), Color.Red);
+
+                //Draw the box around the health bar
+                theSpriteBatch.Draw(HealthBar, new Rectangle((int)base.getPosition().X, (int)base.getPosition().Y+90, HealthBar.Width, 14), new Rectangle(0, 0, HealthBar.Width, 14), Color.White);
             }
         }
 
