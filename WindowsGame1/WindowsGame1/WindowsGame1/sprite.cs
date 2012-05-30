@@ -67,12 +67,12 @@ namespace WindowsGame1
 
         public int getHeight()
         {
-            return Size.Height;
+            return mSpriteTexture.Height;
         }
 
         public int getWidth()
         {
-            return Size.Width;
+            return mSpriteTexture.Width;
         }
 
         public void Update(GameTime theGameTime, Vector2 theSpeed, Vector2 theDirection)//Update the Sprite and change it's position based on the passed in speed, direction and elapsed time.

@@ -19,7 +19,7 @@ namespace WindowsGame1
         SpriteBatch spriteBatch;
         Tower Tbutton;
         sprite Back1;
-        Pcrane enemy1;
+        //Pcrane enemy1;
         sprite sidebar;
         sprite title;
         sprite map;
@@ -50,8 +50,8 @@ namespace WindowsGame1
             graphics.PreferredBackBufferHeight = 600;
             graphics.ApplyChanges();
 
-            enemy1 = new Pcrane();
-            enemy1.Scale = 0.5f;
+            //enemy1 = new Pcrane();
+            //enemy1.Scale = 0.5f;
 
             sidebar = new sprite();
 
@@ -86,7 +86,7 @@ namespace WindowsGame1
 
             Back1.LoadContent(this.Content, "Back01");
 
-            enemy1.LoadContent(this.Content);
+            //enemy1.LoadContent(this.Content);
 
             sidebar.LoadContent(this.Content, "side");
             sidebar.setPosition(new Vector2(800,0));
@@ -126,7 +126,7 @@ namespace WindowsGame1
             }
             else if (gameScreen)
             {
-                enemy1.Update(gameTime);
+                //enemy1.Update(gameTime);
  
                 //Tbutton.setTarget(enemy1);
                 
@@ -215,8 +215,8 @@ namespace WindowsGame1
             
             for (int i = 0; i < towers.Count; i++)
             {
-                rect1 = new Rectangle((int)towers[i].getPosition().X, (int)towers[i].getPosition().Y, 700, 700);
-                //rect1 = towers[i].getRange(); //this needs to be fixed
+                //rect1 = new Rectangle((int)towers[i].getPosition().X, (int)towers[i].getPosition().Y, 700, 700);
+                rect1 = towers[i].getRange(); //think this is working now
                 for (int j = 0; j < flock.Count; j++)
                 {
                     rect2 = new Rectangle((int)flock[j].getPosition().X, (int)flock[j].getPosition().Y, 70, 70);
@@ -247,7 +247,7 @@ namespace WindowsGame1
             else if(gameScreen)
             {
                 Back1.Draw(this.spriteBatch);
-                enemy1.Draw(this.spriteBatch,Color.Blue);
+                //enemy1.Draw(this.spriteBatch,Color.Blue);
 
                 if (wave1.getDone() == false)
                 {
@@ -274,6 +274,7 @@ namespace WindowsGame1
             {
                 this.IsMouseVisible = true;
             }
+
             Tbutton.Scale = 0.3f;
             Tbutton.Draw(this.spriteBatch);
             DrawText();

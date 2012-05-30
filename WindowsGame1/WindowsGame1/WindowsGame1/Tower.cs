@@ -67,7 +67,7 @@ namespace WindowsGame1
 
         public Rectangle getRange()
         {
-            return base.Size;
+            return new Rectangle((int)range.getPosition().X,(int)range.getPosition().Y,(int)(range.getWidth() * range.Scale), (int)(range.getHeight() * range.Scale));
         }
 
         public Pcrane getTarget()
@@ -86,12 +86,12 @@ namespace WindowsGame1
             START_POSITION_Y = Y;
             setPosition(new Vector2(START_POSITION_X, START_POSITION_Y));
             towers = new List<Tower>();
-            range.setPosition(new Vector2(START_POSITION_X - 100, START_POSITION_Y - 100));
 
             if (str == "Tower")
             {
                 mCurrentState = State.Tower;
                 range.scale = 2.5f;
+                range.setPosition(new Vector2(START_POSITION_X - 100, START_POSITION_Y - 100));
             }
             else if (str == "Button")
             {

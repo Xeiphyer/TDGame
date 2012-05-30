@@ -11,7 +11,7 @@ namespace WindowsGame1
 {
     class Fireball : sprite
     {
-        const int MAX_DISTANCE = 500;//range
+        const int MAX_DISTANCE = 150;//range
         public bool Visible = false;
         Vector2 mStartPosition;
         Vector2 mSpeed;
