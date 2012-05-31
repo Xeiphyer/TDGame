@@ -17,12 +17,14 @@ namespace WindowsGame1
         public Rectangle Size;//The size of the Sprite
         public float scale = 1.0f;//Used to size the Sprite up or down from the original image
         public string AssetName;
+        public SpriteFont font;
 
         public void LoadContent(ContentManager theContentManager, string theAssetName)//Load the texture for the sprite using the Content Pipeline
         {
             mSpriteTexture = theContentManager.Load<Texture2D>(theAssetName);
             AssetName = theAssetName;
             Size = new Rectangle(0, 0, (int)(mSpriteTexture.Width * scale), (int)(mSpriteTexture.Height * scale));
+            font = theContentManager.Load<SpriteFont>("SpriteFont1");
         }
 
         public virtual void Draw(SpriteBatch theSpriteBatch)//Draw the sprite to the screen
@@ -67,12 +69,12 @@ namespace WindowsGame1
 
         public int getHeight()
         {
-            return mSpriteTexture.Height;
+            return mSpriteTexture.Height*(int)scale;
         }
 
         public int getWidth()
         {
-            return mSpriteTexture.Width;
+            return mSpriteTexture.Width*(int)scale;
         }
 
         public void Update(GameTime theGameTime, Vector2 theSpeed, Vector2 theDirection)//Update the Sprite and change it's position based on the passed in speed, direction and elapsed time.

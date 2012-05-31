@@ -37,8 +37,8 @@ namespace WindowsGame1
         List<Tower> towers;
 
         Pcrane target;
-
         sprite range = new sprite();
+        bool towerStats = false;
 
         enum State
         {
@@ -86,7 +86,7 @@ namespace WindowsGame1
             START_POSITION_Y = Y;
             setPosition(new Vector2(START_POSITION_X, START_POSITION_Y));
             towers = new List<Tower>();
-
+ 
             if (str == "Tower")
             {
                 mCurrentState = State.Tower;
@@ -153,6 +153,10 @@ namespace WindowsGame1
             range.Update(theGameTime, mSpeed, mDirection);
             base.Update(theGameTime, mSpeed, mDirection);
             UpdateClick(mouseState, lastMouseState);
+            foreach (Tower atower in towers)
+            {
+                atower.Update(theGameTime);
+            }
         }
 
        /* public void Update(GameTime theGameTime, Vector2 XY)
@@ -167,6 +171,10 @@ namespace WindowsGame1
 
         private void UpdateClick(MouseState mousestate, MouseState lastmousestate)
         {
+            if (mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
+            {
+                towerStats = false;//tower click to turn off stats in sidebar
+            }
             if (mCurrentState == State.Click && mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released && Stats.getGold() >= 50)
             {
                 Tower aTower = new Tower("Tower", mousestate.X - 35, mousestate.Y - 35);    // *X1* Center tower on mouse. Change to 1/2 texture size.
@@ -176,7 +184,20 @@ namespace WindowsGame1
                 mCurrentState = State.Button;
                 Stats.setGold(Stats.getGold()-50);
             }
-            if (mCurrentState == State.Button
+            
+            if (mCurrentState == State.Tower
+                && mousestate.X > START_POSITION_X
+                && mousestate.X < (START_POSITION_X + (int)(mSpriteTexture.Width * Scale))
+                && mousestate.Y > START_POSITION_Y
+                && mousestate.Y < (START_POSITION_Y + (int)(mSpriteTexture.Height * Scale)))
+            {
+                if (mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
+                {
+                    towerStats = true;//tower click to show stats in sidebar
+                }
+            }
+            
+            if (mCurrentState == State.Button 
                 && mousestate.X > START_POSITION_X
                 && mousestate.X < (START_POSITION_X + (int)(mSpriteTexture.Width * Scale))
                 && mousestate.Y > START_POSITION_Y
@@ -294,8 +315,24 @@ namespace WindowsGame1
                 {
                     aTower.Draw(theSpriteBatch);
                 }
+
                 base.Draw(theSpriteBatch);
-                range.Draw(theSpriteBatch);
+
+                MouseState mousestate = Mouse.GetState();
+
+                if (mCurrentState == State.Tower
+                && mousestate.X > START_POSITION_X
+                && mousestate.X < (START_POSITION_X + (int)(mSpriteTexture.Width * Scale))
+                && mousestate.Y > START_POSITION_Y
+                && mousestate.Y < (START_POSITION_Y + (int)(mSpriteTexture.Height * Scale)))
+                {
+                    range.Draw(theSpriteBatch);//hover over to see tower range
+                }
+                if (towerStats == true)
+                {
+                    theSpriteBatch.DrawString(base.font, "kills\nexperience\nsell price\nsome more shit\n...", new Vector2(820, 200), Color.Black);
+
+                }
             }
 
         }

@@ -260,7 +260,7 @@ namespace WindowsGame1
 
                 sidebar.Draw(this.spriteBatch);
 
-            if (Tbutton.changeMouse())
+                if (Tbutton.changeMouse() == true)
             {
                 this.IsMouseVisible = false;        //code for changing the mouse image
                 MouseState Mstate = Mouse.GetState();            
