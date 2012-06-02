@@ -29,6 +29,7 @@ namespace WindowsGame1
         SpriteFont font;
         waves wave1;
         waves wave2;
+        Button lvl1;
 
 
         public Game1()
@@ -61,7 +62,10 @@ namespace WindowsGame1
             wave1 = new waves();
             wave2 = new waves();
 
+            lvl1 = new Button();
+
             base.Initialize();
+
         }
 
         private void levelStart()
@@ -103,6 +107,9 @@ namespace WindowsGame1
 
             wave2.LoadContent(this.Content);
             wave2.setColor(Color.Tomato);
+
+            lvl1.LoadContent(this.Content, "lvl");
+            lvl1.setPosition(new Vector2(30, 500));
         }
 
         protected override void UnloadContent()
@@ -123,6 +130,7 @@ namespace WindowsGame1
             else if (mapScreen)
             {
                 updateMap();
+                lvl1.Update(Mouse.GetState());
             }
             else if (gameScreen)
             {
@@ -243,6 +251,7 @@ namespace WindowsGame1
             else if (mapScreen)
             {
                 map.Draw(this.spriteBatch);
+                lvl1.Draw(this.spriteBatch);
             }
             else if(gameScreen)
             {

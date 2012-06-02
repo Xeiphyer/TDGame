@@ -11,7 +11,6 @@ Content\start2.xnb
 Content\clearTower.xnb
 Content\next1.xnb
 Content\circle.xnb
+Content\HealthBar_thumb.xnb
 Content\SpriteFont1.xnb
 Content\Pew_Pew-DKnight556-1379997159.xnb
-Content\HealthBar_thumb.xnb
-Content\lvl.xnb
