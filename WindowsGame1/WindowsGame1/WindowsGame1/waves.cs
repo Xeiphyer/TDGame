@@ -167,6 +167,12 @@ namespace WindowsGame1
             return done;
         }
 
+        public void setDone(bool input)
+        {
+            done = input;
+            return;
+        }
+
         public override void Draw(SpriteBatch theSpriteBatch)
         {
             if (done == false)

@@ -30,6 +30,7 @@ namespace WindowsGame1
         waves wave1;
         waves wave2;
         Button lvl1;
+        Button start;
 
 
         public Game1()
@@ -63,6 +64,7 @@ namespace WindowsGame1
             wave2 = new waves();
 
             lvl1 = new Button();
+            start = new Button();
 
             base.Initialize();
 
@@ -110,6 +112,9 @@ namespace WindowsGame1
 
             lvl1.LoadContent(this.Content, "lvl");
             lvl1.setPosition(new Vector2(30, 500));
+
+            start.LoadContent(this.Content, "start");
+            start.setPosition(new Vector2(350, 475));
         }
 
         protected override void UnloadContent()
@@ -126,6 +131,7 @@ namespace WindowsGame1
             if (titleScreen)
             {
                 updateTitle();
+                start.Update(Mouse.GetState());
             }
             else if (mapScreen)
             {
@@ -151,11 +157,12 @@ namespace WindowsGame1
                     updateCollision(wave2,gameTime);
                     updateTarget(wave2);
                 }
-                if (Stats.getLives() <= 0)
+                if (Stats.getLives() <= 0 || wave2.getDone() == true && wave2.getDone() == true)
                 {
                     mapScreen = true;
                     gameScreen = false;
                 }
+
                 Tbutton.Update(gameTime);
             }
 
@@ -164,7 +171,7 @@ namespace WindowsGame1
 
         private void updateTitle()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) == true)
+            if (start.getClicked() == true || Keyboard.GetState().IsKeyDown(Keys.Space) == true)
             {
                 titleScreen = false;
                 mapScreen = true;
@@ -175,7 +182,7 @@ namespace WindowsGame1
 
         private void updateMap()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true || lvl1.getClicked() == true)
             {
                 mapScreen = false;
                 gameScreen = true;
@@ -246,6 +253,7 @@ namespace WindowsGame1
             if (titleScreen)
             {
                 title.Draw(this.spriteBatch);
+                start.Draw(this.spriteBatch);
             }
 
             else if (mapScreen)
