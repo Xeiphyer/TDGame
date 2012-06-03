@@ -15,7 +15,7 @@ namespace WindowsGame1
     {
         public int START_POSITION_X;
         public int START_POSITION_Y;
-        string WIZARD_ASSETNAME = "tower1";
+        string WIZARD_ASSETNAME = "tower2";
         const int MOVE_UP = -1;
         const int MOVE_DOWN = 1;
         const int MOVE_LEFT = -1;
@@ -39,6 +39,14 @@ namespace WindowsGame1
         Pcrane target;
         sprite range = new sprite();
         bool towerStats = false;
+
+        // grid vars
+        int TileX;
+        int TileY;
+        int tileWidth = 34;
+        int tileHeight = 34;
+        int squarePositionX;
+        int squarePositionY;
 
         enum State
         {
@@ -175,9 +183,25 @@ namespace WindowsGame1
             {
                 towerStats = false;//tower click to turn off stats in sidebar
             }
-            if (mCurrentState == State.Click && mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released && Stats.getGold() >= 50)
+            if (mCurrentState == State.Click && mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released && mousestate.X < 800 && Stats.getGold() >= 50)
             {
-                Tower aTower = new Tower("Tower", mousestate.X - 35, mousestate.Y - 35);    // *X1* Center tower on mouse. Change to 1/2 texture size.
+
+
+
+
+                // **x2** 
+
+
+
+
+                //showGrid(1);
+
+                TileX = (int)Math.Floor((float)(mousestate.X / tileWidth));
+                TileY = (int)Math.Floor((float)(mousestate.Y / tileHeight));
+                squarePositionX = (TileX * tileWidth) + (tileWidth / 2);
+                squarePositionY = (TileY * tileHeight) + (tileHeight / 2);
+
+                Tower aTower = new Tower("Tower", squarePositionX -30, squarePositionY -30);    // *X1* Center tower on mouse. Change to 1/2 texture size.
                 aTower.Scale = 0.5f;
                 aTower.LoadContent(mContentManager);
                 towers.Add(aTower);
@@ -208,6 +232,27 @@ namespace WindowsGame1
                 {
                     mCurrentState = State.Click;//button click here
                 }
+            }
+        }
+
+        public void showGrid(int status)
+        {
+            int x = 0;
+            int y = 30;
+            if (status == 0)
+            {
+
+                while (x < 800)
+                {
+                    while (y < 600)
+                    {
+                        // **x3** gonna make it draw a gridsquare on each valid tower placement spot
+                        //    It'll skip the already placed tower spots, and eventually the lane
+                        //    We need variables to track it though. Not sure how we are gonna do it.
+                    }
+
+                }
+                
             }
         }
 

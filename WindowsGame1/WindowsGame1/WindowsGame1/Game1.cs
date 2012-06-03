@@ -20,6 +20,7 @@ namespace WindowsGame1
         Tower Tbutton;
         sprite Back1;
         //Pcrane enemy1;
+        sprite topbar;
         sprite sidebar;
         sprite title;
         sprite map;
@@ -56,6 +57,7 @@ namespace WindowsGame1
             //enemy1.Scale = 0.5f;
 
             sidebar = new sprite();
+            topbar = new sprite();
 
             title = new sprite();
             map = new sprite();
@@ -96,6 +98,8 @@ namespace WindowsGame1
 
             sidebar.LoadContent(this.Content, "side");
             sidebar.setPosition(new Vector2(800,0));
+            topbar.LoadContent(this.Content, "topbar");
+            topbar.setPosition(new Vector2(0, 0));
 
             title.LoadContent(this.Content, "title");
             map.LoadContent(this.Content, "Map");
@@ -276,16 +280,17 @@ namespace WindowsGame1
                 }
 
                 sidebar.Draw(this.spriteBatch);
+                topbar.Draw(this.spriteBatch);
 
                 if (Tbutton.changeMouse() == true)
             {
                 this.IsMouseVisible = false;        //code for changing the mouse image
                 MouseState Mstate = Mouse.GetState();            
                 Tbutton.Scale = 0.5f;
-                Tbutton.setImage(this.Content,"clearTower");
-                Vector2 pos = new Vector2(Mstate.X - 35, Mstate.Y - 35);     // *X1* Center tower on mouse. Change to 1/2 texture size.   
+                Tbutton.setImage(this.Content,"clearTower2");
+                Vector2 pos = new Vector2(Mstate.X - 30, Mstate.Y - 30);     // *X1* Center tower on mouse. Change to 1/2 texture size.   
                 Tbutton.Draw(this.spriteBatch, pos);
-                Tbutton.setImage(this.Content,"tower1");
+                Tbutton.setImage(this.Content,"tower2");
             }
             else
             {
@@ -304,7 +309,7 @@ namespace WindowsGame1
 
         private void DrawText()
         {
-            spriteBatch.DrawString(font, "Lives: "+Stats.getLives()+"   Gold: "+Stats.getGold()+"   Energy: "+Stats.getEnergy(), new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(font, "Lives: "+Stats.getLives()+"   Gold: "+Stats.getGold()+"   Energy: "+Stats.getEnergy(), new Vector2(10, 1), Color.Black);
         }
     }
 }
