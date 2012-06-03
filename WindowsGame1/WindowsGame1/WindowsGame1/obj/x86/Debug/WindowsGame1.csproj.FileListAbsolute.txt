@@ -40,3 +40,5 @@ C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debu
 C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Pew_Pew-DKnight556-1379997159.xnb
 C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\circle.xnb
 C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\circle.xnb
+C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\HealthBar_thumb.xnb
+C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\lvl.xnb

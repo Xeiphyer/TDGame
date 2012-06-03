@@ -14,18 +14,17 @@ namespace WindowsGame1
 {
     class Pcrane : sprite
     {
-        const string WIZARD_ASSETNAME = "Pcrane";
-        public int X = 0;
-        public int Y = 90;
+        const string ASSETNAME = "Pcrane";
         const int WIZARD_SPEED = 200;
         const int MOVE_UP = -1;
         const int MOVE_DOWN = 1;
         const int MOVE_LEFT = -1;
         const int MOVE_RIGHT = 1;
-        int leak = 0;
-        int Hp = 1;
+        const int MAX_HP = 10;//changes the Hp of cranes
+        int Hp;
         public bool Visible = true;
-        int cash = 0;
+        Texture2D HealthBar;
+        //sprite HealthBar;
 
         enum State
         {
@@ -40,13 +39,16 @@ namespace WindowsGame1
 
         public void LoadContent(ContentManager theContentManager)
         {
-            Position = new Vector2(X, Y);
-            base.LoadContent(theContentManager, WIZARD_ASSETNAME);
+            setPosition(new Vector2(0, 90));
+            base.LoadContent(theContentManager, ASSETNAME);
+            HealthBar = theContentManager.Load<Texture2D>("HealthBar_thumb") as Texture2D;
+            Hp = MAX_HP;
         }
 
         public void hit(int dmg)
         {
             Hp = Hp - dmg;
+            Hp = (int)MathHelper.Clamp(Hp, 0, MAX_HP);//keeps Hp between 0 and 100 for health bar
         }
 
         public Rectangle getRec()
@@ -72,30 +74,10 @@ namespace WindowsGame1
             if (Hp <= 0 && mCurrentState == State.Walking)
             {
                 this.Visible = false;
-                cash = 10;
+                Stats.setGold(Stats.getGold() + 10);
                 mCurrentState = State.Dead;
             }
 
-        }
-
-        public Vector2 getV()
-        {
-            Vector2 temp = new Vector2(Position.X, Position.Y);
-            return temp;
-        }
-
-        public int leaks()
-        {
-            int temp = leak;
-            leak = 0;
-            return temp;
-        }
-
-        public int bounty()
-        {
-            int temp = cash;
-            cash = 0;
-            return temp;
         }
 
         private void UpdateMovement()
@@ -105,51 +87,54 @@ namespace WindowsGame1
 
             if (Visible == true)
             {
-                if (Position.X < 600 && Position.Y < 250)
+                if (getPosition().X < 600 && getPosition().Y < 250)
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_RIGHT;
                 }
-                if (Position.X >= 600 && Position.Y < 270)
+                if (getPosition().X >= 600 && getPosition().Y < 270)
                 {
                     mSpeed.Y = WIZARD_SPEED;
                     mDirection.Y = MOVE_DOWN;
                 }
-                if (Position.X > 100 && Position.Y >= 270)
+                if (getPosition().X > 100 && getPosition().Y >= 270)
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_LEFT;
                 }
-                if (Position.X <= 100 && Position.Y < 440 && Position.Y >= 270)
+                if (getPosition().X <= 100 && getPosition().Y < 440 && getPosition().Y >= 270)
                 {
                     mSpeed.Y = WIZARD_SPEED;
                     mDirection.Y = MOVE_DOWN;
                 }
-                if (Position.Y >= 440 && Position.X < 770)
+                if (getPosition().Y >= 440 && getPosition().X < 770)
                 {
                     mSpeed.X = WIZARD_SPEED;
                     mDirection.X = MOVE_RIGHT;
                 }
-                if (Position.X >= 770)
+                if (getPosition().X >= 770)
                 {
-                    X = 0;
-                    Y = 90;
-                    Position = new Vector2(X, Y);
-                    leak++;
+                    setPosition(new Vector2(0, 90));
+                    Stats.setLives(Stats.getLives() - 1);
                 }
             }
         }
 
-        public Vector2 getPos()
-        {
-            return Position;
-        }
-
-        public override void Draw(SpriteBatch theSpriteBatch)//Draw the sprite to the screen
+        public override void Draw(SpriteBatch theSpriteBatch, Color clr)//Draw the sprite to the screen
         {
             if (Visible == true)
             {
-                theSpriteBatch.Draw(mSpriteTexture, Position, new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
+                
+                theSpriteBatch.Draw(mSpriteTexture, getPosition(), new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), clr, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
+
+                //backround of health bar
+                theSpriteBatch.Draw(HealthBar, new Vector2 (base.getPosition().X, base.getPosition().Y+90), new Rectangle(0, 45, HealthBar.Width, 13), Color.Gray);
+                
+                //Draw the current health level based on the current Health
+                theSpriteBatch.Draw(HealthBar, new Rectangle((int)base.getPosition().X, (int)base.getPosition().Y+90, (int)(HealthBar.Width * ((double)Hp / MAX_HP)), 13), new Rectangle(0, 45, HealthBar.Width, 44), Color.Red);
+
+                //Draw the box around the health bar
+                theSpriteBatch.Draw(HealthBar, new Rectangle((int)base.getPosition().X, (int)base.getPosition().Y+90, HealthBar.Width, 14), new Rectangle(0, 0, HealthBar.Width, 14), Color.White);
             }
         }
 

@@ -17,11 +17,9 @@ namespace WindowsGame1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Vector2 mPosition = new Vector2(100, 200);
-       // Tower mSprite;
         Tower Tbutton;
         sprite Back1;
-        Pcrane enemy1;
+        //Pcrane enemy1;
         sprite sidebar;
         sprite title;
         sprite map;
@@ -29,11 +27,10 @@ namespace WindowsGame1
         bool mapScreen = false;
         bool gameScreen = false;
         SpriteFont font;
-        int lives;
-        int gold;
-        int energy;
         waves wave1;
         waves wave2;
+        Button lvl1;
+        Button start;
 
 
         public Game1()
@@ -46,9 +43,6 @@ namespace WindowsGame1
         {
             this.IsMouseVisible = true;
 
-            //mSprite = new Tower("Tower", 125, 200);
-           // mSprite.Scale = 0.5f;
-            
             Tbutton = new Tower("Button", 830, 220);
             Tbutton.Scale = 0.3f;
             
@@ -58,8 +52,8 @@ namespace WindowsGame1
             graphics.PreferredBackBufferHeight = 600;
             graphics.ApplyChanges();
 
-            enemy1 = new Pcrane();
-            enemy1.Scale = 0.5f;
+            //enemy1 = new Pcrane();
+            //enemy1.Scale = 0.5f;
 
             sidebar = new sprite();
 
@@ -69,14 +63,18 @@ namespace WindowsGame1
             wave1 = new waves();
             wave2 = new waves();
 
+            lvl1 = new Button();
+            start = new Button();
+
             base.Initialize();
+
         }
 
         private void levelStart()
         {
-            lives = 20;
-            gold = 200;
-            energy = 100;
+            Stats.setLives(20);
+            Stats.setGold(200);
+            Stats.setEnergy(100);
             titleScreen = false;
             mapScreen = false;
             gameScreen = true;
@@ -90,16 +88,14 @@ namespace WindowsGame1
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-          //  mSprite.LoadContent(this.Content);
-
             Tbutton.LoadContent(this.Content);
 
             Back1.LoadContent(this.Content, "Back01");
 
-            enemy1.LoadContent(this.Content);
+            //enemy1.LoadContent(this.Content);
 
             sidebar.LoadContent(this.Content, "side");
-            sidebar.Position.X = 800;
+            sidebar.setPosition(new Vector2(800,0));
 
             title.LoadContent(this.Content, "title");
             map.LoadContent(this.Content, "Map");
@@ -113,6 +109,12 @@ namespace WindowsGame1
 
             wave2.LoadContent(this.Content);
             wave2.setColor(Color.Tomato);
+
+            lvl1.LoadContent(this.Content, "lvl");
+            lvl1.setPosition(new Vector2(30, 500));
+
+            start.LoadContent(this.Content, "start");
+            start.setPosition(new Vector2(350, 475));
         }
 
         protected override void UnloadContent()
@@ -129,32 +131,39 @@ namespace WindowsGame1
             if (titleScreen)
             {
                 updateTitle();
+                start.Update(Mouse.GetState());
             }
             else if (mapScreen)
             {
                 updateMap();
+                lvl1.Update(Mouse.GetState());
             }
             else if (gameScreen)
             {
-                enemy1.Update(gameTime);
-              //  mSprite.Update(gameTime, enemy1.getV());
-                gold = gold - Tbutton.Update(gameTime);
-                lives = lives - enemy1.leaks();
+                //enemy1.Update(gameTime);
+ 
+                //Tbutton.setTarget(enemy1);
+                
+
                 if (wave1.getDone() == false)
                 {
                     wave1.Update(gameTime);
                     updateCollision(wave1, gameTime);
+                    updateTarget(wave1);
                 }
                 if (wave2.getDone() == false && wave1.getDone() == true)
                 {
                     wave2.Update(gameTime);
                     updateCollision(wave2,gameTime);
+                    updateTarget(wave2);
                 }
-                if (lives == 0)
+                if (Stats.getLives() <= 0 || wave2.getDone() == true && wave2.getDone() == true)
                 {
                     mapScreen = true;
                     gameScreen = false;
                 }
+
+                Tbutton.Update(gameTime);
             }
 
             base.Update(gameTime);
@@ -162,7 +171,7 @@ namespace WindowsGame1
 
         private void updateTitle()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) == true)
+            if (start.getClicked() == true || Keyboard.GetState().IsKeyDown(Keys.Space) == true)
             {
                 titleScreen = false;
                 mapScreen = true;
@@ -173,7 +182,7 @@ namespace WindowsGame1
 
         private void updateMap()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true || lvl1.getClicked() == true)
             {
                 mapScreen = false;
                 gameScreen = true;
@@ -193,16 +202,14 @@ namespace WindowsGame1
             //*****************************fireball enemy collision***********************************//
             for(int i = 0; i < cranes.Count; i++)
             {
-                Vector2 temPos1 = cranes[i].getPos();
+                Vector2 temPos1 = cranes[i].getPosition();
                 rect1 = new Rectangle((int)temPos1.X,(int)temPos1.Y,70,70);//70s should be width then height
-                lives = lives - cranes[i].leaks();
-                gold = gold + cranes[i].bounty();
 
                 for(int j =0; j < mFireballs.Count; j++)
                 {
                     if (mFireballs[j].Visible == true && cranes[i].Visible == true)
                     {
-                        Vector2 temPos2 = mFireballs[j].getPos();
+                        Vector2 temPos2 = mFireballs[j].getPosition();
                         rect2 = new Rectangle((int)temPos2.X, (int)temPos2.Y, 20, 20);
                         if (rect1.Intersects(rect2))
                         {
@@ -212,25 +219,30 @@ namespace WindowsGame1
                     }
                 }
             }
+        }
 
-            //**********************targeting logic***********************//
-          /*  List<Tower> towers = Tbutton.getTowers();
-
+        private void updateTarget(waves waves)//I think the problem is the positions of the rectangles, I wish I could see them to test...
+        {
+            Rectangle rect1;
+            Rectangle rect2;
+            List<Tower> towers = Tbutton.getTowers();
+            List<Pcrane> flock = waves.getList();
+            
             for (int i = 0; i < towers.Count; i++)
             {
-                Vector2 temPos2 = towers[i].getPos();
-                rect2 = new Rectangle((int)temPos2.X, (int)temPos2.Y, 200, 200);
-                for (int j = 0; j < cranes.Count; j++)
+                //rect1 = new Rectangle((int)towers[i].getPosition().X, (int)towers[i].getPosition().Y, 700, 700);
+                rect1 = towers[i].getRange(); //think this is working now
+                for (int j = 0; j < flock.Count; j++)
                 {
-                    Vector2 temPos1 = cranes[i].getPos();
-                    rect1 = new Rectangle((int)temPos1.X, (int)temPos1.Y, 70, 70);//70s should be width then height
-                    if(rect2.Intersects(rect1))
+                    rect2 = new Rectangle((int)flock[j].getPosition().X, (int)flock[j].getPosition().Y, 70, 70);
+                    //rect2 = flock[j].getRec(); //this is wrong too
+                    if (towers[i].getTarget() == null && rect1.Intersects(rect2))
                     {
-                      towers[i].Update(gametime, cranes[j].getPos());
+                        Tbutton.setTarget(flock[j]);
+                        //towers[i].setTarget(flock[j]); //I have no idea why this won't work
                     }
                 }
-            }*/
-
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -241,16 +253,18 @@ namespace WindowsGame1
             if (titleScreen)
             {
                 title.Draw(this.spriteBatch);
+                start.Draw(this.spriteBatch);
             }
 
             else if (mapScreen)
             {
                 map.Draw(this.spriteBatch);
+                lvl1.Draw(this.spriteBatch);
             }
             else if(gameScreen)
             {
                 Back1.Draw(this.spriteBatch);
-                enemy1.Draw(this.spriteBatch,Color.Blue);
+                //enemy1.Draw(this.spriteBatch,Color.Blue);
 
                 if (wave1.getDone() == false)
                 {
@@ -262,8 +276,8 @@ namespace WindowsGame1
                 }
 
                 sidebar.Draw(this.spriteBatch);
-         //   mSprite.Draw(this.spriteBatch);
-            if (Tbutton.changeMouse(gold))
+
+                if (Tbutton.changeMouse() == true)
             {
                 this.IsMouseVisible = false;        //code for changing the mouse image
                 MouseState Mstate = Mouse.GetState();            
@@ -277,6 +291,7 @@ namespace WindowsGame1
             {
                 this.IsMouseVisible = true;
             }
+
             Tbutton.Scale = 0.3f;
             Tbutton.Draw(this.spriteBatch);
             DrawText();
@@ -289,7 +304,7 @@ namespace WindowsGame1
 
         private void DrawText()
         {
-            spriteBatch.DrawString(font, "Lives: "+lives+"   Gold: "+gold+"   Energy: "+energy, new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(font, "Lives: "+Stats.getLives()+"   Gold: "+Stats.getGold()+"   Energy: "+Stats.getEnergy(), new Vector2(0, 0), Color.White);
         }
     }
 }

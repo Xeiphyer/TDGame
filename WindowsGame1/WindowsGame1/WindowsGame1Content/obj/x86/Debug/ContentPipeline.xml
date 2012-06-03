@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\tower1.xnb</Output>
-      <Time>2012-05-25T05:18:12.507-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\tower1.xnb</Output>
+      <Time>2012-05-15T00:56:00.6640625-06:00</Time>
     </Item>
     <Item>
       <Source>Back01.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Back01.xnb</Output>
-      <Time>2012-05-25T05:17:59.525-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Back01.xnb</Output>
+      <Time>2012-05-09T14:10:02.46875-06:00</Time>
     </Item>
     <Item>
       <Source>Pcrane.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Pcrane.xnb</Output>
-      <Time>2012-05-25T05:17:59.527-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Pcrane.xnb</Output>
+      <Time>2012-05-09T15:20:19.0253907-06:00</Time>
     </Item>
     <Item>
       <Source>Back01path.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Back01path.xnb</Output>
-      <Time>2012-05-25T05:17:59.526-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Back01path.xnb</Output>
+      <Time>2012-05-09T23:29:12.6972657-06:00</Time>
     </Item>
     <Item>
       <Source>Fireball.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Fireball.xnb</Output>
-      <Time>2012-05-25T05:17:59.526-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Fireball.xnb</Output>
+      <Time>2012-05-10T12:05:17.0283203-06:00</Time>
     </Item>
     <Item>
       <Source>side.png</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\side.xnb</Output>
-      <Time>2012-05-25T05:18:12.504-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\side.xnb</Output>
+      <Time>2012-05-13T21:15:26.8583984-06:00</Time>
     </Item>
     <Item>
       <Source>Map.png</Source>
@@ -61,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Map.xnb</Output>
-      <Time>2012-05-25T05:18:12.496-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Map.xnb</Output>
+      <Time>2012-05-13T22:10:04.9609375-06:00</Time>
     </Item>
     <Item>
       <Source>title.png</Source>
@@ -70,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\title.xnb</Output>
-      <Time>2012-05-25T05:18:12.506-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\title.xnb</Output>
+      <Time>2012-05-13T22:10:04.2890625-06:00</Time>
     </Item>
     <Item>
       <Source>start.png</Source>
@@ -79,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\start.xnb</Output>
-      <Time>2012-05-25T05:18:12.504-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\start.xnb</Output>
+      <Time>2012-06-02T18:31:17.2978515-06:00</Time>
     </Item>
     <Item>
       <Source>start2.png</Source>
@@ -88,8 +88,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\start2.xnb</Output>
-      <Time>2012-05-25T05:18:12.505-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\start2.xnb</Output>
+      <Time>2012-05-14T16:53:04.0209062-06:00</Time>
     </Item>
     <Item>
       <Source>clearTower.png</Source>
@@ -97,8 +97,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\clearTower.xnb</Output>
-      <Time>2012-05-25T05:18:12.5-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\clearTower.xnb</Output>
+      <Time>2012-05-16T20:35:17.0898437-06:00</Time>
     </Item>
     <Item>
       <Source>next1.png</Source>
@@ -106,8 +106,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\next1.xnb</Output>
-      <Time>2012-05-25T05:18:12.501-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\next1.xnb</Output>
+      <Time>2012-05-18T02:12:02.4511719-06:00</Time>
     </Item>
     <Item>
       <Source>circle.png</Source>
@@ -115,8 +115,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\circle.xnb</Output>
-      <Time>2012-05-28T00:13:11.647-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\circle.xnb</Output>
+      <Time>2012-05-27T13:06:22.2235078-06:00</Time>
     </Item>
     <Item>
       <Source>SpriteFont1.spritefont</Source>
@@ -124,8 +124,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
-      <Time>2012-05-25T05:18:12.499-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
+      <Time>2012-05-14T22:06:39.0429687-06:00</Time>
     </Item>
     <Item>
       <Source>Pew_Pew-DKnight556-1379997159.wav</Source>
@@ -133,8 +133,26 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Pew_Pew-DKnight556-1379997159.xnb</Output>
-      <Time>2012-05-25T05:18:12.498-06:00</Time>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\Pew_Pew-DKnight556-1379997159.xnb</Output>
+      <Time>2012-05-15T16:22:53.1435547-06:00</Time>
+    </Item>
+    <Item>
+      <Source>HealthBar_thumb.png</Source>
+      <Name>HealthBar_thumb</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\HealthBar_thumb.xnb</Output>
+      <Time>2012-05-29T17:35:00.2421875-06:00</Time>
+    </Item>
+    <Item>
+      <Source>lvl.png</Source>
+      <Name>lvl</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\lvl.xnb</Output>
+      <Time>2012-06-02T17:33:53.2734375-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -142,39 +160,39 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-06:00</Value>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2010-08-23T12:41:18-06:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
-        <Value>2010-08-23T13:41:18-06:00</Value>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2010-08-23T12:41:18-06:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-06:00</Value>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2010-08-23T12:41:18-06:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-06:00</Value>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2010-08-23T12:41:18-06:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-06:00</Value>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2010-08-23T12:41:18-06:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2010-08-23T13:41:18-06:00</Value>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2010-08-23T12:41:18-06:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-02-06T23:07:33.027-07:00</Value>
+        <Value>2012-05-02T01:09:11.1484375-06:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

@@ -71,7 +71,7 @@ namespace WindowsGame1
             cranes.Clear();
             counter = 10;
             state = State.scroll;
-            Position = new Vector2(START_POSITION_X, START_POSITION_Y);
+            setPosition(new Vector2(START_POSITION_X, START_POSITION_Y));
             done = false;
         }
 
@@ -133,7 +133,7 @@ namespace WindowsGame1
             for (int i = 0; i < cranes.Count; i++)
             {
                 cranes[i].Update(theGameTime);
-                if (cranes[i].dead() == true && cranes[i].bounty() == 0)
+                if (cranes[i].dead() == true)
                 {
                     cranes.Remove(cranes[i]);
                 }
@@ -165,6 +165,12 @@ namespace WindowsGame1
         public bool getDone()
         {
             return done;
+        }
+
+        public void setDone(bool input)
+        {
+            done = input;
+            return;
         }
 
         public override void Draw(SpriteBatch theSpriteBatch)
