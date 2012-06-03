@@ -1,13 +1,14 @@
-I'm not sure you got my email but anyway, check this game out:
+Alright, so the grid is sorta working. All the hard coding we did is sorta fucking everything up though haha.
 
-http://www.notdoppler.com/cursedtreasure-donttouchmygems.php
+The range needs to be adjusted for the new tower size, its off center now. Couldn't figure out how to change it.
+Also needa make the fireballs spawn from the center of the tower, so we needa get some easy way of getting the center of the sprite. 
 
-I think this is what we should do for sizes, the towers are still 3D too. Once we have the scale it wont matter if we hardcode things in either. once you get the grid going we can set the size of towers and start getting art.
+Lemme know if you think the tower is too small? We can move the size around pretty easily. Probably need to make it at least twice as big on the selection side.
 
--Fil
+I added a bar at the top for the life/gold/energy and made the text black, so now its all professional.
 
-Check my Commit message on the game, its pretty long. Also...
+Towers won't place in the selection area anymore, but they will still place in the top area with the life and shit I think, I didn't change that yet, though its like a 10second fix.
 
-1. Once we get this new stuff finished and have it working so far, we should make a copy of the game so we have a stable version, and the buggy version we are working on. Just in case we mess things up, it'll be easier than trying to remember when the last time everything worked properly was.
 
-2. We are going to have to make sure every tower fits within the same texture area because of the grid. I'm going to make the towers take up 2x2 squares I guess. What's the size of the texture? Scaling and shit is going to make this sort of a headache.
+So, for the grid, I want to get a transparent grid to overlay the map when the tower is selected, and then show the square the tower will place to in a different color, but I think that'll be redundant once we get the sprite to center properly. 
+We needa redraw the map to make it fit with the grid better, but that can wait until I make the actual grid appear over the map. 
