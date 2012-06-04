@@ -45,7 +45,7 @@ namespace WindowsGame1
             this.IsMouseVisible = true;
 
             Tbutton = new Tower("Button", 830, 220);
-            Tbutton.Scale = 0.3f;
+            Tbutton.scale = 0.5f;
             
             Back1 = new sprite();
             Back1.Scale = 2.0f;
@@ -191,6 +191,7 @@ namespace WindowsGame1
                 mapScreen = false;
                 gameScreen = true;
                 levelStart();
+                lvl1.setClicked(false);
                 return;
 
             }
@@ -297,8 +298,11 @@ namespace WindowsGame1
                 this.IsMouseVisible = true;
             }
 
-            Tbutton.Scale = 0.3f;
-            Tbutton.Draw(this.spriteBatch);
+            Tbutton.Scale = 0.7f; //this changes the button size on the sidebar
+            if (Tbutton.getTowerStats() == false)
+            {
+                Tbutton.Draw(this.spriteBatch);
+            }
             DrawText();
             }
 

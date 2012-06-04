@@ -78,6 +78,16 @@ namespace WindowsGame1
             return new Rectangle((int)range.getPosition().X,(int)range.getPosition().Y,(int)(range.getWidth() * range.Scale), (int)(range.getHeight() * range.Scale));
         }
 
+        public bool getTowerStats()
+        {
+            return towerStats;
+        }
+        public void setTowerStats(bool input)
+        {
+            towerStats = input;
+            return;
+        }
+
         public Pcrane getTarget()
         {
             return target;
@@ -99,11 +109,12 @@ namespace WindowsGame1
             {
                 mCurrentState = State.Tower;
                 range.scale = 2.5f;
-                range.setPosition(new Vector2(START_POSITION_X - 100, START_POSITION_Y - 100));
+                range.setPosition(new Vector2(START_POSITION_X - 130, START_POSITION_Y - 130));
             }
             else if (str == "Button")
             {
                 mCurrentState = State.Button;
+                scale = 3.0f;
                 range.scale = 0.01f;
             }
         }
@@ -375,7 +386,7 @@ namespace WindowsGame1
                 }
                 if (towerStats == true)
                 {
-                    theSpriteBatch.DrawString(base.font, "kills\nexperience\nsell price\nsome more shit\n...", new Vector2(820, 200), Color.Black);
+                    theSpriteBatch.DrawString(base.font, "kills\nexperience\nsell price\nsome more shit\n...", new Vector2(820, 300), Color.Black);
 
                 }
             }

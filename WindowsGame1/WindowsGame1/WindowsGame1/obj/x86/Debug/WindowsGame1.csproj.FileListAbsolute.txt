@@ -48,3 +48,11 @@ C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debu
 C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\clearTower2.xnb
 C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\gridsquare.xnb
 C:\Users\Sean\Desktop\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\topbar.xnb
+C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\tower2.xnb
+C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\clearTower2.xnb
+C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\gridsquare.xnb
+C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\topbar.xnb
+C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\WindowsGame1.exe.manifest
+C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\WindowsGame1.application
+C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\obj\x86\Debug\WindowsGame1.exe.manifest
+C:\Users\Phil\TDGame\WindowsGame1\WindowsGame1\WindowsGame1\obj\x86\Debug\WindowsGame1.application
