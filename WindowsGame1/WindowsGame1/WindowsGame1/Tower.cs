@@ -212,7 +212,7 @@ namespace WindowsGame1
                 squarePositionX = (TileX * tileWidth) + (tileWidth / 2);
                 squarePositionY = (TileY * tileHeight) + (tileHeight / 2);
 
-                Tower aTower = new Tower("Tower", squarePositionX -30, squarePositionY -30);    // *X1* Center tower on mouse. Change to 1/2 texture size.
+                Tower aTower = new Tower("Tower", squarePositionX - 30, squarePositionY - 30);    // *X1* Center tower on mouse. Change to 1/2 texture size.
                 aTower.Scale = 0.5f;
                 aTower.LoadContent(mContentManager);
                 towers.Add(aTower);
@@ -328,7 +328,7 @@ namespace WindowsGame1
                         if (aFireball.Visible == false)
                         {
                             aCreateNew = false;
-                            aFireball.Fire(aTower.getPosition() + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
+                            aFireball.Fire(aTower.getPosition() + new Vector2(getWidth() / 2, getHeight() / 2), new Vector2(200, 200), new Vector2(1, 0));
                             break;
                         }
                     }
@@ -337,7 +337,7 @@ namespace WindowsGame1
                     {
                         Fireball aFireball = new Fireball();
                         aFireball.LoadContent(mContentManager);
-                        aFireball.Fire(aTower.getPosition() + new Vector2(Size.Width / 2, Size.Height / 2), new Vector2(200, 200), new Vector2(1, 0));
+                        aFireball.Fire(aTower.getPosition() + new Vector2(getWidth() / 2, getHeight() / 2), new Vector2(200, 200), new Vector2(1, 0));
                         mFireballs.Add(aFireball);
                     }
                 }

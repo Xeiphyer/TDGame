@@ -289,7 +289,8 @@ namespace WindowsGame1
                 MouseState Mstate = Mouse.GetState();            
                 Tbutton.Scale = 0.5f;
                 Tbutton.setImage(this.Content,"clearTower2");
-                Vector2 pos = new Vector2(Mstate.X - 30, Mstate.Y - 30);     // *X1* Center tower on mouse. Change to 1/2 texture size.   
+                Vector2 pos = new Vector2((int)Math.Floor((float)(Mstate.X / 34))*34, (int)Math.Floor((float)(Mstate.Y / 34))*34); //new mouse snap-to off by a little
+                //Vector2 pos = new Vector2(Mstate.X - 30, Mstate.Y - 30);     // *X1* Center tower on mouse. Change to 1/2 texture size.   
                 Tbutton.Draw(this.spriteBatch, pos);
                 Tbutton.setImage(this.Content,"tower2");
             }

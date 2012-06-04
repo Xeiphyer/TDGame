@@ -14,7 +14,7 @@ namespace WindowsGame1
     {
         Vector2 Position = new Vector2(0, 0);//The current position of the Sprite
         protected Texture2D mSpriteTexture;//The texture object used when drawing the sprite
-        public Rectangle Size;//The size of the Sprite
+        public Rectangle Size;//The size of the Sprite bugged, usually off
         public float scale = 1.0f;//Used to size the Sprite up or down from the original image
         public string AssetName;
         public SpriteFont font;
