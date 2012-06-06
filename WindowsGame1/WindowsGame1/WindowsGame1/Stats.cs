@@ -7,9 +7,9 @@ namespace WindowsGame1
 {
     static class Stats
     {
-        static int lives;
-        static int gold;
-        static int energy;
+        private static int lives;
+        private static int gold;
+        private static int energy;
 
         public static int getLives()
         {

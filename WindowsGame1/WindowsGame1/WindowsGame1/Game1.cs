@@ -17,7 +17,7 @@ namespace WindowsGame1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Tower Tbutton;
+        //Tower Tbutton;
         sprite Back1;
         //Pcrane enemy1;
         sprite topbar;
@@ -32,6 +32,7 @@ namespace WindowsGame1
         waves wave2;
         Button lvl1;
         Button start;
+        TowerButton tower1;
 
 
         public Game1()
@@ -44,8 +45,8 @@ namespace WindowsGame1
         {
             this.IsMouseVisible = true;
 
-            Tbutton = new Tower("Button", 830, 220);
-            Tbutton.scale = 0.5f;
+            tower1 = new TowerButton(830, 220);
+            //tower1.scale = 0.5f;
             
             Back1 = new sprite();
             Back1.Scale = 2.0f;
@@ -80,7 +81,7 @@ namespace WindowsGame1
             titleScreen = false;
             mapScreen = false;
             gameScreen = true;
-            Tbutton.reset();
+            tower1.reset();
             wave1.reset();
             wave2.reset();
         }
@@ -90,7 +91,7 @@ namespace WindowsGame1
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Tbutton.LoadContent(this.Content);
+            tower1.LoadContent(this.Content);
 
             Back1.LoadContent(this.Content, "Back01");
 
@@ -167,7 +168,7 @@ namespace WindowsGame1
                     gameScreen = false;
                 }
 
-                Tbutton.Update(gameTime);
+                tower1.Update(gameTime);
             }
 
             base.Update(gameTime);
@@ -202,7 +203,7 @@ namespace WindowsGame1
             Rectangle rect1;
             Rectangle rect2;
             List<Pcrane> cranes = wave.getList();
-            List<Fireball> mFireballs = Tbutton.getList();
+            List<Fireball> mFireballs = tower1.getFire();
 
             //*****************************fireball enemy collision***********************************//
             for(int i = 0; i < cranes.Count; i++)
@@ -230,7 +231,7 @@ namespace WindowsGame1
         {
             Rectangle rect1;
             Rectangle rect2;
-            List<Tower> towers = Tbutton.getTowers();
+            List<Tower> towers = tower1.getTowers();
             List<Pcrane> flock = waves.getList();
             
             for (int i = 0; i < towers.Count; i++)
@@ -243,8 +244,8 @@ namespace WindowsGame1
                     //rect2 = flock[j].getRec(); //this is wrong too
                     if (towers[i].getTarget() == null && rect1.Intersects(rect2))
                     {
-                        Tbutton.setTarget(flock[j]);
-                        //towers[i].setTarget(flock[j]); //I have no idea why this won't work
+                        //Tbutton.setTarget(flock[j]);
+                        towers[i].setTarget(flock[j]); //woooo it works!
                     }
                 }
             }
@@ -283,27 +284,27 @@ namespace WindowsGame1
                 sidebar.Draw(this.spriteBatch);
                 topbar.Draw(this.spriteBatch);
 
-                if (Tbutton.changeMouse() == true)
+                if (tower1.changeMouse() == true)
             {
                 this.IsMouseVisible = false;        //code for changing the mouse image
                 MouseState Mstate = Mouse.GetState();            
-                Tbutton.Scale = 0.5f;
-                Tbutton.setImage(this.Content,"clearTower2");
+                tower1.Scale = 0.5f;
+                tower1.setImage(this.Content,"clearTower2");
                 Vector2 pos = new Vector2((int)Math.Floor((float)(Mstate.X / 34))*34, (int)Math.Floor((float)(Mstate.Y / 34))*34); //new mouse snap-to off by a little
                 //Vector2 pos = new Vector2(Mstate.X - 30, Mstate.Y - 30);     // *X1* Center tower on mouse. Change to 1/2 texture size.   
-                Tbutton.Draw(this.spriteBatch, pos);
-                Tbutton.setImage(this.Content,"tower2");
+                tower1.Draw(this.spriteBatch, pos);
+                tower1.setImage(this.Content,"tower2");
             }
             else
             {
                 this.IsMouseVisible = true;
             }
 
-            Tbutton.Scale = 0.7f; //this changes the button size on the sidebar
-            if (Tbutton.getTowerStats() == false)
-            {
-                Tbutton.Draw(this.spriteBatch);
-            }
+            tower1.Scale = 0.7f; //this changes the button size on the sidebar
+            //if (tower1.getTowerStats() == false)
+            //{
+                tower1.Draw(this.spriteBatch);
+            //}
             DrawText();
             }
 

@@ -23,11 +23,6 @@ namespace WindowsGame1
             hover = false;
         }
 
-        /*public override void LoadContent(ContentManager contmgr, String str)
-        {
-            base.LoadContent(contmgr, str);
-        }*/
-
         public void Update(MouseState mouseState)
         {
             position = getPosition();
