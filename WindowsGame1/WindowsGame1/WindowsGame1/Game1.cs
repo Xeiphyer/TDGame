@@ -28,11 +28,12 @@ namespace WindowsGame1
         bool mapScreen = false;
         bool gameScreen = false;
         SpriteFont font;
-        waves wave1;
-        waves wave2;
-        Button lvl1;
+        //waves wave1;
+        //waves wave2;
+        Button lvl1Button;
         Button start;
         TowerButton tower1;
+        Level1 lvl1;
 
 
         public Game1()
@@ -63,11 +64,13 @@ namespace WindowsGame1
             title = new sprite();
             map = new sprite();
 
-            wave1 = new waves();
-            wave2 = new waves();
+            //wave1 = new waves();
+            //wave2 = new waves();
 
-            lvl1 = new Button();
+            lvl1Button = new Button();
             start = new Button();
+
+            lvl1 = new Level1();
 
             base.Initialize();
 
@@ -82,8 +85,9 @@ namespace WindowsGame1
             mapScreen = false;
             gameScreen = true;
             tower1.reset();
-            wave1.reset();
-            wave2.reset();
+            //wave1.reset();
+            //wave2.reset();
+            lvl1.reset();
         }
 
         protected override void LoadContent()
@@ -110,16 +114,18 @@ namespace WindowsGame1
 
             font = Content.Load<SpriteFont>("SpriteFont1");
 
-            wave1.LoadContent(this.Content);
+            //wave1.LoadContent(this.Content);
 
-            wave2.LoadContent(this.Content);
-            wave2.setColor(Color.Tomato);
+            //wave2.LoadContent(this.Content);
+            //wave2.setColor(Color.Tomato);
 
-            lvl1.LoadContent(this.Content, "lvl");
-            lvl1.setPosition(new Vector2(30, 500));
+            lvl1Button.LoadContent(this.Content, "lvl");
+            lvl1Button.setPosition(new Vector2(30, 500));
 
             start.LoadContent(this.Content, "start");
             start.setPosition(new Vector2(350, 475));
+
+            lvl1.LoadContent(this.Content);
         }
 
         protected override void UnloadContent()
@@ -141,16 +147,16 @@ namespace WindowsGame1
             else if (mapScreen)
             {
                 updateMap();
-                lvl1.Update(Mouse.GetState());
+                lvl1Button.Update(Mouse.GetState());
             }
             else if (gameScreen)
             {
                 //enemy1.Update(gameTime);
  
                 //Tbutton.setTarget(enemy1);
-                
 
-                if (wave1.getDone() == false)
+                lvl1.Update(gameTime);
+                /*if (wave1.getDone() == false)
                 {
                     wave1.Update(gameTime);
                     updateCollision(wave1, gameTime);
@@ -161,8 +167,9 @@ namespace WindowsGame1
                     wave2.Update(gameTime);
                     updateCollision(wave2,gameTime);
                     updateTarget(wave2);
-                }
-                if (Stats.getLives() <= 0 || wave2.getDone() == true && wave2.getDone() == true)
+                }*/
+                //if (Stats.getLives() <= 0 || wave2.getDone() == true && wave2.getDone() == true)
+                if(Stats.getLives() <= 0 || lvl1.getDone() == true)
                 {
                     mapScreen = true;
                     gameScreen = false;
@@ -187,12 +194,12 @@ namespace WindowsGame1
 
         private void updateMap()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true || lvl1.getClicked() == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true || lvl1Button.getClicked() == true)
             {
                 mapScreen = false;
                 gameScreen = true;
                 levelStart();
-                lvl1.setClicked(false);
+                lvl1Button.setClicked(false);
                 return;
 
             }
@@ -202,7 +209,7 @@ namespace WindowsGame1
         {
             Rectangle rect1;
             Rectangle rect2;
-            List<Pcrane> cranes = wave.getList();
+            List<Pcrane> cranes = lvl1.getCranes();//this will have to be changes based on level, returns the cranes currently onscreen
             List<Fireball> mFireballs = tower1.getFire();
 
             //*****************************fireball enemy collision***********************************//
@@ -232,7 +239,7 @@ namespace WindowsGame1
             Rectangle rect1;
             Rectangle rect2;
             List<Tower> towers = tower1.getTowers();
-            List<Pcrane> flock = waves.getList();
+            List<Pcrane> flock = lvl1.getCranes();//this will have to be changes based on level, returns the cranes currently onscreen
             
             for (int i = 0; i < towers.Count; i++)
             {
@@ -251,7 +258,7 @@ namespace WindowsGame1
             }
         }
 
-        protected override void Draw(GameTime gameTime)
+        protected override void Draw(GameTime gameTime)//calls all the draw functions in each class
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
@@ -265,21 +272,23 @@ namespace WindowsGame1
             else if (mapScreen)
             {
                 map.Draw(this.spriteBatch);
-                lvl1.Draw(this.spriteBatch);
+                lvl1Button.Draw(this.spriteBatch);
             }
             else if(gameScreen)
             {
                 Back1.Draw(this.spriteBatch);
                 //enemy1.Draw(this.spriteBatch,Color.Blue);
 
-                if (wave1.getDone() == false)
+
+                lvl1.Draw(this.spriteBatch);
+                /*if (wave1.getDone() == false)
                 {
                     wave1.Draw(this.spriteBatch);
                 }
                 if (wave2.getDone() == false && wave1.getDone() == true)
                 {
                     wave2.Draw(this.spriteBatch);
-                }
+                }*/
 
                 sidebar.Draw(this.spriteBatch);
                 topbar.Draw(this.spriteBatch);
@@ -313,7 +322,7 @@ namespace WindowsGame1
             base.Draw(gameTime);
         }
 
-        private void DrawText()
+        private void DrawText()//draws the text at the top of the screen
         {
             spriteBatch.DrawString(font, "Lives: "+Stats.getLives()+"   Gold: "+Stats.getGold()+"   Energy: "+Stats.getEnergy(), new Vector2(10, 1), Color.Black);
         }

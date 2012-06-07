@@ -31,8 +31,10 @@ namespace WindowsGame1
         const int MOVE_RIGHT = 1;
         ContentManager mContentManager;
         int cooldown = 25;
-        int counter;
-        Color color = Color.White;
+        int unitCounter;
+        int numberOfUnits;//number of units in the wave
+        Color color;//color of this wave
+        int Hp;//hp of all the units in this wave
 
         Vector2 mDirection = Vector2.Zero;
         Vector2 mSpeed = Vector2.Zero;
@@ -49,9 +51,11 @@ namespace WindowsGame1
             spawned
         }
 
-        public waves()
+        public waves()//constructor
         {
-
+            Hp = 10;
+            color = Color.White;
+            numberOfUnits = 10;
         }
 
         public void setImage(ContentManager theContentManager, String str)
@@ -59,9 +63,19 @@ namespace WindowsGame1
             base.LoadContent(theContentManager, str);
         }
 
-        public void setColor(Color clr)
+        public void setColor(Color clr)//changes the color of all the units in the wave
         {
             color = clr;
+        }
+
+        public void setHp(int newHp)//sets the Hp of all units in the wave
+        {
+            Hp = newHp;
+        }
+
+        public void setNumberOfUnits(int newNumberOfUnits)//changes the number of units that spawn
+        {
+            numberOfUnits = newNumberOfUnits;
         }
 
         public void reset()
@@ -69,7 +83,7 @@ namespace WindowsGame1
             X = START_POSITION_X;
             Y = START_POSITION_Y;
             cranes.Clear();
-            counter = 10;
+            unitCounter = numberOfUnits;
             state = State.scroll;
             setPosition(new Vector2(START_POSITION_X, START_POSITION_Y));
             done = false;
@@ -82,6 +96,7 @@ namespace WindowsGame1
             foreach (Pcrane aCrane in cranes)
             {
                 aCrane.LoadContent(theContentManager);
+                aCrane.setHp(Hp);
             }
 
             base.LoadContent(theContentManager, ASSETNAME);
@@ -148,8 +163,8 @@ namespace WindowsGame1
                 cranes.Add(aCrane);
                 aCrane.Scale = 0.5f;
                 cooldown = 25;
-                --counter;
-                if (counter == 0)
+                --unitCounter;
+                if (unitCounter == 0)
                 {
                     state = State.spawned;
                 }

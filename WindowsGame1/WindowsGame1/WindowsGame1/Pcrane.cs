@@ -20,7 +20,7 @@ namespace WindowsGame1
         const int MOVE_DOWN = 1;
         const int MOVE_LEFT = -1;
         const int MOVE_RIGHT = 1;
-        const int MAX_HP = 10;//changes the Hp of cranes
+        int MAX_HP = 10;//changes the Hp of cranes
         int Hp;//keeps track of hp
         public bool Visible = true;
         Texture2D HealthBar;
@@ -49,6 +49,11 @@ namespace WindowsGame1
         {
             Hp = Hp - dmg;
             Hp = (int)MathHelper.Clamp(Hp, 0, MAX_HP);//keeps Hp between 0 and 100 for health bar
+        }
+
+        public void setHp(int newHp)
+        {
+            MAX_HP = newHp;
         }
 
         public bool dead()
