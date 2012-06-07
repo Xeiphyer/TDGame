@@ -156,6 +156,9 @@ namespace WindowsGame1
                 //Tbutton.setTarget(enemy1);
 
                 lvl1.Update(gameTime);
+                updateCollision(gameTime);
+                updateTarget();
+
                 /*if (wave1.getDone() == false)
                 {
                     wave1.Update(gameTime);
@@ -205,7 +208,7 @@ namespace WindowsGame1
             }
         }
 
-        private void updateCollision(waves wave, GameTime gametime)
+        public void updateCollision(GameTime gametime)
         {
             Rectangle rect1;
             Rectangle rect2;
@@ -234,7 +237,7 @@ namespace WindowsGame1
             }
         }
 
-        private void updateTarget(waves waves)//I think the problem is the positions of the rectangles, I wish I could see them to test...
+        private void updateTarget()//I think the problem is the positions of the rectangles, I wish I could see them to test...
         {
             Rectangle rect1;
             Rectangle rect2;

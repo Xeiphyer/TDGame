@@ -96,7 +96,6 @@ namespace WindowsGame1
             foreach (Pcrane aCrane in cranes)
             {
                 aCrane.LoadContent(theContentManager);
-                aCrane.setHp(Hp);
             }
 
             base.LoadContent(theContentManager, ASSETNAME);
@@ -135,11 +134,6 @@ namespace WindowsGame1
 
         private void UpdateCranes(GameTime theGameTime)
         {
-            /*foreach (Pcrane aCrane in cranes)
-            {
-                aCrane.Update(theGameTime);
-            }*/
-
             if (cranes.Count == 0 && state == State.spawned)
             {
                 done = true;
@@ -162,6 +156,7 @@ namespace WindowsGame1
                 aCrane.LoadContent(mContentManager);
                 cranes.Add(aCrane);
                 aCrane.Scale = 0.5f;
+                aCrane.setHp(Hp);
                 cooldown = 25;
                 --unitCounter;
                 if (unitCounter == 0)

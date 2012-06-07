@@ -39,7 +39,7 @@ namespace WindowsGame1
             wave5 = new waves();
         }
 
-        public void reset()
+        public void reset()//resets the level
         {
             wave1.reset();
             wave2.reset();
@@ -55,20 +55,24 @@ namespace WindowsGame1
             wave1.setNumberOfUnits(5);
 
             wave2.LoadContent(theContentManager);
-            wave2.setColor(Color.Tomato);
-            wave2.setNumberOfUnits(5);
+            wave2.setColor(Color.Tomato);//change color
+            wave2.setNumberOfUnits(5);//change number of units that spawn
+            wave2.setHp(15);//change the Hp of those units
 
             wave3.LoadContent(theContentManager);
             wave3.setColor(Color.Green);
             wave3.setNumberOfUnits(7);
+            wave3.setHp(20);
 
             wave4.LoadContent(theContentManager);
             wave4.setColor(Color.Yellow);
             wave4.setNumberOfUnits(10);
+            wave4.setHp(30);
 
             wave5.LoadContent(theContentManager);
             wave5.setColor(Color.Blue);
             wave5.setNumberOfUnits(20);
+            wave5.setHp(40);
         }
 
         public void Update(GameTime theGameTime)//updates appropriate wave and changes level state
@@ -126,20 +130,20 @@ namespace WindowsGame1
                 return false;
         }
 
-        public List<Pcrane> getCranes()
+        public List<Pcrane> getCranes()//returns a list of cranes from the wave on screen
         {
-            switch (currentState)//checking wich wave to update
+            switch (currentState)//checking wich wave to get the list from
             {
                 case State.one:
                     return wave1.getList();
                 case State.two:
-                    return wave1.getList();
+                    return wave2.getList();
                 case State.three:
-                    return wave1.getList();
+                    return wave3.getList();
                 case State.four:
-                    return wave1.getList();
+                    return wave4.getList();
                 case State.five:
-                    return wave1.getList();
+                    return wave5.getList();
             }
             List<Pcrane> empty = new List<Pcrane>();
             return empty;
