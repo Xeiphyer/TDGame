@@ -31,7 +31,7 @@ namespace WindowsGame1
         {
             theSpriteBatch.Draw(mSpriteTexture, Position, new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
         }
-        public virtual void Draw(SpriteBatch theSpriteBatch, Color clr)//Draw the sprite to the screen
+        public virtual void Draw(SpriteBatch theSpriteBatch, Color clr)//Draw the sprite to the screen with different colors
         {
             theSpriteBatch.Draw(mSpriteTexture, Position, new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), clr, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
         }

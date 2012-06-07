@@ -183,13 +183,22 @@ namespace WindowsGame1
             }
 
             else
-            {
+            {   
+                bool flag = false;
                 foreach (Tower aTower in towers)
                 {
                     aTower.Draw(theSpriteBatch);
+                    if (aTower.getTowerStats() == true)
+                    {
+                        flag = true;
+                    }
                 }
 
-                base.Draw(theSpriteBatch);
+                if (flag == false)
+                {
+                    base.Draw(theSpriteBatch);
+                }
+
                 MouseState mousestate = Mouse.GetState();
             }
 

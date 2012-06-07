@@ -280,18 +280,8 @@ namespace WindowsGame1
             else if(gameScreen)
             {
                 Back1.Draw(this.spriteBatch);
-                //enemy1.Draw(this.spriteBatch,Color.Blue);
-
 
                 lvl1.Draw(this.spriteBatch);
-                /*if (wave1.getDone() == false)
-                {
-                    wave1.Draw(this.spriteBatch);
-                }
-                if (wave2.getDone() == false && wave1.getDone() == true)
-                {
-                    wave2.Draw(this.spriteBatch);
-                }*/
 
                 sidebar.Draw(this.spriteBatch);
                 topbar.Draw(this.spriteBatch);
@@ -313,10 +303,8 @@ namespace WindowsGame1
             }
 
             tower1.Scale = 0.7f; //this changes the button size on the sidebar
-            //if (tower1.getTowerStats() == false)
-            //{
-                tower1.Draw(this.spriteBatch);
-            //}
+            tower1.Draw(this.spriteBatch);
+
             DrawText();
             }
 

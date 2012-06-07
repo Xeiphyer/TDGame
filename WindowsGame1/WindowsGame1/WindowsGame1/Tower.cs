@@ -200,12 +200,16 @@ namespace WindowsGame1
             && mousestate.Y > START_POSITION_Y
             && mousestate.Y < (START_POSITION_Y + (int)(mSpriteTexture.Height * Scale)))
             {
-                range.Draw(theSpriteBatch);//hover over to see tower range
+                //hover over to see tower range
             }
 
             if (towerStats == true)
             {
-                theSpriteBatch.DrawString(base.font, "kills\nexperience\nsell price\nsome more shit\n...", new Vector2(820, 300), Color.Black);//text display on the sidebar
+                range.Draw(theSpriteBatch);
+                theSpriteBatch.DrawString(base.font, "kills\nexperience\nsell price\nsome more shit\n...", new Vector2(820, 200), Color.Black);//text display on the sidebar
+                scale = 1.5f;//scale up for the side window
+                Draw(theSpriteBatch, new Vector2(850,50));
+                scale = 0.5f;//scale back to the original size
             }
             
         }
