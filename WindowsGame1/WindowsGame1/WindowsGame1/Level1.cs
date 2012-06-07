@@ -41,6 +41,7 @@ namespace WindowsGame1
 
         public void reset()//resets the level
         {
+            currentState = State.one;
             wave1.reset();
             wave2.reset();
             wave3.reset();

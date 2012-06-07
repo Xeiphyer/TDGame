@@ -17,24 +17,26 @@ namespace WindowsGame1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        //Tower Tbutton;
         sprite Back1;
-        //Pcrane enemy1;
         sprite topbar;
         sprite sidebar;
         sprite title;
         sprite map;
-        bool titleScreen = true;
-        bool mapScreen = false;
-        bool gameScreen = false;
         SpriteFont font;
-        //waves wave1;
-        //waves wave2;
         Button lvl1Button;
         Button start;
         TowerButton tower1;
         Level1 lvl1;
+        State gameState;
 
+        enum State//games states
+        {
+            title,
+            map,
+            level1,
+            level2,
+            level3
+        }
 
         public Game1()
         {
@@ -55,19 +57,14 @@ namespace WindowsGame1
             graphics.PreferredBackBufferHeight = 600;
             graphics.ApplyChanges();
 
-            //enemy1 = new Pcrane();
-            //enemy1.Scale = 0.5f;
-
             sidebar = new sprite();
             topbar = new sprite();
 
             title = new sprite();
             map = new sprite();
 
-            //wave1 = new waves();
-            //wave2 = new waves();
-
             lvl1Button = new Button();
+
             start = new Button();
 
             lvl1 = new Level1();
@@ -81,12 +78,7 @@ namespace WindowsGame1
             Stats.setLives(20);
             Stats.setGold(200);
             Stats.setEnergy(100);
-            titleScreen = false;
-            mapScreen = false;
-            gameScreen = true;
             tower1.reset();
-            //wave1.reset();
-            //wave2.reset();
             lvl1.reset();
         }
 
@@ -99,8 +91,6 @@ namespace WindowsGame1
 
             Back1.LoadContent(this.Content, "Back01");
 
-            //enemy1.LoadContent(this.Content);
-
             sidebar.LoadContent(this.Content, "side");
             sidebar.setPosition(new Vector2(800,0));
             topbar.LoadContent(this.Content, "topbar");
@@ -108,16 +98,9 @@ namespace WindowsGame1
 
             title.LoadContent(this.Content, "title");
             map.LoadContent(this.Content, "Map");
-            titleScreen = true;
-            mapScreen = false;
-            gameScreen = false;
+            gameState = State.title;
 
             font = Content.Load<SpriteFont>("SpriteFont1");
-
-            //wave1.LoadContent(this.Content);
-
-            //wave2.LoadContent(this.Content);
-            //wave2.setColor(Color.Tomato);
 
             lvl1Button.LoadContent(this.Content, "lvl");
             lvl1Button.setPosition(new Vector2(30, 500));
@@ -139,43 +122,25 @@ namespace WindowsGame1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            if (titleScreen)
+            if (gameState == State.title)
             {
                 updateTitle();
                 start.Update(Mouse.GetState());
             }
-            else if (mapScreen)
+            else if (gameState == State.map)
             {
                 updateMap();
                 lvl1Button.Update(Mouse.GetState());
             }
-            else if (gameScreen)
+            else if (gameState == State.level1)
             {
-                //enemy1.Update(gameTime);
- 
-                //Tbutton.setTarget(enemy1);
-
                 lvl1.Update(gameTime);
                 updateCollision(gameTime);
                 updateTarget();
 
-                /*if (wave1.getDone() == false)
-                {
-                    wave1.Update(gameTime);
-                    updateCollision(wave1, gameTime);
-                    updateTarget(wave1);
-                }
-                if (wave2.getDone() == false && wave1.getDone() == true)
-                {
-                    wave2.Update(gameTime);
-                    updateCollision(wave2,gameTime);
-                    updateTarget(wave2);
-                }*/
-                //if (Stats.getLives() <= 0 || wave2.getDone() == true && wave2.getDone() == true)
                 if(Stats.getLives() <= 0 || lvl1.getDone() == true)
                 {
-                    mapScreen = true;
-                    gameScreen = false;
+                    gameState = State.map;
                 }
 
                 tower1.Update(gameTime);
@@ -188,19 +153,17 @@ namespace WindowsGame1
         {
             if (start.getClicked() == true || Keyboard.GetState().IsKeyDown(Keys.Space) == true)
             {
-                titleScreen = false;
-                mapScreen = true;
+                gameState = State.map;
                 return;
 
             }
         }
 
-        private void updateMap()
+        private void updateMap()//checks button states on the map screen
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true || lvl1Button.getClicked() == true)
             {
-                mapScreen = false;
-                gameScreen = true;
+                gameState = State.level1;
                 levelStart();
                 lvl1Button.setClicked(false);
                 return;
@@ -266,18 +229,18 @@ namespace WindowsGame1
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
 
-            if (titleScreen)
+            if (gameState == State.title)
             {
                 title.Draw(this.spriteBatch);
                 start.Draw(this.spriteBatch);
             }
 
-            else if (mapScreen)
+            else if (gameState == State.map)
             {
                 map.Draw(this.spriteBatch);
                 lvl1Button.Draw(this.spriteBatch);
             }
-            else if(gameScreen)
+            else if(gameState == State.level1)
             {
                 Back1.Draw(this.spriteBatch);
 
@@ -292,8 +255,8 @@ namespace WindowsGame1
                 MouseState Mstate = Mouse.GetState();            
                 tower1.Scale = 0.5f;
                 tower1.setImage(this.Content,"clearTower2");
-                Vector2 pos = new Vector2((int)Math.Floor((float)(Mstate.X / 34))*34, (int)Math.Floor((float)(Mstate.Y / 34))*34); //new mouse snap-to off by a little
-                //Vector2 pos = new Vector2(Mstate.X - 30, Mstate.Y - 30);     // *X1* Center tower on mouse. Change to 1/2 texture size.   
+                //Vector2 pos = new Vector2((int)Math.Floor((float)(Mstate.X / 34))*34, (int)Math.Floor((float)(Mstate.Y / 34))*34); //new mouse snap-to off by a little
+                Vector2 pos = new Vector2(Mstate.X - 30, Mstate.Y - 30);     // *X1* Center tower on mouse. Change to 1/2 texture size.   
                 tower1.Draw(this.spriteBatch, pos);
                 tower1.setImage(this.Content,"tower2");
             }
