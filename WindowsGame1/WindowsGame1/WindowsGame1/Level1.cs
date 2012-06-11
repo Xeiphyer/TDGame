@@ -11,11 +11,11 @@ namespace WindowsGame1
 {
     class Level1
     {
-        waves wave1;
-        waves wave2;
-        waves wave3;
-        waves wave4;
-        waves wave5;
+        protected waves wave1;
+        protected waves wave2;
+        protected waves wave3;
+        protected waves wave4;
+        protected waves wave5;
         State currentState;//current state of the level
 
         enum State//possible level states
@@ -49,7 +49,7 @@ namespace WindowsGame1
             wave5.reset();
         }
 
-        public void LoadContent(ContentManager theContentManager)//load all waves
+        public virtual void LoadContent(ContentManager theContentManager)//load all waves
         {
             wave1.LoadContent(theContentManager);
             wave1.setColor(Color.White);

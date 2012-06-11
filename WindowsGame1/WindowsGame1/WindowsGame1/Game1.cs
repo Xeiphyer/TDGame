@@ -28,6 +28,8 @@ namespace WindowsGame1
         TowerButton tower1;
         Level1 lvl1;
         State gameState;
+        Button lvl2Button;
+        Level2 lvl2;
 
         enum State//games states
         {
@@ -69,6 +71,9 @@ namespace WindowsGame1
 
             lvl1 = new Level1();
 
+            lvl2Button = new Button();
+            lvl2 = new Level2();
+
             base.Initialize();
 
         }
@@ -79,7 +84,6 @@ namespace WindowsGame1
             Stats.setGold(200);
             Stats.setEnergy(100);
             tower1.reset();
-            lvl1.reset();
         }
 
         protected override void LoadContent()
@@ -108,7 +112,12 @@ namespace WindowsGame1
             start.LoadContent(this.Content, "start");
             start.setPosition(new Vector2(350, 475));
 
+            lvl2Button.LoadContent(this.Content, "lvl");
+            lvl2Button.setPosition(new Vector2(120, 320));
+
             lvl1.LoadContent(this.Content);
+
+            lvl2.LoadContent(this.Content);
         }
 
         protected override void UnloadContent()
@@ -131,14 +140,28 @@ namespace WindowsGame1
             {
                 updateMap();
                 lvl1Button.Update(Mouse.GetState());
+                lvl2Button.Update(Mouse.GetState());
             }
             else if (gameState == State.level1)
             {
                 lvl1.Update(gameTime);
-                updateCollision(gameTime);
-                updateTarget();
+                updateCollision(gameTime, lvl1.getCranes());
+                updateTarget(lvl1);
 
                 if(Stats.getLives() <= 0 || lvl1.getDone() == true)
+                {
+                    gameState = State.map;
+                }
+
+                tower1.Update(gameTime);
+            }
+            else if (gameState == State.level2)
+            {
+                lvl2.Update(gameTime);
+                updateCollision(gameTime, lvl2.getCranes());
+                updateTarget(lvl2);
+
+                if (Stats.getLives() <= 0 || lvl2.getDone() == true)
                 {
                     gameState = State.map;
                 }
@@ -161,21 +184,32 @@ namespace WindowsGame1
 
         private void updateMap()//checks button states on the map screen
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true || lvl1Button.getClicked() == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true || lvl1Button.getClicked() == true)//level 1
             {
                 gameState = State.level1;
                 levelStart();
-                lvl1Button.setClicked(false);
+                lvl1.reset();
+                lvl1Button.setClicked(false);//reset the button off clicked state
+                return;
+
+            }
+
+            if (lvl2Button.getClicked() == true)//level 2
+            {
+                gameState = State.level2;
+                levelStart();
+                lvl2.reset();
+                lvl2Button.setClicked(false);//reset the button off clicked state
                 return;
 
             }
         }
 
-        public void updateCollision(GameTime gametime)
+        private void updateCollision(GameTime gametime, List<Pcrane> cranes)
         {
             Rectangle rect1;
             Rectangle rect2;
-            List<Pcrane> cranes = lvl1.getCranes();//this will have to be changes based on level, returns the cranes currently onscreen
+            //List<Pcrane> cranes = level.getCranes();//this will have to be changes based on level, returns the cranes currently onscreen
             List<Fireball> mFireballs = tower1.getFire();
 
             //*****************************fireball enemy collision***********************************//
@@ -200,12 +234,12 @@ namespace WindowsGame1
             }
         }
 
-        private void updateTarget()//I think the problem is the positions of the rectangles, I wish I could see them to test...
+        private void updateTarget(Level1 level)//I think the problem is the positions of the rectangles, I wish I could see them to test...
         {
             Rectangle rect1;
             Rectangle rect2;
             List<Tower> towers = tower1.getTowers();
-            List<Pcrane> flock = lvl1.getCranes();//this will have to be changes based on level, returns the cranes currently onscreen
+            List<Pcrane> flock = level.getCranes();//this will have to be changes based on level, returns the cranes currently onscreen
             
             for (int i = 0; i < towers.Count; i++)
             {
@@ -239,36 +273,44 @@ namespace WindowsGame1
             {
                 map.Draw(this.spriteBatch);
                 lvl1Button.Draw(this.spriteBatch);
+                lvl2Button.Draw(this.spriteBatch);
             }
-            else if(gameState == State.level1)
+            else if(gameState == State.level1 || gameState == State.level2)
             {
-                Back1.Draw(this.spriteBatch);
-
-                lvl1.Draw(this.spriteBatch);
+                if (gameState == State.level1)
+                {
+                    Back1.Draw(this.spriteBatch);
+                    lvl1.Draw(this.spriteBatch);
+                }
+                else if (gameState == State.level2)
+                {
+                    Back1.Draw(this.spriteBatch);
+                    lvl2.Draw(this.spriteBatch);
+                }
 
                 sidebar.Draw(this.spriteBatch);
                 topbar.Draw(this.spriteBatch);
 
                 if (tower1.changeMouse() == true)
-            {
-                this.IsMouseVisible = false;        //code for changing the mouse image
-                MouseState Mstate = Mouse.GetState();            
-                tower1.Scale = 0.5f;
-                tower1.setImage(this.Content,"clearTower2");
-                //Vector2 pos = new Vector2((int)Math.Floor((float)(Mstate.X / 34))*34, (int)Math.Floor((float)(Mstate.Y / 34))*34); //new mouse snap-to off by a little
-                Vector2 pos = new Vector2(Mstate.X - 30, Mstate.Y - 30);     // *X1* Center tower on mouse. Change to 1/2 texture size.   
-                tower1.Draw(this.spriteBatch, pos);
-                tower1.setImage(this.Content,"tower2");
-            }
-            else
-            {
-                this.IsMouseVisible = true;
-            }
+                {
+                    this.IsMouseVisible = false;        //code for changing the mouse image
+                    MouseState Mstate = Mouse.GetState();            
+                    tower1.Scale = 0.5f;
+                    tower1.setImage(this.Content,"clearTower2");
+                    //Vector2 pos = new Vector2((int)Math.Floor((float)(Mstate.X / 34))*34, (int)Math.Floor((float)(Mstate.Y / 34))*34); //new mouse snap-to off by a little
+                    Vector2 pos = new Vector2(Mstate.X - 30, Mstate.Y - 30);     // *X1* Center tower on mouse. Change to 1/2 texture size.   
+                    tower1.Draw(this.spriteBatch, pos);
+                    tower1.setImage(this.Content,"tower2");
+                }
+                else
+                {
+                    this.IsMouseVisible = true;
+                }
 
-            tower1.Scale = 0.7f; //this changes the button size on the sidebar
-            tower1.Draw(this.spriteBatch);
+                tower1.Scale = 0.7f; //this changes the button size on the sidebar
+                tower1.Draw(this.spriteBatch);
 
-            DrawText();
+                DrawText();
             }
 
             spriteBatch.End();

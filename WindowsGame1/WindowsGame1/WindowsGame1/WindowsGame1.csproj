@@ -122,6 +122,7 @@
   <ItemGroup>
     <Compile Include="Button.cs" />
     <Compile Include="Level1.cs" />
+    <Compile Include="Level2.cs" />
     <Compile Include="Stats.cs" />
     <Compile Include="Fireball.cs" />
     <Compile Include="Pcrane.cs" />
