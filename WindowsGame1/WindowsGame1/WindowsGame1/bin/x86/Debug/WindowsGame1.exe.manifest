@@ -100,7 +100,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ZUnXYVmvPG0r5hnHH0xtfgvnPAs=</dsig:DigestValue>
+        <dsig:DigestValue>5P6rRd+iJbYeoIjOOJh/P7+7dco=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

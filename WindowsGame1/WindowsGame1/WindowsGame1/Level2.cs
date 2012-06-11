@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace WindowsGame1
 {
-    class Level2 : Level1
+    class Level2 : Level1//extends level 1 class
     {
-        public override void LoadContent(ContentManager theContentManager)//load all waves
+        public override void LoadContent(ContentManager theContentManager)//load all waves this is all you need really
         {
             wave1.LoadContent(theContentManager);
             wave1.setColor(Color.Aqua);
@@ -34,6 +34,7 @@ namespace WindowsGame1
             wave5.setColor(Color.DarkBlue);
             wave5.setNumberOfUnits(1);
             wave5.setHp(160);
+            wave5.setScale(0.7f);
         }
     }
 }

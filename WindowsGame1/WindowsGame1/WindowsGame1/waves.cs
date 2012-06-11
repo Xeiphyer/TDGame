@@ -35,6 +35,7 @@ namespace WindowsGame1
         int numberOfUnits;//number of units in the wave
         Color color;//color of this wave
         int Hp;//hp of all the units in this wave
+        float scale;//determins the size of the enemys
 
         Vector2 mDirection = Vector2.Zero;
         Vector2 mSpeed = Vector2.Zero;
@@ -56,6 +57,7 @@ namespace WindowsGame1
             Hp = 10;
             color = Color.White;
             numberOfUnits = 10;
+            scale = 0.5f;
         }
 
         public void setImage(ContentManager theContentManager, String str)
@@ -76,6 +78,11 @@ namespace WindowsGame1
         public void setNumberOfUnits(int newNumberOfUnits)//changes the number of units that spawn
         {
             numberOfUnits = newNumberOfUnits;
+        }
+
+        public void setScale(float newSize)
+        {
+            scale = newSize;
         }
 
         public void reset()
@@ -155,7 +162,7 @@ namespace WindowsGame1
                 Pcrane aCrane = new Pcrane();
                 aCrane.LoadContent(mContentManager);
                 cranes.Add(aCrane);
-                aCrane.Scale = 0.5f;
+                aCrane.Scale = scale;
                 aCrane.setHp(Hp);
                 cooldown = 25;
                 --unitCounter;
