@@ -129,13 +129,13 @@ namespace WindowsGame1
                 theSpriteBatch.Draw(mSpriteTexture, getPosition(), new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height), clr, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
 
                 //backround of health bar
-                theSpriteBatch.Draw(HealthBar, new Vector2 (base.getPosition().X, base.getPosition().Y+90), new Rectangle(0, 45, HealthBar.Width, 13), Color.Gray);
+                theSpriteBatch.Draw(HealthBar, new Vector2 (base.getPosition().X, base.getPosition().Y + (180*scale)), new Rectangle(0, 45, HealthBar.Width, 13), Color.Gray);
                 
                 //Draw the current health level based on the current Health
-                theSpriteBatch.Draw(HealthBar, new Rectangle((int)base.getPosition().X, (int)base.getPosition().Y+90, (int)(HealthBar.Width * ((double)Hp / MAX_HP)), 13), new Rectangle(0, 45, HealthBar.Width, 44), Color.Red);
+                theSpriteBatch.Draw(HealthBar, new Rectangle((int)base.getPosition().X, (int)base.getPosition().Y + (int)(180 * scale), (int)(HealthBar.Width * ((double)Hp / MAX_HP)), 13), new Rectangle(0, 45, HealthBar.Width, 44), Color.Red);
 
                 //Draw the box around the health bar
-                theSpriteBatch.Draw(HealthBar, new Rectangle((int)base.getPosition().X, (int)base.getPosition().Y+90, HealthBar.Width, 14), new Rectangle(0, 0, HealthBar.Width, 14), Color.White);
+                theSpriteBatch.Draw(HealthBar, new Rectangle((int)base.getPosition().X, (int)base.getPosition().Y + (int)(180 * scale), HealthBar.Width, 14), new Rectangle(0, 0, HealthBar.Width, 14), Color.White);
             }
         }
 

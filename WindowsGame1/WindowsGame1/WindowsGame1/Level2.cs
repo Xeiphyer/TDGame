@@ -13,7 +13,8 @@ namespace WindowsGame1
         {
             wave1.LoadContent(theContentManager);
             wave1.setColor(Color.Aqua);
-            wave1.setNumberOfUnits(5);
+            wave1.setNumberOfUnits(15);
+            wave1.setScale(0.3f);//default scale is 0.5
 
             wave2.LoadContent(theContentManager);
             wave2.setColor(Color.Magenta);//change color
